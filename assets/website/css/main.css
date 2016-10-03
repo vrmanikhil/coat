@@ -1,0 +1,717 @@
+/* ==========================================================================
+  Index Page
+   ========================================================================== */
+
+@font-face {
+	font-family: 'quick';
+	src: url(../assets/quick.otf);
+}
+
+@font-face {
+	font-family: 'quick-b';
+	src: url(../assets/quick-b.otf);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+	font-family: 'quick';
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.header {
+	background-color: #3d464d;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 999999;
+}
+
+.logo {
+	margin-top: 120px;
+	height: 220px;
+	width: auto;
+	border-right: 2px solid #0b99cd;
+	padding-right: 0px;
+}
+
+.main-header {
+	color: white;
+	font-family: 'quick-b';
+	margin-bottom: 0px;
+	font-size: 16px;
+}
+
+.link {
+	color: #d9d9d9;
+}
+
+.link:hover {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.link:visited {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.link:focus {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.link:active {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.sub-header {
+	font-size: 13px;
+	margin-top: 0px;
+	color: white;
+}
+
+#remove-padding {
+	padding: 0px;
+}
+
+.button {
+	color: white;
+	font-family: 'quick-b';
+	margin-top: 50px;
+	padding: 9px;
+	text-align: center;
+}
+
+#margin-add {
+	margin-top: 28px;
+	padding: 0px;
+}
+
+#signup {
+	border: 1px solid white;
+}
+
+#signup:hover {
+	background-color: white;
+	color: #3d464d;
+	transition: 0.15s ease-in;
+	text-decoration: none;
+}
+
+#signup:visited {
+	text-decoration: none;
+}
+
+#signup:focus {
+	text-decoration: none;
+}
+
+.content {
+	margin-top: 95px;
+	background-color: #ecf0f1;
+	height: 515px;
+}
+
+#why-section {
+	height: 360px;
+}
+
+#footer {
+	height: 80px;
+	background-color: #3d464d;
+}
+
+#icon {
+	text-align: center;
+	margin-top: 60px;
+}
+
+#indicator {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body::-webkit-scrollbar {
+	width: 0.5em;
+}
+
+body::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: #555555;
+	outline: 1px solid #b8bdc1;
+}
+
+.signup-form {
+	margin-top: 10px;
+}
+
+.main-form {
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 0px;
+	border-bottom: 2px solid transparent;
+	margin-bottom: 11px;
+}
+
+.main-form:focus {
+	border-bottom: 2px solid #0b99cd;
+	outline: none;
+	transition: 0.2s ease-in;
+}
+
+.dropdown {
+	margin-bottom: 15px;
+}
+
+select {
+	padding: 10px;
+	background-color: white;
+	border: none;
+}
+
+select:focus {
+	outline: none;
+}
+
+option {
+	font-family: 'quick-b';
+	padding: 5px;
+}
+
+select>option {
+	font-family: 'quick-b';
+}
+
+::-webkit-input-placeholder {
+	color: #9d9d9d;
+	font-family: 'quick-b';
+}
+
+:-moz-placeholder {
+	color: #b8bdc1;
+	font-family: 'quick-b';
+}
+
+::-moz-placeholder {
+	color: #b8bdc1;
+	font-family: 'quick-b';
+}
+
+:-ms-input-placeholder {
+	color: #b8bdc1;
+	font-family: 'quick-b';
+}
+
+#terms {
+	margin-top: 5px;
+	margin-bottom: 28px;
+	text-decoration: none;
+}
+
+#terms:hover {
+	text-decoration: none;
+}
+
+.button-2 {
+	background: #0b99cd;
+	color: white;
+	text-align: center;
+	padding: 15px 16px 15px 16px
+}
+
+.button-2:hover {
+	color: white;
+	background-color: #0a88b6;
+	text-decoration: none;
+}
+
+.button:visited {
+	color: white;
+	text-decoration: none;
+}
+
+.button:focus {
+	color: white;
+	text-decoration: none;
+}
+
+.dis {
+	background: #ebebeb;
+}
+
+.main-form-2 {
+	margin-top: 15px;
+	background-color: transparent;
+	color: white;
+	border-bottom: 2px solid #a5a5a5;
+}
+
+.main-form-2::-webkit-input-placeholder {
+	color: white;
+}
+
+.main-form-2:focus {
+	border-bottom: 2px solid white;
+	transition: 0.2s ease-in;
+}
+
+#remember {
+	font-family: 'quick-b';
+	color: white;
+	font-size: 10px;
+	text-transform: capitalize;
+}
+
+.forgot {
+	color: white;
+	font-family: 'quick';
+	float: right;
+	margin-top: 0px;
+	font-size: 12px;
+}
+
+.forgot:hover {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.forgot:focus {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.forgot:visited {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.forgot:active {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.dis-2 {
+	background-color: white;
+}
+
+#back {
+	font-family: 'quick-b';
+	color: #3d464d;
+}
+
+#back:hover {
+	color: #2e353a;
+	text-decoration: none;
+}
+
+#back:focus {
+	color: #2e353a;
+}
+
+#back:visited {
+	color: #2e353a;
+}
+
+#back:active {
+	color: #2e353a;
+}
+
+.footer {
+	text-align: center;
+	float: none;
+	font-size: 1.2em;
+	font-family: 'quick-b';
+	color: white !important;
+}
+
+.modal-button {
+	background-color: #3d464d;
+}
+
+.modal-button:hover {
+	background-color: #2e353a;
+}
+
+
+/* ==========================================================================
+   User Dashboard
+   ========================================================================== */
+
+#welcome {
+	color: white;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+	text-transform: capitalize;
+}
+
+#name {
+	margin-top: 0px;
+	font-family: 'quick-b';
+	color: #3d464d;
+	background-color: #d9d9d9;
+	padding: 12px 9px 12px 9px;
+	text-align: center;
+	font-size: 1.4em;
+	text-transform: uppercase;
+}
+
+.image {
+	text-align: center;
+}
+
+#avatar {
+	margin-top: 18px;
+}
+
+#sidebar-wrapper {
+	position: fixed;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	background-color: #3d464d;
+}
+
+#main-wrapper {
+	position: relative;
+	/*left: 250px;*/
+	top: 0;
+	/*margin-right: 100px;*/
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	font-family: 'quick-b';
+	font-size: 1em;
+}
+
+.fields {
+	height: 50px;
+}
+
+.fields:hover {
+	background-color: #f5f5f5;
+}
+
+th,
+td {
+	padding: 18px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+.dash-head {
+	font-size: 1.2em;
+	color: #2e353a;
+	font-family: 'quick-b';
+}
+
+.heading-table {
+	height: 50px;
+	background: #3d464d;
+	color: white;
+	border-bottom: 5px solid #65dfe1;
+	padding: 100px;
+}
+
+.heading-table:hover {
+	background-color: #2e353a;
+	transition: 0.2s ease-in;
+}
+
+#basics {
+	width: 100% !important;
+	height: 50px;
+	border-radius: 0px;
+}
+
+#basics::-webkit-input-placeholder {
+	font-size: 1.2em;
+}
+
+#basics:focus {
+	outline: none;
+}
+
+#counter {
+	color: white;
+	background: #3d464d;
+	padding: 10px 12px 10px 12px;
+	border-radius: 20px;
+	margin-left: 10px;
+}
+
+#add-skill-button {
+	display: inline-block;
+	padding: 15px 16px 15px 16px;
+	margin-top: 1px;
+}
+
+.next-button {
+	display: inline-block;
+	padding: 15px 16px 15px 16px;
+}
+
+.close {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.change {
+	float: none;
+	text-align: center !important;
+	display: block;
+	margin-top: 10px;
+}
+
+
+/* ==========================================================================
+   User Dashboard view 2
+   ========================================================================== */
+
+#t-2 {
+	height: 60px;
+}
+
+#completed {
+	background: #19cfa2;
+}
+
+#completed:hover {
+	background: #16b48d;
+}
+
+#completed:visited {
+	background: #16b48d;
+}
+
+#completed:active {
+	background: #16b48d;
+}
+
+#completed:focus {
+	background: #16b48d;
+}
+
+
+/* ==========================================================================
+   MCQ
+   ========================================================================== */
+
+#clockdiv {
+	text-align: center;
+	margin-top: 30px;
+	padding: 20px;
+	color: #fff;
+	font-family: 'quick-b';
+	border-bottom: 2px solid #65dfe1;
+}
+
+.inline {
+	font-family: 'quick-b';
+	display: inline-block;
+}
+
+#clockdiv div > span {
+	padding: 15px;
+	border-radius: 120px;
+	background: #3d464d;
+	display: inline-block;
+}
+
+.smalltext {
+	color: #3d464d;
+	margin-top: 20px;
+	margin-right: 10px;
+}
+
+.days {
+	margin-right: 14px;
+}
+
+.hours {
+	margin-right: 8x;
+}
+
+.minutes {
+	margin-right: 0px;
+}
+
+.seconds {
+	margin-left: 0px;
+}
+
+.review label {
+	font-family: 'quick-b';
+	font-weight: 500;
+	transition: background-color .3s, ease-in;
+	background-color: #16b48d;
+	font-size: 16px;
+	cursor: pointer;
+	margin: 2px;
+	position: relative;
+	display: inline-block;
+	background-color: none;
+	color: #fff;
+	border: 1px solid #ccc;
+	padding: 5px 5px 5px 5px;
+	text-align: center;
+	border-radius: 50%;
+	width: 11.9%;
+	margin-left: 10px;
+	margin-bottom: 5px;
+}
+
+.review label:hover {
+	background-color: #16b48d;
+	transition: background-color .5s, ease-in;
+	color: white;
+}
+
+.review label:active {
+	background-color: #16b48d;
+}
+
+.review input[type="checkbox"] {
+	display: none;
+}
+
+.review input[type=checkbox]:checked + label {
+	background-color: #3d464d;
+	color: white;
+}
+
+.review {
+	margin-bottom: 30px;
+}
+
+.review h4 {
+	font-family: 'quick-b';
+	color: #3d464d;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 18px;
+	font-weight: 700;
+	margin-bottom: 30px;
+	margin-top: 20px;
+}
+
+.question-container {
+	padding: 0px 25px 0px 25px;
+}
+
+.question-image {
+	max-height: 100%;
+	max-width: 100%;
+}
+
+.question-paragraph {
+	font-family: 'quick';
+	text-align: justify;
+}
+
+#ques-title {
+	font-size: 1.5em;
+}
+
+#separator {
+	margin: 0px;
+	margin-bottom: 5px;
+}
+
+.answer-container {
+	padding: 0px 25px 0px 25px;
+}
+
+.options label {
+	font-family: 'quick-b';
+	font-weight: 700;
+	transition: background-color .3s, ease-in;
+	font-size: 15px;
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	background-color: none;
+	color: #222;
+	border: 1px solid #d4d4d4;
+	padding: 2%;
+	width: 60%;
+	text-align: left;
+	margin: 8px;
+}
+
+.options input[type="checkbox"] {
+	display: none;
+}
+
+.opt {
+	background-color: #3d464d;
+	padding: 14px 16px 14px 16px;
+	border: 1px solid #ebebeb;
+	color: white;
+	font-family: 'quick-b';
+	font-weight: 700;
+	margin-right: 8px;
+}
+
+.options {
+	padding-top: 1%;
+	padding-bottom: 4%;
+}
+
+.image-answer {
+	margin-top: 30px;
+}
+
+#image-ans {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+p {
+	font-family: 'quick';
+}
+
+.passage {
+	height: 500px;
+	text-align: justify;
+	overflow: auto;
+}
+
+
+/* ==========================================================================
+   Change Password
+   ========================================================================== */
+
+.password {
+	width: 50%;
+	border-bottom: 2px solid #ccc;
+}
