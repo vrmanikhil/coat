@@ -23,17 +23,17 @@
                                     <tr>
                                         <th>S.No</th>
                                         <th>Skill Name</th>
-                                        <th>Time Alloted</th>
+                                        <th>Available for User Driven Test</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  <?php foreach ($skills as $key => $value) {  ?>
+                                  <?php $i=1; foreach ($skills as $key => $value) {  ?>
                                     <tr class="odd gradeX">
-                                        <td>1</td>
+                                        <td><?php echo $i; $i++; ?></td>
                                         <td><?php echo $value['skill']; ?></td>
-                                        <td>10</td>
+                                        <td><?php if($value['availableForUserDriven']==='1') echo "Available"; else echo "Not Available";  ?></td>
                                         <td class="center"><a data-toggle="modal" data-target="#myModal" class="btn btn-success">Edit</a></td>
                                         <td class="center"><a data-toggle="modal" data-target="#myModal1" class="btn btn-danger">Delete</a></td>
                                     </tr>
@@ -46,32 +46,27 @@
                         <!-- /.panel-body -->
                     </div>
                     <h2>Add New Skill</h2>
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <form action="<?php echo base_url('/admin_functions/addSkill'); ?>" method="post">
                       <div class="col-sm-12">
                         <div class="col-sm-7">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label>Skill Name</label>
-                                <input type="text" class="form-control" id="name" required placeholder="Skill Name">
+                                <input type="text" class="form-control" name="skill" required placeholder="Skill Name">
                             </div>
                         </div>
                       </div>
-                      <div class="col-sm-3">
+                      <div class="col-sm-5">
                       <div class="control-group form-group">
                           <div class="controls">
-                              <label>Skill Colour</label>
-                              <input type="text" class="form-control" id="name" required placeholder="Skill Colour">
+                              <label>Available for User Driven Test</label>
+                              <select class="form-control" required name="availableForUserDriven" required>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                              </select>
                           </div>
                       </div>
                     </div>
-                    <div class="col-sm-2">
-                    <div class="control-group form-group">
-                        <div class="controls">
-                            <label>Time Allotted</label>
-                            <input type="text" class="form-control" id="name" required placeholder="Time Allotted">
-                        </div>
-                    </div>
-                  </div>
                       </div>
                         <div id="success"></div>
                         <!-- For success/fail messages -->

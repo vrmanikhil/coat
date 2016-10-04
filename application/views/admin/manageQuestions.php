@@ -23,26 +23,22 @@
                                     <tr>
                                         <th>S.No</th>
                                         <th>Question</th>
+                                        <th>Skill</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                  <?php $i=1; foreach ($questions as $key => $value) { ?>
                                     <tr class="odd gradeX">
-                                        <td>1</td>
-                                        <td>What is the total population of India?</td>
-                                        <td class="center"><a data-toggle="modal" data-target="#myModal" class="btn btn-success">Edit</a></td>
+                                        <td><?php echo $i; $i++; ?></td>
+                                        <td><?php echo $value['question']; ?></td>
+                                        <td><?php echo $value['skill']; ?></td>
+                                        <td class="center"><a href="<?php echo base_url('/admin/editQuestion/'); echo $value['question_id']; ?>" class="btn btn-success">Edit</a></td>
                                         <td class="center"><a data-toggle="modal" data-target="#myModal1" class="btn btn-danger">Delete</a></td>
                                     </tr>
-                                    <tr class="odd gradeX">
-                                        <td>2</td>
-                                        <td>Who is known as the Fathers of Computers?</td>
-                                        <td class="center"><a data-toggle="modal" data-target="#myModal" class="btn btn-success">Edit</a></td>
-                                        <td class="center"><a data-toggle="modal" data-target="#myModal1" class="btn btn-danger">Delete</a></td>
-                                    </tr>
-
-
-
+                                  <?php } ?>
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
@@ -50,38 +46,11 @@
                         </div>
                         <!-- /.panel-body -->
                     </div>
-                
+
             </div>
         </div>
         <!-- /.row -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Edition</h4>
-              </div>
-              <div class="modal-body">
-                <form name="sentMessage" id="contactForm" novalidate>
-                    <div class="control-group form-group">
-                        <div class="controls">
-                            <label>Edition Name</label>
-                            <input type="text" class="form-control" id="name" required value="August 2016">
-                        </div>
-                    </div>
-                    <div id="success"></div>
-                    <!-- For success/fail messages -->
 
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success">Update</button>
-                  </form>
-              </div>
-
-            </div>
-          </div>
-        </div>
         <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">

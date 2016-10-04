@@ -36,6 +36,34 @@ class Admin_library {
 		return $CI->adminModel->getSkills();
 	}
 
+	public function getQuestions()
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->getQuestions();
+	}
+
+	public function getQuestionData($questionID)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->getQuestionData($questionID);
+	}
+
+	public function getColleges()
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->getColleges();
+	}
+
+	public function getCompulsorySkills()
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->getCompulsorySkills();
+	}
+
 	public function getTestSetupDetails()
 	{
 		$CI = &get_instance();
@@ -48,6 +76,34 @@ class Admin_library {
 		$CI = &get_instance();
 		$CI->load->model('admin_model','adminModel');
 		return $CI->adminModel->addQuestion($questionData);
+	}
+
+	public function updateQuestion($questionData, $question_id)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->updateQuestion($questionData, $question_id);
+	}
+
+	public function addSkill($skillData)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->addSkill($skillData);
+	}
+
+	public function addCompulsorySkill($skillData)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->addCompulsorySkill($skillData);
+	}
+
+	public function setupTest($testData)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->setupTest($testData);
 	}
 
 }

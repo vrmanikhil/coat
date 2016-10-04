@@ -29,6 +29,14 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/addQuestion', $this->data);
 	}
 
+	public function editQuestion($questionID = '')
+	{
+		$this->data['skills'] = $this->admin_library->getSkills();
+		$this->data['questionData'] = $this->admin_library->getQuestionData($questionID);
+		$this->data['questionData'] = $this->data['questionData'][0];
+		$this->load->view('admin/editQuestion', $this->data);
+	}
+
 	public function manageSkills()
 	{
 		$this->data['skills'] = $this->admin_library->getSkills();
@@ -37,15 +45,17 @@ class Admin extends CI_Controller {
 
 	public function manageQuestions()
 	{
-		$this->data['skills'] = $this->admin_library->getSkills();
+		$this->data['questions'] = $this->admin_library->getQuestions();
 		$this->load->view('admin/manageQuestions', $this->data);
 	}
 
 	public function testSetup()
 	{
 		$this->data['skills'] = $this->admin_library->getSkills();
+		$this->data['colleges'] = $this->admin_library->getColleges();
 		$this->data['testSetup'] = $this->admin_library->getTestSetupDetails();
 		$this->data['testSetup'] = $this->data['testSetup'][0];
+		$this->data['compulsorySkills'] = $this->admin_library->getCompulsorySkills();
 		$this->load->view('admin/testSetup', $this->data);
 	}
 
