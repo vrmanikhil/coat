@@ -35,6 +35,14 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/addQuestion', $this->data);
 	}
 
+	public function changePassword()
+	{
+		if (!$this->admin_library->auth()) {
+			redirect(base_url('/admin'));
+		}
+		$this->load->view('admin/changePassword', $this->data);
+	}
+
 	public function editQuestion($questionID = '')
 	{
 		if (!$this->admin_library->auth()) {

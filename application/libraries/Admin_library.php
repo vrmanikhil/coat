@@ -29,11 +29,24 @@ class Admin_library {
 		return 0;
 	}
 
+	public function changePassword($new_password){
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->changePassword($new_password);
+	}
+
 	public function getSkills()
 	{
 		$CI = &get_instance();
 		$CI->load->model('admin_model','adminModel');
 		return $CI->adminModel->getSkills();
+	}
+
+	public function getPassword()
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->getPassword();
 	}
 
 	public function getQuestions()

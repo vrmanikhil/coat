@@ -32,6 +32,48 @@ class Admin_functions extends CI_Controller {
 		redirect(base_url('/admin'));
 	}
 
+	public function changePassword()
+	{
+		$currentPassword = '';
+		$newPassword = '';
+		$confirmPassword = '';
+		if($x = $this->input->post('currentPassword'))
+			$currentPassword = $x;
+		if($x = $this->input->post('newPassword'))
+			$newPassword = $x;
+		if($x = $this->input->post('confirmPassword'))
+			$confirmPassword = $x;
+		if($currentPassword == '' || $newPassword == '' || $confirmPassword == ''){
+			$this->session->set_flashdata('message', array('content'=>'Incomplete Data','color'=>'red'));
+			redirect(base_url('/admin/changePassword'));
+		}
+		if($newPassword === $confirmPassword){
+			$result = $this->admin_library->getPassword();
+			$password = $result[0]['password'];
+			$current_password = md5($currentPassword);
+			$new_password = md5($newPassword);
+			if($password === $current_password){
+				$result = $this->admin_library->changePassword($new_password);
+				if($result){
+					$this->session->set_flashdata('message', array('content'=>'Password Changed Successfully','color'=>'green'));
+					redirect(base_url('/admin/changePassword'));
+				}
+				else{
+					$this->session->set_flashdata('message', array('content'=>'Something went Wrong','color'=>'red'));
+					redirect(base_url('/admin/changePassword'));
+				}
+			}
+			else{
+				$this->session->set_flashdata('message', array('content'=>'Your Password do not Match with the password entered','color'=>'red'));
+				redirect(base_url('/admin/changePassword'));
+			}
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Your New and Confirm New Password do not Match','color'=>'red'));
+			redirect(base_url('/admin/changePassword'));
+		}
+	}
+
 	public function add_question()
 	{
 		$skill_id = '';
@@ -122,8 +164,17 @@ class Admin_functions extends CI_Controller {
 			'option3' => $option3,
 			'option4' => $option4
 		);
+		if($skill_id == '' || $answer == '' || $difficulty_level == '' || $question == '' || $option1 == '' || $option2 == '' || $option3 == '' || $option4 == '' ){
+			$this->session->set_flashdata('message', array('content'=>'Incomplete Data','color'=>'red'));
+			redirect(base_url('/admin/addQuestion'));
+		}
 		$result = $this->admin_library->updateQuestion($questionData, $question_id);
 		if($result){
+			$this->session->set_flashdata('message', array('content'=>'Question Successfully Updated','color'=>'green'));
+			redirect(base_url('/admin/manageQuestions'));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something went Wrong.','color'=>'red'));
 			redirect(base_url('/admin/manageQuestions'));
 		}
 	}
@@ -136,12 +187,25 @@ class Admin_functions extends CI_Controller {
 			$skill = $x;
 		if($x = $this->input->post('availableForUserDriven'))
 			$availableForUserDriven = $x;
+		if($skill == '' || $availableForUserDriven == ''){
+			$this->session->set_flashdata('message', array('content'=>'Incomplete Data','color'=>'red'));
+			redirect(base_url('/admin/manageSkills'));
+		}
 		$skillData = array(
 			'skill' => $skill,
 			'availableForUserDriven' => $availableForUserDriven
 		);
+		if($skill == '' || $availableForUserDriven == ''){
+			$this->session->set_flashdata('message', array('content'=>'Incomplete Data','color'=>'red'));
+			redirect(base_url('/admin/manageSkills'));
+		}
 		$result = $this->admin_library->addSkill($skillData);
 		if($result){
+			$this->session->set_flashdata('message', array('content'=>'Skill Successfully Added','color'=>'green'));
+			redirect(base_url('/admin/manageSkills'));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something went Wrong.','color'=>'red'));
 			redirect(base_url('/admin/manageSkills'));
 		}
 	}
@@ -161,8 +225,17 @@ class Admin_functions extends CI_Controller {
 			'skill' => $skill,
 			'availableForUserDriven' => $availableForUserDriven
 		);
+		if($skill == '' || $availableForUserDriven == ''){
+			$this->session->set_flashdata('message', array('content'=>'Incomplete Data','color'=>'red'));
+			redirect(base_url('/admin/manageSkills'));
+		}
 		$result = $this->admin_library->updateSkill($skillData, $skillID);
 		if($result){
+			$this->session->set_flashdata('message', array('content'=>'Skill updated Successfully','color'=>'green'));
+			redirect(base_url('/admin/manageSkills'));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something went Wrong!','color'=>'red'));
 			redirect(base_url('/admin/manageSkills'));
 		}
 	}
@@ -174,6 +247,11 @@ class Admin_functions extends CI_Controller {
 			$questionID = $x;
 		$result = $this->admin_library->deleteQuestion($questionID);
 		if($result){
+			$this->session->set_flashdata('message', array('content'=>'Question Deleted Successfully','color'=>'green'));
+			redirect(base_url('/admin/manageQuestions'));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something went Wrong!','color'=>'red'));
 			redirect(base_url('/admin/manageQuestions'));
 		}
 	}
@@ -185,6 +263,11 @@ class Admin_functions extends CI_Controller {
 			$skillID = $x;
 		$result = $this->admin_library->deleteSkill($skillID);
 		if($result){
+			$this->session->set_flashdata('message', array('content'=>'Skill Deleted Successfully','color'=>'green'));
+			redirect(base_url('/admin/manageSkills'));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something went Wrong!','color'=>'red'));
 			redirect(base_url('/admin/manageSkills'));
 		}
 	}
@@ -196,6 +279,11 @@ class Admin_functions extends CI_Controller {
 			$skillID = $x;
 		$result = $this->admin_library->deleteCompulsorySkill($skillID);
 		if($result){
+			$this->session->set_flashdata('message', array('content'=>'Compulsory Skill Deleted Successfully','color'=>'green'));
+			redirect(base_url('/admin/testSetup'));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something went Wrong!','color'=>'red'));
 			redirect(base_url('/admin/testSetup'));
 		}
 	}
@@ -226,6 +314,11 @@ class Admin_functions extends CI_Controller {
 		$result = $this->admin_library->setupTest($testData);
 		$result_ = $this->admin_library->truncateCompulsorySkills();
 		if($result && $result_){
+			$this->session->set_flashdata('message', array('content'=>'Test Successfully Flushed','color'=>'green'));
+			redirect(base_url('/admin/testSetup'));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something went Wrong!','color'=>'red'));
 			redirect(base_url('/admin/testSetup'));
 		}
 	}
@@ -262,6 +355,10 @@ class Admin_functions extends CI_Controller {
 			$mediumPercentage = $x;
 		if($x = $this->input->post('hardPercentage'))
 			$hardPercentage = $x;
+		if($testName == '' || $college_id == '' || $numberOfSkills == '' || $positiveScore == '' || $negativeScore == '' || $numberOfQuestions == '' || $time == '' || $easyPercentage == '' || $mediumPercentage == '' || $hardPercentage == ''){
+			$this->session->set_flashdata('message', array('content'=>'Incomplete Data','color'=>'red'));
+			redirect(base_url('/admin/testSetup'));
+		}
 		$testData = array(
 			'testName' => $testName,
 			'college_id' => $college_id,
@@ -276,6 +373,11 @@ class Admin_functions extends CI_Controller {
 		);
 		$result = $this->admin_library->setupTest($testData);
 		if($result){
+			$this->session->set_flashdata('message', array('content'=>'Test Setup Successful','color'=>'green'));
+			redirect(base_url('/admin/testSetup'));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something went Wrong','color'=>'red'));
 			redirect(base_url('/admin/testSetup'));
 		}
 	}
@@ -306,6 +408,11 @@ class Admin_functions extends CI_Controller {
 				$mediumPercentage = $x;
 			if($x = $this->input->post('hardPercentage'))
 				$hardPercentage = $x;
+			if($skill_id == '' || $positiveScore == '' || $negativeScore == '' || $numberOfQuestions == '' || $time == '' || $easyPercentage == '' || $mediumPercentage == '' || $hardPercentage == ''){
+				$this->session->set_flashdata('message', array('content'=>'Incomplete Data','color'=>'red'));
+				redirect(base_url('/admin/testSetup'));
+			}
+			$result = $this->admin_library->checkCompulsorySkill($skill_id);
 			$skillData = array(
 				'skill_id' => $skill_id,
 				'positiveScore' => $positiveScore,
@@ -318,6 +425,11 @@ class Admin_functions extends CI_Controller {
 			);
 			$result = $this->admin_library->addCompulsorySkill($skillData);
 			if($result){
+				$this->session->set_flashdata('message', array('content'=>'Compulsory Skill Added Successful','color'=>'green'));
+				redirect(base_url('/admin/testSetup'));
+			}
+			else{
+				$this->session->set_flashdata('message', array('content'=>'Something went Wrong','color'=>'red'));
 				redirect(base_url('/admin/testSetup'));
 			}
 	}

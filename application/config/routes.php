@@ -64,5 +64,7 @@ $route['admin/manageSkills'] = 'admin/manageSkills';
 $route['admin/manageQuestions'] = 'admin/manageQuestions';
 $route['admin/testSetup'] = 'admin/testSetup';
 
+$route['admin/changePassword'] = 'admin/changePassword';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

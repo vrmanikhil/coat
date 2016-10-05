@@ -7,7 +7,7 @@ class Admin_model extends CI_Model {
 		parent::__construct();
 		$this->load->database();
 	}
-	
+
 	public function login($username,$password)
 	{
 		$result = $this->db->get_where('admin', array('username' => $username,'password' => $password), 1, 0);
@@ -15,6 +15,24 @@ class Admin_model extends CI_Model {
 			return true;
 		}
 		return false;
+	}
+
+	public function getPassword(){
+		$user_data = $this->session->userdata('user_data');
+		$username = $user_data['username'];
+		$this->db->where('username', $username);
+		$query = $this->db->get('admin');
+		return $query->result_array();
+	}
+
+	public function changePassword($new_password){
+		$user_data = $this->session->userdata('user_data');
+		$username = $user_data['username'];
+		$this->db->where('username', $username);
+		$passwordData = array(
+			'password' => $new_password
+		);
+		return $this->db->update('admin', $passwordData);
 	}
 
 	public function getSkills(){

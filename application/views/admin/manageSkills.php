@@ -60,9 +60,9 @@
                       <div class="control-group form-group">
                           <div class="controls">
                               <label>Available for User Driven Test</label>
-                              <select class="form-control" required name="availableForUserDriven" required>
+                              <select class="form-control" name="availableForUserDriven" required>
                                 <option value="1">Yes</option>
-                                <option value="0">No</option>
+                                <option value="-1">No</option>
                               </select>
                           </div>
                       </div>
@@ -96,7 +96,7 @@
                             <label>Available for User Driven Test</label>
                             <select type="text" class="form-control" id="available" value="" name="availableForUserDriven" required>
                               <option value="1">Yes</option>
-                              <option value="0">No</option>
+                              <option value="-1">No</option>
                             </select>
                         </div>
                     </div>
@@ -139,8 +139,8 @@
 
         <!-- Footer -->
 <?php echo $bottom; ?>
-<script src="/assets/js/jquery.dataTables.min.js"></script>
- <script src="/assets/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url('/assets/admin/js/jquery.dataTables.min.js'); ?>"></script>
+ <script src="<?php echo base_url('/assets/admin/js/dataTables.bootstrap.min.js') ?>"></script>
 
  <script>
  $(document).ready(function() {
