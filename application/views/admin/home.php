@@ -16,17 +16,17 @@
                   <img src="<?php echo base_url('/assets/admin/images/administrator.png'); ?>" style="width: 100%;">
                 </div>
                 <div class="col-md-8">
-                  <form role="form" action="<?php echo base_url('/Home/doLogin'); ?>" method="post">
+                  <form role="form" action="<?php echo base_url('/admin_functions/doLogin'); ?>" method="post">
                       <div class="control-group form-group">
                           <div class="controls">
                               <label>User-Name</label>
-                              <input type="text" class="form-control" name="username" id="name" required placeholder="User-Name">
+                              <input type="text" class="form-control" name="username" required placeholder="User-Name">
                           </div>
                       </div>
                       <div class="control-group form-group">
                           <div class="controls">
                               <label>Password</label>
-                              <input type="password" class="form-control" name="password" id="name" required placeholder="Password">
+                              <input type="password" class="form-control" name="password" required placeholder="Password">
                           </div>
                       </div>
 

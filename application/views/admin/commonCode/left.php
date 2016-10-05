@@ -3,7 +3,7 @@
     <center>
       <b>Administrator</b>
       <br>
-      <a>Sign Out</a>
+      <a href="<?php echo base_url('/admin_functions/logout') ?>">Sign Out</a>
     </center>
     <br>
     <div class="list-group">
@@ -17,13 +17,7 @@
         <a href="<?php echo base_url('/add_author') ?>" class="list-group-item">Manage Users</a>
 
         <center><label class="list-group-item">TEST SETUP</label></center>
-        <a href="<?php echo base_url('/change_password') ?>" class="list-group-item">Manage Test Settings</a>
-
-        <center><label class="list-group-item">COLLEGES</label></center>
-        <a href="<?php echo base_url('/manage_editions') ?>" class="list-group-item">Add College</a>
-        <a href="<?php echo base_url('/manage_editions') ?>" class="list-group-item">View Colleges</a>
-        <a href="<?php echo base_url('/manage_editions') ?>" class="list-group-item">Manage Batches</a>
-        <a href="<?php echo base_url('/manage_editions') ?>" class="list-group-item">Manage Courses</a>
+        <a href="<?php echo base_url('/admin/testSetup') ?>" class="list-group-item">Manage Test Settings</a>
 
         <center><label class="list-group-item">SETTINGS</label></center>
         <a href="<?php echo base_url('/change_password') ?>" class="list-group-item">Change Password</a>

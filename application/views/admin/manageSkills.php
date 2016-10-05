@@ -23,19 +23,19 @@
                                     <tr>
                                         <th>S.No</th>
                                         <th>Skill Name</th>
-                                        <th>Time Alloted</th>
+                                        <th>Available for User Driven Test</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  <?php foreach ($skills as $key => $value) {  ?>
+                                  <?php $i=1; foreach ($skills as $key => $value) {  ?>
                                     <tr class="odd gradeX">
-                                        <td>1</td>
+                                        <td><?php echo $i; $i++; ?></td>
                                         <td><?php echo $value['skill']; ?></td>
-                                        <td>10</td>
-                                        <td class="center"><a data-toggle="modal" data-target="#myModal" class="btn btn-success">Edit</a></td>
-                                        <td class="center"><a data-toggle="modal" data-target="#myModal1" class="btn btn-danger">Delete</a></td>
+                                        <td><?php if($value['availableForUserDriven']==='1') echo "Available"; else echo "Not Available";  ?></td>
+                                        <td class="center"><a data-toggle="modal" data-id="<?php echo $value['skill_id']; ?>" data-available="<?php echo $value['availableForUserDriven']; ?>" data-skill="<?php echo $value['skill']; ?>" data-target="#myModal" class="open-Skill btn btn-success">Edit</a></td>
+                                        <td class="center"><a data-toggle="modal" data-id="<?php echo $value['skill_id']; ?>" data-target="#myModal1" class="open-AddBookDialog btn btn-danger">Delete</a></td>
                                     </tr>
                                   <?php } ?>
                                 </tbody>
@@ -46,32 +46,27 @@
                         <!-- /.panel-body -->
                     </div>
                     <h2>Add New Skill</h2>
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <form action="<?php echo base_url('/admin_functions/addSkill'); ?>" method="post">
                       <div class="col-sm-12">
                         <div class="col-sm-7">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label>Skill Name</label>
-                                <input type="text" class="form-control" id="name" required placeholder="Skill Name">
+                                <input type="text" class="form-control" name="skill" required placeholder="Skill Name">
                             </div>
                         </div>
                       </div>
-                      <div class="col-sm-3">
+                      <div class="col-sm-5">
                       <div class="control-group form-group">
                           <div class="controls">
-                              <label>Skill Colour</label>
-                              <input type="text" class="form-control" id="name" required placeholder="Skill Colour">
+                              <label>Available for User Driven Test</label>
+                              <select class="form-control" required name="availableForUserDriven" required>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                              </select>
                           </div>
                       </div>
                     </div>
-                    <div class="col-sm-2">
-                    <div class="control-group form-group">
-                        <div class="controls">
-                            <label>Time Allotted</label>
-                            <input type="text" class="form-control" id="name" required placeholder="Time Allotted">
-                        </div>
-                    </div>
-                  </div>
                       </div>
                         <div id="success"></div>
                         <!-- For success/fail messages -->
@@ -86,23 +81,34 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Edition</h4>
+                <h4 class="modal-title" id="myModalLabel">Edit Skill</h4>
               </div>
               <div class="modal-body">
-                <form name="sentMessage" id="contactForm" novalidate>
+                <form action="<?php echo base_url('/admin_functions/updateSkill'); ?>" method="post">
                     <div class="control-group form-group">
                         <div class="controls">
-                            <label>Edition Name</label>
-                            <input type="text" class="form-control" id="name" required value="August 2016">
+                            <label>Skill Name</label>
+                            <input type="text" class="form-control" name="skill" id="skill" required>
                         </div>
                     </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Available for User Driven Test</label>
+                            <select type="text" class="form-control" id="available" value="" name="availableForUserDriven" required>
+                              <option value="1">Yes</option>
+                              <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div id="success"></div>
                     <!-- For success/fail messages -->
 
               </div>
               <div class="modal-footer">
+                  <input type="hidden" name="bookId" id="bookId" value=""/>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success">Update</button>
+                <button type="submit" class="btn btn-success">Update</button>
                   </form>
               </div>
 
@@ -114,14 +120,17 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Delete Edition</h4>
+                <h4 class="modal-title" id="myModalLabel">Delete Skill</h4>
               </div>
               <div class="modal-body">
-                Are you sure you want to delete the edition <b>August 2016</b>?
+                Are you sure you want to delete the skill?
               </div>
               <div class="modal-footer">
+                <form action="<?php echo base_url('/admin_functions/deleteSkill'); ?>" method="post">
+                <input type="hidden" name="bookId" id="bookId" value=""/>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
               </div>
             </div>
           </div>
@@ -139,6 +148,24 @@
          responsive: true
      });
  });
+ </script>
+
+ <script>
+ $(document).on("click", ".open-AddBookDialog", function () {
+    var myBookId = $(this).data('id');
+    $(".modal-footer #bookId").val( myBookId );
+});
+ </script>
+
+ <script>
+ $(document).on("click", ".open-Skill", function () {
+   var myBookId = $(this).data('id');
+   var skill = $(this).data('skill');
+   var available = $(this).data('available');
+   $(".modal-body #skill").val( skill );
+   $(".modal-body #available").val( available );
+    $(".modal-footer #bookId").val( myBookId );
+});
  </script>
 
 

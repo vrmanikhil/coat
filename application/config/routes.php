@@ -58,6 +58,8 @@ $route['test'] = 'welcome/test';
 
 $route['admin'] = 'admin';
 $route['admin/addQuestion'] = 'admin/addQuestion';
+$route['admin/editQuestion/(:any)'] = 'admin/editQuestion/$1';
+
 $route['admin/manageSkills'] = 'admin/manageSkills';
 $route['admin/manageQuestions'] = 'admin/manageQuestions';
 $route['admin/testSetup'] = 'admin/testSetup';

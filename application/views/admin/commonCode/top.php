@@ -50,3 +50,17 @@
         </div>
         <!-- /.container -->
     </nav>
+    <div class="container">
+
+    <?php
+	if($message['content']!=''){?>
+          <div class="row">
+                     <div class="col-lg-12">
+
+                         <ol class="breadcrumb" style="margin-top: 20px;">
+                             <font color="<?=$message['color']?>"><?=$message['content']?></font>
+                         </ol>
+                     </div>
+                 </div>
+            <br><br>
+	<?php }?>
