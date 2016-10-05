@@ -12,14 +12,14 @@ class Welcome extends CI_Controller {
 		$this->data['head'] =  $this->load->view('commonCode/head',$this->data,true);
 		$this->data['left'] =  $this->load->view('commonCode/left',$this->data,true);
 		$this->data['foot'] =  $this->load->view('commonCode/foot',$this->data,true);
-		// $this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
-		// $this->data['csrf_token'] = $this->security->get_csrf_hash();
-		// $this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','class'=>'');
+		$this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
+		$this->data['csrf_token'] = $this->security->get_csrf_hash();
+		//$this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','class'=>'');
 	}
 
 	public function index()
 	{
-		$this->load->view('home');
+		$this->load->view('home', $this->data);
 	}
 
 	public function selectSkills(){
