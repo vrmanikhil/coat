@@ -20,7 +20,7 @@
         <a href="<?php echo base_url('/admin/testSetup') ?>" class="list-group-item">Manage Test Settings</a>
 
         <center><label class="list-group-item">SETTINGS</label></center>
-        <a href="<?php echo base_url('/change_password') ?>" class="list-group-item">Change Password</a>
+        <a href="<?php echo base_url('/admin/changePassword') ?>" class="list-group-item">Change Password</a>
 
     </div>
 </div>
