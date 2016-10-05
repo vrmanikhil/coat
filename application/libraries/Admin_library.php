@@ -2,32 +2,32 @@
 
 class Admin_library {
 
-	// public function login($username,$password)
-	// {
-	// 	$CI =& get_instance();
-	// 	$CI->load->model('data_model','home');
-	// 	$result = $CI->home->login($username,$password);
-	// 	if ($result) {
-	// 		$data = array(
-	// 			'loggedIn' => true,
-	// 			'username' => $username
-	// 			);
-	// 		$CI->session->set_userdata('user_data', $data);
-	// 		return 1;
-	// 	}
-	// 	return 0;
-	// }
-	//
-	// public function auth()
-	// {
-	// 	$CI = & get_instance();
-	// 	$CI->load->library('session');
-	// 	$data = $CI->session->userdata('user_data');
-	// 	if (isset($data['loggedIn']) && $data['loggedIn']) {
-	// 		return 1;
-	// 	}
-	// 	return 0;
-	// }
+	public function login($username,$password)
+	{
+		$CI =& get_instance();
+		$CI->load->model('admin_model','adminModel');
+		$result = $CI->adminModel->login($username,$password);
+		if ($result) {
+			$data = array(
+				'loggedIn' => true,
+				'username' => $username
+				);
+			$CI->session->set_userdata('user_data', $data);
+			return 1;
+		}
+		return 0;
+	}
+
+	public function auth()
+	{
+		$CI = & get_instance();
+		$CI->load->library('session');
+		$data = $CI->session->userdata('user_data');
+		if (isset($data['loggedIn']) && $data['loggedIn']) {
+			return 1;
+		}
+		return 0;
+	}
 
 	public function getSkills()
 	{
@@ -71,6 +71,13 @@ class Admin_library {
 		return $CI->adminModel->getTestSetupDetails();
 	}
 
+	public function truncateCompulsorySkills()
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->truncateCompulsorySkills();
+	}
+
 	public function addQuestion($questionData)
 	{
 		$CI = &get_instance();
@@ -78,11 +85,39 @@ class Admin_library {
 		return $CI->adminModel->addQuestion($questionData);
 	}
 
+	public function deleteQuestion($questionID)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->deleteQuestion($questionID);
+	}
+
+	public function deleteSkill($skillID)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->deleteSkill($skillID);
+	}
+
+	public function deleteCompulsorySkill($skillID)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->deleteCompulsorySkill($skillID);
+	}
+
 	public function updateQuestion($questionData, $question_id)
 	{
 		$CI = &get_instance();
 		$CI->load->model('admin_model','adminModel');
 		return $CI->adminModel->updateQuestion($questionData, $question_id);
+	}
+
+	public function updateSkill($skillData, $skillID)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->updateSkill($skillData, $skillID);
 	}
 
 	public function addSkill($skillData)

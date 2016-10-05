@@ -27,7 +27,7 @@
 
 
 
-
+					
 					<div class="col-md-5">
 						<input type="email" placeholder="E-MAIL ADDRESS" class="main-form main-form-2" style="width:100%;" id="login-form">
 					</div>

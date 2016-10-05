@@ -7,16 +7,15 @@ class Admin_model extends CI_Model {
 		parent::__construct();
 		$this->load->database();
 	}
-
-	//
-	// public function login($username,$password)
-	// {
-	// 	$result = $this->db->get_where('admin', array('username' => $username,'password' => $password), 1, 0);
-	// 	if ($result->num_rows()>0) {
-	// 		return true;
-	// 	}
-	// 	return false;
-	// }
+	
+	public function login($username,$password)
+	{
+		$result = $this->db->get_where('admin', array('username' => $username,'password' => $password), 1, 0);
+		if ($result->num_rows()>0) {
+			return true;
+		}
+		return false;
+	}
 
 	public function getSkills(){
 		$query = $this->db->get('skills');
@@ -48,6 +47,10 @@ class Admin_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function truncateCompulsorySkills(){
+		return $this->db->empty_table('compulsorySkills');
+	}
+
 	public function getQuestionData($questionID){
 		$this->db->where('question_id', $questionID);
 		$query = $this->db->get('questions');
@@ -59,8 +62,25 @@ class Admin_model extends CI_Model {
 		return $this->db->update('questions', $questionData);
 	}
 
+	public function updateSkill($skillData, $skillID){
+		$this->db->where('skill_id', $skillID);
+		return $this->db->update('skills', $skillData);
+	}
+
 	public function addQuestion($data){
 		return $this->db->insert('questions',$data);
+	}
+
+	public function deleteQuestion($questionID){
+		return $this->db->delete('questions', array('question_id' => $questionID));
+	}
+
+	public function deleteSkill($skillID){
+		return $this->db->delete('skills', array('skill_id' => $skillID));
+	}
+
+	public function deleteCompulsorySkill($skillID){
+		return $this->db->delete('compulsorySkills', array('id' => $skillID));
 	}
 
 	public function addSkill($data){

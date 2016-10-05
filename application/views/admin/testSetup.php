@@ -20,7 +20,7 @@
             <?php echo $left; ?>
             <!-- Content Column -->
             <div class="col-md-9">
-                    <a class="btn btn-danger" style="float:right;">Flush Test Settings</a>
+                    <a href="<?php echo base_url('/admin_functions/flushTest'); ?>" class="btn btn-danger" style="float:right;">Flush Test Settings</a>
                     <h2>Test Settings</h2>
                     <form action="<?php echo base_url('/admin_functions/setupTest'); ?>" method="post">
                       <div class="col-sm-12">
@@ -135,16 +135,16 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                        <?php foreach ($compulsorySkills as $key => $value) {  ?>
+                                        <?php $i=1; foreach ($compulsorySkills as $key => $value) {  ?>
                                           <tr class="odd gradeX">
-                                              <td><?php echo $value['id']; ?></td>
+                                              <td><?php echo $i; $i++; ?></td>
                                               <td><?php echo $value['skill'] ?></td>
                                               <td><?php echo $value['numberOfQuestions']; ?></td>
                                               <td><?php echo $value['time']; ?></td>
                                               <td><?php echo $value['easyPercentage']; ?>% - <?php echo $value['mediumPercentage']; ?>% - <?php echo $value['hardPercentage']; ?>%</td>
                                               <td><?php echo $value['positiveScore']; ?>/<?php echo $value['negativeScore']; ?></td>
-                                              <td class="center"><a data-toggle="modal" data-target="#myModal" class="btn btn-success">Edit</a></td>
-                                              <td class="center"><a data-toggle="modal" data-target="#myModal1" class="btn btn-danger">Delete</a></td>
+                                              <td class="center"><a data-toggle="modal" data-target="#myModal" data-id="<?php echo $value['id']; ?>" class="edit-skill btn btn-success">Edit</a></td>
+                                              <td class="center"><a data-toggle="modal" data-id="<?php echo $value['id']; ?>" data-target="#myModal1" class="open-AddBookDialog btn btn-danger">Delete</a></td>
                                           </tr>
                                           <?php } ?>
                                       </tbody>
@@ -257,6 +257,26 @@
       </div>
 
 
+      <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Delete Compulsory Skill</h4>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to delete the compulsory skill?
+            </div>
+            <div class="modal-footer">
+              <form action="<?php echo base_url('/admin_functions/deleteCompulsorySkill'); ?>" method="post">
+              <input type="hidden" name="bookId" id="bookId" value=""/>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
         <hr>
 
         <!-- Footer -->
@@ -271,6 +291,13 @@
          responsive: true
      });
  });
+ </script>
+
+ <script>
+ $(document).on("click", ".open-AddBookDialog", function () {
+    var myBookId = $(this).data('id');
+    $(".modal-footer #bookId").val( myBookId );
+});
  </script>
 
 </body>

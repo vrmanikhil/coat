@@ -3,16 +3,7 @@
 
 
     <!-- Page Content -->
-    <div class="container">
-      <div class="row">
-                 <div class="col-lg-12">
 
-                     <ol class="breadcrumb" style="margin-top: 20px;">
-                         <font color="green">This is some text!</font>
-                     </ol>
-                 </div>
-             </div>
-        <br><br>
 
         <!-- Content Row -->
         <div class="row">

@@ -36,7 +36,7 @@
                                         <td><?php echo $value['question']; ?></td>
                                         <td><?php echo $value['skill']; ?></td>
                                         <td class="center"><a href="<?php echo base_url('/admin/editQuestion/'); echo $value['question_id']; ?>" class="btn btn-success">Edit</a></td>
-                                        <td class="center"><a data-toggle="modal" data-target="#myModal1" class="btn btn-danger">Delete</a></td>
+                                        <td class="center"><a data-toggle="modal" data-id="<?php echo $value['question_id']; ?>" data-target="#myModal1" class="open-AddBookDialog btn btn-danger">Delete</a></td>
                                     </tr>
                                   <?php } ?>
                                 </tbody>
@@ -56,14 +56,17 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Delete Edition</h4>
+                <h4 class="modal-title" id="myModalLabel">Delete Question</h4>
               </div>
               <div class="modal-body">
-                Are you sure you want to delete the edition <b>August 2016</b>?
+                Are you sure you want to delete the question?
               </div>
               <div class="modal-footer">
+                <form action="<?php echo base_url('/admin_functions/deleteQuestion'); ?>" method="post">
+                <input type="hidden" name="bookId" id="bookId" value=""/>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
               </div>
             </div>
           </div>
@@ -72,8 +75,8 @@
 
         <!-- Footer -->
 <?php echo $bottom; ?>
-<script src="/assets/js/jquery.dataTables.min.js"></script>
- <script src="/assets/js/dataTables.bootstrap.min.js"></script>
+<script src="/assets/admin/js/jquery.dataTables.min.js"></script>
+ <script src="/assets/admin/js/dataTables.bootstrap.min.js"></script>
 
  <script>
  $(document).ready(function() {
@@ -81,6 +84,13 @@
          responsive: true
      });
  });
+ </script>
+
+ <script>
+ $(document).on("click", ".open-AddBookDialog", function () {
+    var myBookId = $(this).data('id');
+    $(".modal-footer #bookId").val( myBookId );
+});
  </script>
 
 
