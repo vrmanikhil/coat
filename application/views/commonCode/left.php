@@ -6,18 +6,17 @@
   </div>
 
   <div class="row image" style="">
-    <img src="<?php echo base_url('assets/website/images/man.png'); ?>" height="100px;" id="avatar">
+    <img src="<?php echo $_SESSION['userData']['profileImage']; ?>" height="100px;" id="avatar">
 
   </div>
 
   <div class="row" style="text-align:center;">
     <h3 id="welcome">WELCOME</h3>
-    <div id="name">SIDDHARTH JAIN</div>
-    <a href="#" class="forgot change">Change Password</a>
+    <div id="name"><?php echo $_SESSION['userData']['name']; ?></div>
   </div>
 
   <div class="row" style="margin-top:50px;text-align:center;">
-    <a href="#" class="button" id="signup">LOGOUT</a>
+    <a href="<?php echo base_url('homeFunctions/logout'); ?>" class="button" id="signup">LOGOUT</a>
 
   </div>
 </div>

@@ -1,7 +1,45 @@
-<!doctype html>
-<html class="no-js" lang="">
-
+<!DOCTYPE html>
+<html lang="en">
 <?php echo $head; ?>
+
+<style>
+.svg-hexagonal-counter {
+    position: relative;
+    float: left;
+}
+
+.svg-hexagonal-counter h2 {
+    text-align:center;
+    position: absolute;
+    line-height: 200px;
+    width: 100%;
+}
+
+.svg-hexagonal-counter .counter{
+    width: 200px;
+    height: 240px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+.svg-hexagonal-counter .counter .track,
+.svg-hexagonal-counter .counter .fill {
+    fill: rgba(0, 0, 0, 0);
+    stroke-width: 30;
+    transform: translate(290px, 800px)rotate(-120deg);
+}
+
+.svg-hexagonal-counter .counter .fill {
+    stroke: rgb(255, 255, 255);
+    stroke-linecap: round;
+    stroke-dasharray: 2160;
+    stroke-dashoffset: 2160;
+}
+</style>
 
 <body>
 
@@ -9,234 +47,198 @@
 	<div class="container-fluid">
 		<div class="row">
 			<?php echo $left; ?>
-			<div class="col-md-9 col-md-offset-2" id="main-wrapper">
-				<div class="row">
-					<div class="col-md-12">
-						<h2 class="dash-head" id="ques-title"><span style="margin-right:10px;"><img src="<?php echo base_url('assets/website/images/search.png'); ?>" height="40px;"></span> CSS- WEB DEVELOPMENT</h2>
-					</div>
-				</div>
 
-				<div class="row">
-					<div class="col-md-8">
-						<h2>QUESTION 1</h2>
-						<hr id="separator">
-						<div class="row question-container">
+			<div class="col-md-9" id="main-wrapper">
+
+          <div class="col-sm-9">
 
 
-							<p class="question-paragraph">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fu</p>
+    					<div style="text-align: center; margin-top: 25px;">
+    						<p class="mcq-title">SKILL: C++</p>
+    					</div>
 
-
-						</div>
-
-						<div class="row answer-container">
-							<div class="options">
-
-
-
-								<div class="paragraph-answer">
-									<span class="opt">A</span>
-									<input type="checkbox" id="option-1">
-									<label for="option-1" class="selected">Choice 1</label>
-								</div>
-
-								<div class="paragraph-answer">
-									<span class="opt">B</span>
-									<input type="checkbox" id="option-2">
-									<label for="option-2" class="selected">Choice 2</label>
-								</div>
-
-								<div class="paragraph-answer">
-									<span class="opt">C</span>
-									<input type="checkbox" id="option-3">
-									<label for="option-3" class="selected">Choice 3</label>
-								</div>
-
-								<div class="paragraph-answer">
-									<span class="opt">D</span>
-									<input type="checkbox" id="option-4">
-									<label for="option-4" class="selected">Choice 4</label>
-								</div>
-
-
-								<!--------------------------------Options are IMAGE ---------------------------------------------->
+    					<div class="col-sm-12">
+                <p class="mcq" style="float: right;"><a>Skip Question</a></p>
+    						<p class="mcq"><strong>Question</strong></p>
+    						<p class="mcq"><p>#include &lt;iostream&gt;<br />
+using namespace std;<br />
+int main() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; int a = 5, b = 6, c, d;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; c = a, b;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; d = (a, b);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; c &lt;&lt; &#39; &#39; &lt;&lt; d;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return 0;<br />
+&nbsp;&nbsp;}</p>
+</p>
+                <div class="options">
+    							<div>
+    								<span class="opt">A</span>
+    								<input type="radio" name="answer" id="optionA" value="A" />
+    								<label for="optionA">5 6</label>
+    							</div>
+    							<div>
+    								<span class="opt">B</span>
+    								<input type="radio" name="answer" id="optionB" value="B" />
+    								<label for="optionB">6 5</label>
+    							</div>
+    							<div>
+    								<span class="opt">C</span>
+    								<input type="radio" name="answer" id="optionC" value="C" />
+    								<label for="optionC">6 7</label>
+    							</div>
+    							<div>
+    								<span class="opt">D</span>
+    								<input type="radio" name="answer" id="optionD" value="D" />
+    								<label for="optionD">None of the above </label>
+    							</div>
+    						</div>
+    					</div>
 
 
 
-<!--
-								<div class="selected image-answer">
+    					<center><button class="btn btn-default" style="background-color: #3d464d; color: #fff; margin-top: 10px;">SUBMIT</button>
+              </center>
 
-									<input type="checkbox">
-									<span class="opt">A</span>
-									<div id="image-ans">
-										<img src="assets/automne-1920-1080.JPG" class="question-image">
-									</div>
-
-									<input type="checkbox">
-									<span class="opt" id="image-ans">B</span>
-									<div id="image-ans">
-										<img src="assets/automne-1920-1080.JPG" class="question-image">
-									</div>
-
-									<input type="checkbox">
-									<span class="opt">C</span>
-									<div id="image-ans">
-										<img src="assets/automne-1920-1080.JPG" class="question-image">
-									</div>
-
-									<input type="checkbox">
-									<span class="opt">D</span>
-									<div id="image-ans">
-										<img src="assets/automne-1920-1080.JPG" class="question-image">
-									</div>
-								</div>
--->
-
-
-
-
-
-							</div>
-
-							<div class="row" style="margin-top:20px;margin-bottom:30px;">
-								<div class="col-md-2"><a href="#" class="button button-2"> Back</a></div>
-								<div class="col-md-offset-8 col-md-2"><a href="#" class="button button-2"> Next</a></div>
-
-							</div>
-
-						</div>
-
-
-					</div>
+          </div>
 
 
 
 
 
 
+          <div class="col-sm-3">
+
+            <div class="col-sm-12 well" style="margin-top: 25px;">
+              <center><b>My Skill Strength: 15%</b></center>
+              <div class="progress" style="margin-top: 10px;">
+                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:0%"></div>
+                <div class="progress-bar progress-bar-success" role="progressbar" style="width:15%"></div>
+              </div>
+              <a style="float:right;" data-toggle="modal" data-target="#knowMore">Know More</a>
+            </div>
+
+            <div class="col-sm-12 well">
+              <center><b>Time Consumed</b>
+                <div class="svg-test">
+
+                </div>
+              </center>
+            </div>
+
+            <div class="col-sm-12 well">
+              <center><button class="btn btn-lg" style="background-color: #3d464d; color: #fff;">FINISH TEST</button></center>
+            </div>
 
 
 
+          </div>
 
-					<div class="col-md-4">
-
-						<div id="clockdiv">
-
-							<div class="inline">
-								<span class="hours"></span>
-								<div class="smalltext">Hours</div>
-							</div>
-							<div class="inline">
-								<span class="minutes"></span>
-								<div class="smalltext">Minutes</div>
-							</div>
-							<div class="inline">
-								<span class="seconds"></span>
-								<div class="smalltext">Seconds</div>
-							</div>
-						</div>
-
-						<div class="row review">
-							<h4>REVIEW QUESTIONS</h4>
-							<div class="col-md-offset-1 col-md-12 check">
-
-								<div>
-									<input type="checkbox" id="1">
-									<label for="1">1</label>
-									<input type="checkbox" id="2">
-									<label for="2">2</label>
-									<input type="checkbox" id="3">
-									<label for="3">3</label>
-									<input type="checkbox" id="4">
-									<label for="4">4</label>
-								</div>
-
-								<div>
-									<input type="checkbox" id="5">
-									<label for="5">5</label>
-									<input type="checkbox" id="6">
-									<label for="6">6</label>
-									<input type="checkbox" id="7">
-									<label for="7">7</label>
-									<input type="checkbox" id="8">
-									<label for="8">8</label>
-								</div>
-								<div>
-									<input type="checkbox" id="9">
-									<label for="9">9</label>
-									<input type="checkbox" id="10">
-									<label for="10">10</label>
-									<input type="checkbox" id="11">
-									<label for="11">11</label>
-									<input type="checkbox" id="12">
-									<label for="12">12</label>
-								</div>
-
-
-							</div>
-						</div>
-
-					</div>
-				</div>
 			</div>
+
 		</div>
 	</div>
 
+
+  <div class="modal fade" id="knowMore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel"><b>Skill Strength<b></h4>
+      </div>
+      <div class="modal-body">
+        <p class="mcq"><b>Details will go here</b></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
 </body>
 <?php echo $foot; ?>
+
+<script src="http://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
 <script>
-	function getTimeRemaining(endtime) {
-		var t = Date.parse(endtime) - Date.parse(new Date());
-		var seconds = Math.floor((t / 1000) % 60);
-		var minutes = Math.floor((t / 1000 / 60) % 60);
-		var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-		var days = Math.floor(t / (1000 * 60 * 60 * 24));
-		return {
-			'total': t
-			, 'days': days
-			, 'hours': hours
-			, 'minutes': minutes
-			, 'seconds': seconds
-		};
-	}
+(function ( $ ) {
+    $.fn.svgTimer = function(options) {
+        var opts = $.extend({}, $.fn.svgTimer.defaults, options);
 
-	function initializeClock(id, endtime) {
-		var clock = document.getElementById(id);
-		var hoursSpan = clock.querySelector('.hours');
-		var minutesSpan = clock.querySelector('.minutes');
-		var secondsSpan = clock.querySelector('.seconds');
+        var template = "<div class='svg-hexagonal-counter'>"
+            + "<h2>0</h2>"
+            + "<svg class='counter' x='0px' y='0px' viewBox='0 0 776 628'>"
+            + "<path class='track' d='M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z'></path>"
+            + "<path class='fill' d='M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z'></path>"
+            + "</svg>"
+            + "</div>";
 
-		function updateClock() {
-			var t = getTimeRemaining(endtime);
+        return this.each(function() {
+            // Build dom for svg countdown
+            var parentEl = $(this);
+            parentEl.append(template);
 
-			hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-			minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-			secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+            //define dom elements
+            var track = parentEl.find('.track');
+            var fill = parentEl.find('.fill');
+            var counterText = parentEl.find('h2');
 
-			if (t.total <= 0) {
-				clearInterval(timeinterval);
-			}
-		}
+            //set time and offset
+            var time = opts.time; /* how long the timer runs for */
+            var initialOffset = 2160;
+            var i = 1;
 
-		updateClock();
-		var timeinterval = setInterval(updateClock, 1000);
-	}
+            //draw initial hexagon
+            track.css('stroke', opts.track);
+            fill.css({
+                'stroke': opts.fill,
+                'stroke-dashoffset': initialOffset-(i*(initialOffset/time)) + 'px',
+                'transition': 'stroke-dashoffset 1s ' +  opts.transition
+            });
 
-	var deadline = new Date(Date.parse(new Date()) + 60 * 60 * 1000);
-	initializeClock('clockdiv', deadline);
+            //run timer
+            var interval = setInterval(function() {
+                track.css('stroke', opts.track);
+                fill.css({
+                    'stroke': opts.fill,
+                    'stroke-dashoffset': initialOffset-(i*(initialOffset/time)) + 'px',
+                    'transition': 'stroke-dashoffset 1s ' +  opts.transition
+                });
+                if(opts.direction === 'forward'){
+                    counterText.text(i);
+                } else if (opts.direction === 'backward') {
+                    var count = opts.time - i + 1;
+                    counterText.text(count);
+                }
 
-	$('.selected').click(function(){
-		console.log($(this).parent().find('span'))
+                if (i == time) {
+                    clearInterval(interval);
+                }
+                i++;
+            }, opts.interval);
+        });
+    };
 
-		$(this).parent().find('span').css('background-color','#16b48d')
-		$(this).parent().find('span').css('transition','0.1s ease-in')
-	});
-
-	$('.question-image').click(function(){
-		$(this).parent().find('span').css('background-color','#16b48d')
-		$(this).parent().find('span').css('transition','0.1s ease-in')
-	});
-
-
+    $.fn.svgTimer.defaults = {
+        time: 124,
+        track: 'rgb(56, 71, 83)',
+        fill: 'rgb(104, 214, 198)',
+        transition: 'linear',
+        direction: 'forward',
+        interval: 1000
+    }
+}( jQuery ));
 </script>
+<script>
+$(function () {
+  $('.svg-test').svgTimer();
+});
+</script>
+
+
+
+
 
 </html>

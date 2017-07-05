@@ -14,7 +14,7 @@
 
                     <h2>Add New Question</h2>
                     <form action="<?php echo base_url('/admin_functions/add_question'); ?>" method="post">
-                      <div class="col-sm-6">
+                      <div class="col-sm-4">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label>Skill Name</label>
@@ -26,7 +26,7 @@
                             </div>
                       </div>
                       </div>
-                      <div class="col-sm-3">
+                      <div class="col-sm-2">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label>Answer</label>
@@ -44,10 +44,23 @@
                             <div class="controls">
                                 <label>Difficulty Level</label>
                                 <select name="difficulty_level" class="form-control" required>
-                                  <option value="1">Easy</option>
-                                  <option value="2">Medium</option>
-                                  <option value="3">Hard</option>
+                                  <option value="1.0">1.0</option>
+                                  <option value="2.0">2.0</option>
+                                  <option value="3.0">3.0</option>
+                                  <option value="4.0">4.0</option>
+                                  <option value="5.0">5.0</option>
+                                  <option value="6.0">6.0</option>
+                                  <option value="7.0">7.0</option>
+                                  <option value="8.0">8.0</option>
                                 </select>
+                            </div>
+                      </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label>Expert Time</label>
+                                <input type="text" name="expert_time" class="form-control" placeholder="Expert Time (in seconds)" required>
                             </div>
                       </div>
                       </div>

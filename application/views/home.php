@@ -1,276 +1,186 @@
-<!doctype html>
-<html class="no-js" lang="">
-
-
-
+<!DOCTYPE html>
+<html lang="en">
 <?php echo $head; ?>
-
-
 <body>
-
-	<div class="container-fluid header">
-
-
-
-
+  <?php
+	if($message['content']!=''){?>
+	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
+	<?php }?>
+  <div class="container-fluid">
 		<div class="row">
-
-			<div class="col-md-5" style="margin-top:18px;">
-
-				<h3 class="main-header" style="margin-left:10px;">CAMPUS PUPPY ONLINE ASSESMENT TEST</h3>
-				<h5 class="sub-header" style="margin-left:10px;">powered by  <a href="http://www.campuspuppy.com" target="_blank" class="link">CAMPUSPUPPY</a></h5>
-
-			</div>
-
-			<div class=" col-md-offset-2 col-md-5">
+			<div class="col-md-2" id="sidebar-wrapper" style="background-color: #d3d3d3;">
 				<div class="row">
-				<form method="post" action="web/login">
-						<div class="col-md-5">
-							<input type="email" placeholder="E-MAIL ADDRESS" class="main-form main-form-2" style="width:100%;" id="login-form" name="data[email]">
-						</div>
-
-						<div class="col-md-5">
-							<input type="password" placeholder="PASSWORD" class="main-form main-form-2" style="width:100%;" id="login-form" name="data[password]">
-							<input type="hidden" name="<?= $csrf_token_name?>" value="<?= $csrf_token?>">
-							<a href="#" class="forgot" id="forgot_password">Forgot Password?</a>
-						</div>
-
-						<div class="col-md-2" id="margin-add">
-							<button type="submit" href="#" class="button"/>
-
-						</div>
-					</form>
-					
+          <h3 class="main-header" style="font-size:3em;text-align:center; color: #000;">COAT</h3>
+					<h5 class="sub-header" style="text-align:center; color: #000;">powered by  <a href="http://www.campuspuppy.com" target="_blank" class="link" style="color:#000;"><b>CAMPUSPUPPY</b></a></h5>
 				</div>
+				<div class="row image" style="">
+					<img src="<?php echo base_url('assets/website/images/coat.gif'); ?>" height="150px;" id="avatar">
+				</div>
+				<div class="row" style="text-align:center;">
+          <p class="mcq-title" style="text-transform: none;">Student Login</p>
+          <form action="<?php echo base_url('homeFunctions/doLogin'); ?>" method="post">
+            <div class="form-group">
+              <label style="float: left; margin-left: 10px;">E-Mail Address</label>
+              <input type="email" name="email" class="form-control" placeholder="E-Mail Address" style="width: 90%; margin-left: 10px;">
+            </div>
+            <div class="form-group">
+              <label style="float: left; margin-left: 10px;">Password</label>
+              <input type="password" name="password" class="form-control" placeholder="Password" style="width: 90%; margin-left: 10px;">
+            </div>
+            <center>
+              <p class="mcq" style="text-align: center;"><b><a data-toggle="modal" data-target="#forgotPassword">Forgot Password?</a></b></p>
+            </center>
+            <button type="submit" class="btn btn-primary" style="background-color: #3d464d; color: #fff;">LOGIN</button>
+          </form>
+				</div>
+        <div class="row" style="margin-top:50px;">
+          <p class="mcq" style="color: #fff; font-size: 11px; color: #000;"><b>&copy; Campus Puppy Private Limited 2017</b></p>
+        </div>
 			</div>
+      <div class="modal fade" id="forgotPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel"><b>Forgot Password?<b></h4>
+          </div>
+          <div class="modal-body">
+            <p class="mcq"><b>Contact the COAT representative on your Campus.</b></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+			<div class="col-md-9" id="main-wrapper">
+          <div class="col-sm-12">
+            <div class="col-sm-6">
+              <div style="text-align: center; margin-top: 25px;">
+                <p class="mcq-title">CAMPUSPUPPY ONLINE ASSESSMENT TEST</p>
+              </div>
+              <p class="mcq" style="margin-top: 10px; text-align: justify;">Coat is Campus Puppy Online Assessment Test aims at testing knowledge of a person in specific skills. This test will help people to get recognised among their colleagues and brightening their chances of getting filtered by the top leading companies. The test has a threshold marks value below which the skill will not be added to the person’s profile. This test helps people to not only get through companies but to test their skills and improve their knowledge. Skills vary from technical, aptitude, logical to managerial skills etc. This test is for people from all domains.
+              <h4><b>HAVE YOU TAKEN YOUR COAT YET?</b></h4>
+              </p>
+              <div style="text-align: center; margin-top: 25px;">
+                <p class="mcq-title">ABOUT CAMPUSPUPPY</p>
+              </div>
+              <p class="mcq" style="margin-top: 10px;">
+              <center><img src="<?php echo base_url('assets/website/images/cp.PNG'); ?>" width="80%"></center>
+              <p style="text-align: justify;"><b>Hellooo, Some text will go here, some text about campuspuppy.com will go here. Now we will give the link to visit the website. <a>Visit Website</a></b></p>
+            </p>
+            </div>
+            <div class="col-sm-6">
+    					<div style="text-align: center; margin-top: 25px;">
+    						<p class="mcq-title">REGISTER FOR COAT</p>
+    				  </div>
+            <form action="<?php echo base_url('homeFunctions/register'); ?>" method="post">
+                <div class="col-xs-6">
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" name="firstName" class="form-control" placeholder="First Name" required>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" name="lastName" class="form-control" placeholder="Last Name" required>
+                </div>
+              </div>
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <label>E-Mail Address</label>
+                  <input type="email" name="email" class="form-control" placeholder="E-Mail Address" required>
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <div class="form-group">
+                  <label style="color: #fff;">#</label>
+                  <input type="text" class="form-control" value="+91" disabled>
+                </div>
+              </div>
+              <div class="col-xs-9">
+                <div class="form-group">
+                  <label>Mobile</label>
+                  <input type="text" class="form-control" name="mobile" placeholder="Mobile Number" required>
+                </div>
+              </div>
+              <div class="col-xs-7">
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control" name="password" placeholder="Password" required>
+                </div>
+              </div>
+              <div class="col-xs-5">
+                <div class="form-group">
+                  <label>Gender</label>
+                  <select class="form-control" name="gender" required>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <label>College</label>
+                  <select class="form-control" name="collegeID" required>
+                    <option value="1">JSS Academy of Technical Education, Noida</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-7">
+                <div class="form-group">
+                  <label>Course</label>
+                  <select class="form-control" name="courseID" required>
+                    <option value="1">B.Tech-CSE</option>
+                    <option value="2">B.Tech-IT</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-5">
+                <div class="form-group">
+                  <label>Batch</label>
+                  <input class="form-control" name="batch" placeholder="Batch" required>
+                </div>
+              </div>
+
+              <center>
+                <p class="mcq" style="text-align: center;"><b>By registering you agree to our <a data-toggle="modal" data-target="#termsConditions">Terms and Conditions</a></b></p>
+                <button type="submit" class="btn btn-primary" style="background-color: #3d464d; color: #fff;">REGISTER</button>
+              </center>
+              </form>
+
+              </div>
+          </div>
+
+
+			</div>
+
 		</div>
+	</div>
+
+  <div class="modal fade" id="termsConditions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel"><b>Terms and Conditions<b></h4>
+      </div>
+      <div class="modal-body">
+        <p class="mcq"><b>Terms and Conditions will go here</b></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+  </div>
 
 
-
-		<div class="container">
-
-			<div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog">
-
-					<div class="modal-content" style="height:450px;">
-
-						<div style="padding:12px;background-color: #0b99cd;text-align:center;">
-							<h4 style="font-size:1.7em;color:white;">FORGOT YOUR PASSWORD?</h4>
-						</div>
-
-						<div style="padding-left:50px;padding-top:40px;">
-							<p style="font-size:1.2em;font-family:'quick-b';margin-bottom:40px;">Don't worry! Just fill in your email and we'll help
-								<br> you reset your password. </p>
-								<input type="email" placeholder="E-MAIL ADDRESS" class="main-form" style="width:60%;margin-bottom:50px;margin-right:15px;border-bottom:2px solid #ccc;">
-								<a href="#" class="button button-2 modal-button">SEND E-MAIL</a>
-							</div>
-
-							<div style="padding-left:50px;padding-right:50px;">
-								<hr>
-								<a href="#" id="back" data-dismiss="modal">BACK TO LOGIN</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="container-fluid">
-			<div class="row">
-
-				<div class="col-md-12 content">
-
-					<div class="col-md-2" style="padding-right:0px;">
-						<img src="<?php echo base_url('assets/website/images/coat.gif'); ?>" class="logo">
-					</div>
-
-					<div class="col-md-5" style="padding-left:0px;">
-						<h4 style="margin-top:120px;text-align:justify;">
-							Coat is Campus Puppy Online Assessment Test aims at testing knowledge of a person in specific skills. This test will help people to get recognised among their colleagues and brightening their chances of getting filtered by the top leading companies. The test has a threshold marks value below which the skill will not be added to the person’s profile. This test helps people to not only get through companies but to test their skills and improve their knowledge. Skills vary from technical, aptitude, logical to managerial skills etc. This test is for people from all domains.
-						</h4>
-						<h1 style="font-family:'quick-b';stext-align:left;color:#333333;font-size:1.5em;">HAVE YOU TAKEN YOUR <span style=""> COAT </span> YET?</h1></div>
-
-						<div class="col-md-1">
-						</div>
-
-
-
-						<div class="col-md-4 signup-form">
-							<h3 style="text-align:center; font-family:'quick-b';margin-bottom:30px;">NEW TO COAT? REGISTER NOW!</h3>
-							<form action="web/signup" method="post">
-								<div class="row">
-
-									<div class="col-md-6">
-										<input type="text" placeholder="FIRST NAME" class="main-form" name="data[first_name]">
-									</div>
-
-									<div class="col-md-6">
-										<input type="text" placeholder="LAST NAME" class="main-form" name="data[last_name]">
-									</div>
-
-								</div>
-								<div class="row">
-
-									<div class="col-md-12">
-										<input type="email" placeholder="E-MAIL ADDRESS" class="main-form" style="width:100%;"  name="data[email]">
-
-									</div>
-
-								</div>
-								<div class="row">
-
-									<div class="col-md-2" style="padding-right:2px;">
-										<input placeholder="+91" class="main-form dis-2" disabled style="width:100%;">
-									</div>
-
-									<div class="col-md-10">
-										<input type="number" placeholder="MOBILE NUMBER" class="main-form" style="width:100%;" name="data[mobile]">
-									</div>
-
-								</div>
-
-								<div class="row">
-
-									<div class="col-md-8">
-										<input type="password" placeholder="PASSWORD" class="main-form" style="width:100%;" name="data[password]">
-									</div>
-
-									<div class="col-md-4 dropdown" style="padding-left: 0px;padding-right: 15px;" name="">
-										<select style="width:100%;">
-											<option value="0">GENDER</option>
-											<option value="1">MALE</option>
-											<option value="2">FEMALE</option>
-										</select>
-									</div>
-
-								</div>
-
-
-								<div class="row">
-
-									<div class="col-md-12">
-										<input type="text" placeholder="COLLEGE NAME" disabled class="main-form dis" style="width:100%;" >
-										<input type="hidden" value="0" name="data[college]">
-									</div>
-
-								</div>
-
-								<div class="row">
-
-									<div class="col-md-7 dropdown">
-										<select name="data[course_id]">
-											<option value="0">CHOOSE COURSE</option>
-											<option value="0">B.TECH- COMPUTER SCIENCE</option>
-											<option value="1">B.TECH- COMPUTER SCIENCE</option>
-											<option value="2">B.TECH- COMPUTER SCIENCE</option>
-										</select>
-									</div>
-
-									<div class="col-md-5 dropdown">
-										<select type="text" name="data[batch_id]">
-											<option value="0">CHOOSE BATCH</option>
-											<option value="1">2013-2017</option>
-											<option value="2">2014-2018</option>
-										</select>
-									</div>
-
-								</div>
-
-
-								<div class="row">
-
-									<div class="col-md-12" style="text-align:center;">
-										<h4 id="terms">By registering, you agree to our <a href="#">Terms and Conditions</a></h4>
-										<button type="submit" class="button button-2"/>
-									</div>
-
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="container">
-				<div class="modal fade" id="myModal-2" role="dialog">
-					<div class="modal-dialog">
-
-
-						<div class="modal-content" style="height:450px;margin-top:105px;">
-							<div style="padding:12px;background-color:  #0b99cd;text-align:center;">
-								<h4 style="font-size:1.7em;color:white;">TERMS AND CONDITIONS</h4>
-							</div>
-							<div style="padding-left:30px;padding-top:40px;padding-right:30px;">
-								<p style="font-size:1.2em;font-family:'quick-b';margin-bottom:40px;">The following terms and conditions (the “Terms and Conditions”) govern your use of this Web Site, and any content made available from or through this Web Site, including any subdomains thereof (the “Web Site”). The Web Site is made available by Variety Media, LLC (“Variety”).
-								</div>
-								<div style="padding-left:30px;padding-right:30px;">
-									<hr>
-									<a href="#" id="back" data-dismiss="modal">BACK TO LOGIN</a>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-
-
-				<div class="container-fluid" id="why-section">
-					<div class="row">
-
-						<div>
-							<h2 style="text-align:center; font-size:30px;margin-bottom:5px;margin-top:40px;">WHY COAT ?</h2>
-							<img src="<?php echo base_url('assets/website/images/down-arrow.png'); ?>" height="30px;" id="indicator">
-						</div>
-
-						<div class="col-md-4" id="icon">
-							<img src="<?php echo base_url('assets/website/images/1.PNG'); ?>" height="70px;">
-							<h3 style="margin-bottom:0px;text-transform:uppercase;font-family:'quick-b';font-size:1.35em;">Self Improvement</h3>
-							<h5 style="margin-top:0px;font-size:0.9em;">Testing one’s knowledge in specific skills.</h5>
-						</div>
-
-						<div class="col-md-4" id="icon">
-							<img src="<?php echo base_url('assets/website/images/2.PNG'); ?>" height="70px;">
-							<h3 style="margin-bottom:0px;text-transform:uppercase;font-family:'quick-b';font-size:1.35em;">Recognition</h3>
-							<h5 style="margin-top:0px;font-size:0.9em;">Getting recognised for the specific skill among their colleagues.</h5>
-						</div>
-
-						<div class="col-md-4" id="icon">
-							<img src="<?php echo base_url('assets/website/images/3.PNG'); ?>" height="70px;">
-							<h3 style="margin-bottom:0px;text-transform:uppercase;font-family: 'quick-b';font-size:1.35em;">Job Application</h3>
-							<h5 style="margin-top:0px;font-size:0.9em;">Getting filtered by leading companies for interviews.</h5>
-						</div>
-
-					</div>
-				</div>
-
-
-				<div class="container-fluid" id="footer">
-					<div class="row">
-						<div class="col-md-12" style="text-align:center; margin-top:30px;">
-							<a href="http://www.campuspuppy.com" class="forgot footer" target="_blank">&copy; Campus Puppy Private Limited 2016</a>
-						</div>
-					</div>
-				</div>
-
-				<?php echo $foot; ?>
-
-				<script>
-					$(document).ready(function () {
-						$("#forgot_password").click(function () {
-							$("#myModal").modal();
-						});
-					});
-
-					$(document).ready(function () {
-						$("#terms").click(function () {
-							$("#myModal-2").modal();
-						});
-					});
-				</script>
-			</body>
-
-			</html>
+</body>
+<?php echo $foot; ?>
+</html>

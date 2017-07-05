@@ -77,12 +77,16 @@ class Admin extends CI_Controller {
 		if (!$this->admin_library->auth()) {
 			redirect(base_url('/admin'));
 		}
-		$this->data['skills'] = $this->admin_library->getSkills();
+		$this->data['skills'] = $this->admin_library->getNonCompulsorySkills();
 		$this->data['colleges'] = $this->admin_library->getColleges();
 		$this->data['testSetup'] = $this->admin_library->getTestSetupDetails();
 		$this->data['testSetup'] = $this->data['testSetup'][0];
 		$this->data['compulsorySkills'] = $this->admin_library->getCompulsorySkills();
 		$this->load->view('admin/testSetup', $this->data);
+	}
+
+	public function seed(){
+		$this->admin_library->seed();
 	}
 
 

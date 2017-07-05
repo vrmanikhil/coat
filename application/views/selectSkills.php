@@ -1,143 +1,81 @@
-<!doctype html>
-<html class="no-js" lang="">
-
-
+<!DOCTYPE html>
+<html lang="en">
 <?php echo $head; ?>
-
-
 <body>
-
-
+  <?php
+	if($message['content']!=''){?>
+	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
+	<?php }?>
 	<div class="container-fluid">
 		<div class="row">
 			<?php echo $left; ?>
-
-			<div class="col-md-9 col-md-offset-2" id="main-wrapper">
-
-				<div class="row" style="margin-top:10px;">
-					<div class="col-md-12">
-						<h2 class="dash-head"><span style="margin-right:10px;"><img src="<?php echo base_url('assets/website/images/search.png'); ?>" height="40px;"></span>COMPULSORY TESTS</h2>
-					</div>
-				</div>
-
-				<div class="row" style="margin-bottom:40px;">
-					<div class="col-md-12">
-						<table>
-							<tr class="heading-table">
-								<th width="10%">S.No</th>
-								<th width="50%">Skill Name</th>
-								<th width="20%">Total Questions</th>
-								<th width="20%">Time(mins.)</th>
-							</tr>
-							<tr class="fields">
-								<td>#1</td>
-								<td>PHP</td>
-								<td>20</td>
-								<td>15</td>
-							</tr>
-							<tr class="fields">
-								<td>#1</td>
-								<td>PHP</td>
-								<td>20</td>
-								<td>15</td>
-							</tr>
-							<tr class="fields">
-								<td>#1</td>
-								<td>PHP</td>
-								<td>20</td>
-								<td>15</td>
-							</tr>
-							<tr class="fields">
-								<td>#1</td>
-								<td>PHP</td>
-								<td>20</td>
-								<td>15</td>
-							</tr>
-							<tr class="fields">
-								<td>#1</td>
-								<td>PHP</td>
-								<td>20</td>
-								<td>15</td>
-							</tr>
-
-
-						</table>
-					</div>
-				</div>
-
-				<div class="row" style="margin-bottom:25px;">
-					<div class="col-md-12">
-						<h2 class="dash-head"><span style="margin-right:10px;"><img src="<?php echo base_url('assets/website/images/search.png'); ?>" height="40px;"></span>CHOOSE YOUR SKILLS</h2>
-					</div>
-				</div>
-				<div class="row" style="margin-bottom:30px;">
-					<div class="col-md-6">
-
-						<input id="basics" class="skills" placeholder="Choose skill" style="margin-left:0px !important;">
-					</div>
-					<div class="col-md-2">
-						<a href="#" class="button button-2" id="add-skill-button">ADD SKILL</a>
-					</div>
-					<div class="col-md-4">
-						<h3>SKILLS REMAINING: <span id="counter">12</span></h3>
-					</div>
-				</div>
-
-				<div class="row" style="margin-bottom:10px;">
-					<div class="col-md-12">
-						<table>
-							<tr class="heading-table">
-								<th width="10%">S.No</th>
-								<th width="50%">Skill Name</th>
-								<th width="20%">Total Questions</th>
-								<th width="20%">Time(mins.)</th>
-							</tr>
-							<tr class="fields">
-								<td>#1</td>
-								<td>PHP</td>
-								<td>20</td>
-								<td>15</td>
-							</tr>
-							<tr class="fields">
-								<td>#1</td>
-								<td>Verbal Reasoning</td>
-								<td>20</td>
-								<td>15</td>
-							</tr>
-							<tr class="fields">
-								<td>#1</td>
-								<td>PHP</td>
-								<td>20</td>
-								<td>15</td>
-							</tr>
-							<tr class="fields">
-								<td>#1</td>
-								<td>PHP</td>
-								<td>20</td>
-								<td>15</td>
-							</tr>
-
-
-						</table>
-					</div>
-				</div>
-
-
-				<div class="row" style="margin-bottom:30px;">
-					<div class="col-md-offset-10 col-md-2">
-						<a href="#" class="button button-2 next-button">GO AHEAD!</a>
-					</div>
-				</div>
-
-			</div>
-			<div class="col-md-1">
-
+			<div class="col-md-9" id="main-wrapper">
+          <div class="col-sm-12">
+    					<div style="text-align: center; margin-top: 25px;">
+    						<p class="mcq-title">Compulsory Skill Tests</p>
+    					</div>
+              <table class="table">
+                <thead class="thead-inverse">
+                  <tr>
+                    <th>#</th>
+                    <th>Skill Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php $i=1; foreach ($compulsorySkills as $key => $value) { ?>
+                  <tr>
+                    <th scope="row"><?php echo $i++; ?></th>
+                    <td><?php echo $value['skill']; ?></td>
+                  </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+              <div style="text-align: center; margin-top: 25px;">
+    						<p class="mcq-title">User-Driven Skill Tests</p>
+    					</div>
+              <div class="col-sm-6">
+                <table class="table">
+                  <thead class="thead-inverse">
+                    <tr>
+                      <th>#</th>
+                      <th>Skill Name</th>
+                      <th>Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php $i=1; foreach ($userSkillsSelected as $key => $value) { ?>
+                    <tr>
+                      <th scope="row"><?php echo $i++; ?></th>
+                      <td><?php echo $value['skill']; ?></td>
+                      <td><a href="<?php echo base_url('homeFunctions/removeUserDrivenSkill/').$value['skillID']; ?>" class="btn" style="background-color:#c0392b; color: #fff;">Remove</a></td>
+                    </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-sm-6">
+                <p style="float:right;">User Driven Skills Allowed: <b><?php echo $testSetup['skillsAllowed']; ?></b></p>
+                <br><br>
+                <p class="mcq"><strong>Choose skills you want to attempt test for<strong></p>
+              <form class="form-inline" action="<?php echo base_url('homeFunctions/addUserDrivenSkill'); ?>" method="post">
+                <div class="form-group">
+                  <label>Skill Name</label>
+                  <select type="text" class="form-control" name="skillID">
+                    <?php foreach ($availableUserDrivenSkills as $key => $value) { ?>
+                      <option value="<?php echo $value['skill_id']; ?>"><?php echo $value['skill']; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+                <center><button type="submit" class="btn btn-primary" style="background-color: #3d464d; color: #fff; margin-top: 20px;">Add Skill</button></center>
+              </form>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <center><a href="<?php echo base_url('homeFunctions/goAhead'); ?>" class="btn btn-primary btn-lg">Go Ahead</a></center>
+          </div>
 			</div>
 		</div>
 	</div>
-
-<?php echo $foot; ?>
-
 </body>
-
+<?php echo $foot; ?>
 </html>

@@ -11,7 +11,7 @@
                     <h2>Edit Question</h2>
 
                     <form action="<?php echo base_url('/admin_functions/update_question'); ?>" method="post">
-                      <div class="col-sm-6">
+                      <div class="col-sm-4">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label>Skill Name</label>
@@ -23,7 +23,7 @@
                             </div>
                       </div>
                       </div>
-                      <div class="col-sm-3">
+                      <div class="col-sm-2">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label>Answer</label>
@@ -41,10 +41,23 @@
                             <div class="controls">
                                 <label>Difficulty Level</label>
                                 <select name="difficulty_level" class="form-control" required>
-                                  <option value="1" <?php if($questionData['difficulty_level']==='1') echo "selected"; ?>>Easy</option>
-                                  <option value="2" <?php if($questionData['difficulty_level']==='2') echo "selected"; ?>>Medium</option>
-                                  <option value="3" <?php if($questionData['difficulty_level']==='3') echo "selected"; ?>>Hard</option>
+                                  <option value="1.0" <?php if($questionData['difficulty_level']==='1.0') echo "selected"; ?>>1.0</option>
+                                  <option value="2.0" <?php if($questionData['difficulty_level']==='2.0') echo "selected"; ?>>2.0</option>
+                                  <option value="3.0" <?php if($questionData['difficulty_level']==='3.0') echo "selected"; ?>>3.0</option>
+                                  <option value="4.0" <?php if($questionData['difficulty_level']==='4.0') echo "selected"; ?>>4.0</option>
+                                  <option value="5.0" <?php if($questionData['difficulty_level']==='5.0') echo "selected"; ?>>5.0</option>
+                                  <option value="6.0" <?php if($questionData['difficulty_level']==='6.0') echo "selected"; ?>>6.0</option>
+                                  <option value="7.0" <?php if($questionData['difficulty_level']==='7.0') echo "selected"; ?>>7.0</option>
+                                  <option value="8.0" <?php if($questionData['difficulty_level']==='8.0') echo "selected"; ?>>8.0</option>
                                 </select>
+                            </div>
+                      </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label>Expert Time</label>
+                                <input type="text" name="expert_time" class="form-control" value="<?php echo $questionData['expert_time']; ?>" required>
                             </div>
                       </div>
                       </div>

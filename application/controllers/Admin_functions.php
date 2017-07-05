@@ -9,6 +9,8 @@ class Admin_functions extends CI_Controller {
 		$this->load->library(array('Admin_library','session'));
 		$this->load->helper(array('url'));
 		$this->data = array();
+		$this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','color'=>'');
+
 	}
 
 	public function doLogin(){
@@ -22,6 +24,10 @@ class Admin_functions extends CI_Controller {
 		$result = $this->admin_library->login($username, $password);
 		if($result){
 			redirect(base_url('/admin/manageSkills'));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Please Check your Username/Password','color'=>'red'));
+			redirect(base_url('/admin'));
 		}
 	}
 
@@ -84,12 +90,15 @@ class Admin_functions extends CI_Controller {
 		$option2 = '';
 		$option3 = '';
 		$option4 = '';
+		$expert_time = '';
 		if($x = $this->input->post('skill_id'))
 			$skill_id = $x;
 		if($x = $this->input->post('answer'))
 			$answer = $x;
 		if($x = $this->input->post('difficulty_level'))
 			$difficulty_level = $x;
+		if($x = $this->input->post('expert_time'))
+			$expert_time = $x;
 		if($x = $this->input->post('question'))
 			$question = $x;
 		if($x = $this->input->post('option1'))
@@ -100,7 +109,7 @@ class Admin_functions extends CI_Controller {
 			$option3 = $x;
 		if($x = $this->input->post('option4'))
 			$option4 = $x;
-		if($skill_id == '' || $answer == '' || $difficulty_level == '' || $question == '' || $option1 == '' || $option2 == '' || $option3 == '' || $option4 == '' ){
+		if($skill_id == '' || $answer == '' || $difficulty_level == '' || $question == '' || $option1 == '' || $option2 == '' || $option3 == '' || $option4 == '' || $expert_time == ''){
 			$this->session->set_flashdata('message', array('content'=>'Incomplete Data','color'=>'red'));
 			redirect(base_url('/admin/addQuestion'));
 		}
@@ -112,7 +121,8 @@ class Admin_functions extends CI_Controller {
 			'option1' => $option1,
 			'option2' => $option2,
 			'option3' => $option3,
-			'option4' => $option4
+			'option4' => $option4,
+			'expert_time' => $expert_time
 		);
 		$result = $this->admin_library->addQuestion($questionData);
 		if($result){
@@ -136,12 +146,15 @@ class Admin_functions extends CI_Controller {
 		$option3 = '';
 		$option4 = '';
 		$question_id = '';
+		$expert_time = '';
 		if($x = $this->input->post('skill_id'))
 			$skill_id = $x;
 		if($x = $this->input->post('answer'))
 			$answer = $x;
 		if($x = $this->input->post('difficulty_level'))
 			$difficulty_level = $x;
+		if($x = $this->input->post('expert_time'))
+			$expert_time = $x;
 		if($x = $this->input->post('question'))
 			$question = $x;
 		if($x = $this->input->post('option1'))
@@ -162,9 +175,10 @@ class Admin_functions extends CI_Controller {
 			'option1' => $option1,
 			'option2' => $option2,
 			'option3' => $option3,
-			'option4' => $option4
+			'option4' => $option4,
+			'expert_time' => $expert_time
 		);
-		if($skill_id == '' || $answer == '' || $difficulty_level == '' || $question == '' || $option1 == '' || $option2 == '' || $option3 == '' || $option4 == '' ){
+		if($skill_id == '' || $answer == '' || $difficulty_level == '' || $question == '' || $option1 == '' || $option2 == '' || $option3 == '' || $option4 == '' || $expert_time==''){
 			$this->session->set_flashdata('message', array('content'=>'Incomplete Data','color'=>'red'));
 			redirect(base_url('/admin/addQuestion'));
 		}
@@ -210,8 +224,7 @@ class Admin_functions extends CI_Controller {
 		}
 	}
 
-	public function updateSkill()
-	{
+	public function updateSkill(){
 		$skill = '';
 		$availableForUserDriven = '';
 		$skillID = '';
@@ -240,8 +253,7 @@ class Admin_functions extends CI_Controller {
 		}
 	}
 
-	public function deleteQuestion()
-	{
+	public function deleteQuestion(){
 		$questionID = '';
 		if($x = $this->input->post('bookId'))
 			$questionID = $x;
@@ -256,8 +268,7 @@ class Admin_functions extends CI_Controller {
 		}
 	}
 
-	public function deleteSkill()
-	{
+	public function deleteSkill(){
 		$skillID = '';
 		if($x = $this->input->post('bookId'))
 			$skillID = $x;
@@ -272,8 +283,7 @@ class Admin_functions extends CI_Controller {
 		}
 	}
 
-	public function deleteCompulsorySkill()
-	{
+	public function deleteCompulsorySkill(){
 		$skillID = '';
 		if($x = $this->input->post('bookId'))
 			$skillID = $x;
@@ -288,88 +298,20 @@ class Admin_functions extends CI_Controller {
 		}
 	}
 
-	public function flushTest(){
-		$testName = '';
-		$college_id = '';
+	public function setupTest(){
 		$numberOfSkills = '';
-		$positiveScore = '';
-		$negativeScore = '';
-		$numberOfQuestions = '';
 		$time = '';
-		$easyPercentage = '';
-		$mediumPercentage = '';
-		$hardPercentage = '';
-		$testData = array(
-			'testName' => $testName,
-			'college_id' => $college_id,
-			'skillsAllowed' => $numberOfSkills,
-			'positiveScore' => $positiveScore,
-			'negativeScore' => $negativeScore,
-			'numberOfQuestions' => $numberOfQuestions,
-			'timeAllowed' => $time,
-			'easyPercentage' => $easyPercentage,
-			'mediumPercentage' => $mediumPercentage,
-			'hardPercentage' => $hardPercentage
-		);
-		$result = $this->admin_library->setupTest($testData);
-		$result_ = $this->admin_library->truncateCompulsorySkills();
-		if($result && $result_){
-			$this->session->set_flashdata('message', array('content'=>'Test Successfully Flushed','color'=>'green'));
-			redirect(base_url('/admin/testSetup'));
-		}
-		else{
-			$this->session->set_flashdata('message', array('content'=>'Something went Wrong!','color'=>'red'));
-			redirect(base_url('/admin/testSetup'));
-		}
-	}
-
-	public function setupTest()
-	{
-		$testName = '';
-		$college_id = '';
-		$numberOfSkills = '';
-		$positiveScore = '';
-		$negativeScore = '';
-		$numberOfQuestions = '';
-		$time = '';
-		$easyPercentage = '';
-		$mediumPercentage = '';
-		$hardPercentage = '';
-		if($x = $this->input->post('testName'))
-			$testName = $x;
-		if($x = $this->input->post('college_id'))
-			$college_id = $x;
 		if($x = $this->input->post('numberOfSkills'))
 			$numberOfSkills = $x;
-		if($x = $this->input->post('positiveScore'))
-			$positiveScore = $x;
-		if($x = $this->input->post('negativeScore'))
-			$negativeScore = $x;
-		if($x = $this->input->post('numberOfQuestions'))
-			$numberOfQuestions = $x;
 		if($x = $this->input->post('time'))
 			$time = $x;
-		if($x = $this->input->post('easyPercentage'))
-			$easyPercentage = $x;
-		if($x = $this->input->post('mediumPercentage'))
-			$mediumPercentage = $x;
-		if($x = $this->input->post('hardPercentage'))
-			$hardPercentage = $x;
-		if($testName == '' || $college_id == '' || $numberOfSkills == '' || $positiveScore == '' || $negativeScore == '' || $numberOfQuestions == '' || $time == '' || $easyPercentage == '' || $mediumPercentage == '' || $hardPercentage == ''){
+		if($numberOfSkills == '' || $time == ''){
 			$this->session->set_flashdata('message', array('content'=>'Incomplete Data','color'=>'red'));
 			redirect(base_url('/admin/testSetup'));
 		}
 		$testData = array(
-			'testName' => $testName,
-			'college_id' => $college_id,
 			'skillsAllowed' => $numberOfSkills,
-			'positiveScore' => $positiveScore,
-			'negativeScore' => $negativeScore,
-			'numberOfQuestions' => $numberOfQuestions,
-			'timeAllowed' => $time,
-			'easyPercentage' => $easyPercentage,
-			'mediumPercentage' => $mediumPercentage,
-			'hardPercentage' => $hardPercentage
+			'timeAllowed' => $time
 		);
 		$result = $this->admin_library->setupTest($testData);
 		if($result){
@@ -382,48 +324,15 @@ class Admin_functions extends CI_Controller {
 		}
 	}
 
-		public function addCompulsorySkill()
-		{
+		public function addCompulsorySkill(){
 			$skill_id = '';
-			$positiveScore = '';
-			$negativeScore = '';
-			$numberOfQuestions = '';
-			$time = '';
-			$easyPercentage = '';
-			$mediumPercentage = '';
-			$hardPercentage = '';
 			if($x = $this->input->post('skill_id'))
 				$skill_id = $x;
-			if($x = $this->input->post('positiveScore'))
-				$positiveScore = $x;
-			if($x = $this->input->post('negativeScore'))
-				$negativeScore = $x;
-			if($x = $this->input->post('numberOfQuestions'))
-				$numberOfQuestions = $x;
-			if($x = $this->input->post('time'))
-				$time = $x;
-			if($x = $this->input->post('easyPercentage'))
-				$easyPercentage = $x;
-			if($x = $this->input->post('mediumPercentage'))
-				$mediumPercentage = $x;
-			if($x = $this->input->post('hardPercentage'))
-				$hardPercentage = $x;
-			if($skill_id == '' || $positiveScore == '' || $negativeScore == '' || $numberOfQuestions == '' || $time == '' || $easyPercentage == '' || $mediumPercentage == '' || $hardPercentage == ''){
+			if($skill_id == ''){
 				$this->session->set_flashdata('message', array('content'=>'Incomplete Data','color'=>'red'));
 				redirect(base_url('/admin/testSetup'));
 			}
-			$result = $this->admin_library->checkCompulsorySkill($skill_id);
-			$skillData = array(
-				'skill_id' => $skill_id,
-				'positiveScore' => $positiveScore,
-				'negativeScore' => $negativeScore,
-				'numberOfQuestions' => $numberOfQuestions,
-				'time' => $time,
-				'easyPercentage' => $easyPercentage,
-				'mediumPercentage' => $mediumPercentage,
-				'hardPercentage' => $hardPercentage
-			);
-			$result = $this->admin_library->addCompulsorySkill($skillData);
+			$result = $this->admin_library->addCompulsorySkill($skill_id);
 			if($result){
 				$this->session->set_flashdata('message', array('content'=>'Compulsory Skill Added Successful','color'=>'green'));
 				redirect(base_url('/admin/testSetup'));
@@ -433,5 +342,7 @@ class Admin_functions extends CI_Controller {
 				redirect(base_url('/admin/testSetup'));
 			}
 	}
+
+	
 
 }

@@ -77,6 +77,13 @@ class Admin_library {
 		return $CI->adminModel->getCompulsorySkills();
 	}
 
+	public function getNonCompulsorySkills()
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->getNonCompulsorySkills();
+	}
+
 	public function getTestSetupDetails()
 	{
 		$CI = &get_instance();
@@ -140,18 +147,23 @@ class Admin_library {
 		return $CI->adminModel->addSkill($skillData);
 	}
 
-	public function addCompulsorySkill($skillData)
+	public function addCompulsorySkill($skill_id)
 	{
 		$CI = &get_instance();
 		$CI->load->model('admin_model','adminModel');
-		return $CI->adminModel->addCompulsorySkill($skillData);
+		return $CI->adminModel->addCompulsorySkill($skill_id);
 	}
 
-	public function setupTest($testData)
-	{
+	public function setupTest($testData){
 		$CI = &get_instance();
 		$CI->load->model('admin_model','adminModel');
 		return $CI->adminModel->setupTest($testData);
+	}
+
+	public function seed(){
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->seed();
 	}
 
 }

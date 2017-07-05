@@ -46,9 +46,13 @@ class Admin_model extends CI_Model {
 	}
 
 	public function getCompulsorySkills(){
-		$this->db->from('compulsorySkills');
-		$this->db->join('skills', 'skills.skill_id = compulsorySkills.skill_id');
-		$query = $this->db->get();
+		$query = $this->db->get_where('skills', array('compulsorySkill'=> '1'));
+		return $query->result_array();
+	}
+
+	public function getNonCompulsorySkills(){
+		$query = $this->db->get_where('skills', array('compulsorySkill'=> '0'));
+		// echo $this->db->last_query();die;
 		return $query->result_array();
 	}
 
@@ -98,20 +102,63 @@ class Admin_model extends CI_Model {
 	}
 
 	public function deleteCompulsorySkill($skillID){
-		return $this->db->delete('compulsorySkills', array('id' => $skillID));
+		$data = array(
+      'compulsorySkill' => '0'
+      );
+		$this->db->where('skill_id', $skillID);
+		return $this->db->update('skills', $data);
 	}
 
 	public function addSkill($data){
 		return $this->db->insert('skills',$data);
 	}
 
-	public function addCompulsorySkill($skillData){
-		return $this->db->insert('compulsorySkills',$skillData);
+	public function addCompulsorySkill($skill_id){
+		$data = array(
+      'compulsorySkill' => '1'
+      );
+		$this->db->where('skill_id', $skill_id);
+		return $this->db->update('skills', $data);
 	}
 
 	public function setupTest($testData){
 		$this->db->where('testID', 1);
 		return $this->db->update('testSetup', $testData);
+	}
+
+	public function seed(){
+		for($questionID=181; $questionID<=229; $questionID++){
+			$userID = '1';
+			$answer = rand(1,4);
+			$questionData = $this->getQuestionData($questionID);
+			$questionData = $questionData[0];
+			$difficulty_level = $questionData['difficulty_level'];
+			$expert_time = $questionData['expert_time'];
+			$timeConsumed = rand(30,((2*$expert_time)-1));
+			if($answer == $questionData['answer']){
+				$flag = 1;
+			}
+			else{
+				$flag = -1;
+			}
+			if($flag == '-1'){
+				$correct = 0;
+			}
+			else{
+				$correct = 1;
+			}
+			$score = pow(((pow(3, ($difficulty_level/2)) * ((2*$expert_time)-$timeConsumed))/(2*$expert_time)), (2/$difficulty_level));
+			$score = $score * $flag;
+			$data = array(
+				'userID'=> $userID,
+				'questionID' => $questionID,
+				'answer' => $answer,
+				'score' => $score,
+				'timeConsumed' => $timeConsumed,
+				'correct' => $correct
+			);
+			$this->db->insert('responses', $data);
+		}
 	}
 
 
