@@ -63,6 +63,15 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/manageSkills', $this->data);
 	}
 
+	public function manageUsers()
+	{
+		if (!$this->admin_library->auth()) {
+			redirect(base_url('/admin'));
+		}
+		$this->data['users'] = $this->admin_library->getUsers();
+		$this->load->view('admin/manageUsers', $this->data);
+	}
+
 	public function manageQuestions()
 	{
 		if (!$this->admin_library->auth()) {

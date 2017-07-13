@@ -69,6 +69,11 @@ class Admin_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function getUsers(){
+		$query = $this->db->get('users');
+		return $query->result_array();
+	}
+
 	public function truncateCompulsorySkills(){
 		return $this->db->empty_table('compulsorySkills');
 	}
