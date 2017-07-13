@@ -14,7 +14,7 @@
         <a href="<?php echo base_url('/admin/addQuestion') ?>" class="list-group-item">Add Question</a>
 
         <center><label class="list-group-item">USERS</label></center>
-        <a href="<?php echo base_url('/add_author') ?>" class="list-group-item">Manage Users</a>
+        <a href="<?php echo base_url('/admin/manageUsers') ?>" class="list-group-item">Manage Users</a>
 
         <center><label class="list-group-item">TEST SETUP</label></center>
         <a href="<?php echo base_url('/admin/testSetup') ?>" class="list-group-item">Manage Test Settings</a>

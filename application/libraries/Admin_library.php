@@ -166,4 +166,10 @@ class Admin_library {
 		return $CI->adminModel->seed();
 	}
 
+	public function getUsers(){
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->getUsers();
+	}
+
 }

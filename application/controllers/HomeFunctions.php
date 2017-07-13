@@ -1,4 +1,4 @@
-<?php
+2<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class HomeFunctions extends CI_Controller {
@@ -239,7 +239,7 @@ class HomeFunctions extends CI_Controller {
 		 var_dump($this->getQuestionDetails('1'));
 	}
 
-	
+
 	private function getQuestionDetails($questionID){
 		$questionDetails = $this->home_lib->getQuestionDetails($questionID);
 		return $questionDetails;
