@@ -25,8 +25,7 @@ class HomeFunctions extends CI_Controller {
 				redirect(base_url('select-skills'));}
 			if($_SESSION['registrationLevel']=='2'){
 				redirect(base_url('skill-tests'));}
-		}
-		else{
+		}else{
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again12.','class'=>'error'));
 			redirect(base_url());
 		}
@@ -225,9 +224,15 @@ class HomeFunctions extends CI_Controller {
 		$skill_id = $this->input->get('skillID');
 		$skillStatus = $this->home_lib->getSkillStatus($skill_id, $_SESSION['userData']['userID']);
 		if($skillStatus[0]['status']=='1'){
+			$_SESSION['userData']['currentSkill'] = $skill_id;
+			$_SESSION['userData'][$skill_id]['totalScore'] = 0;
+			$_SESSION['userData'][$skill_id]['skips'] = 3;
+			$_SESSION['userData'][$skill_id]['skipStatus'] = 0;
 			$this->home_lib->lockSkills($skill_id, $_SESSION['userData']['userID']);
 			$this->home_lib->changeSkillStatusToResume($skill_id, $_SESSION['userData']['userID']);
-			echo "bas ab test start krna hai";die;
+			$level = 1;
+			$_SESSION['questionData'] = $this->getQuestionDetails($level, $skill_id);
+			redirect(base_url('test'));
 		}
 		else{
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured. Please Try Again.','class'=>'error'));
@@ -235,13 +240,84 @@ class HomeFunctions extends CI_Controller {
 		}
 	}
 
+	public function nextQuestion(){
+		$answer = $this->input->post('answer');
+		$timeConsumed = $this->input->post('timeConsumed');
+		$correct = $this->home_lib->checkAnswer($_SESSION['questionData']['question_id'], $answer);
+		$score = $this->calculateScore($_SESSION['questionData']['difficulty_level'], $_SESSION['questionData']['expert_time'], $_SESSION['questionData']['timeConsumed'], $correct);
+		$skill_id = $_SESSION['userData']['currentSkill'];
+		$data = array(
+			'userID' => $_SESSION['userData']['userID'],
+			'question_id' => $_SESSION['questionData']['question_id'],
+			'answer' => $answer,
+			'score' => $score,
+			'timeConsumed' => $timeConsumed,
+			'$correct' => $correct
+			);
+		if($this->home_lib->updateResponse($data)){
+			$this->getSkip($skill_id);
+			$_SESSION['userData'][$skill_id]['totalScore'] += $score;
+			$totalScore = $_SESSION['userData'][$skill_id]['totalScore'];
+			$level = $this->getLevel($totalScore);
+			if($totalScore > 100){
+				echo "End the test.. That Guy is a Genius";
+				$this->endTest($skill_id);
+			}
+			$_SESSION['questionData'] = $this->getQuestionDetails($level, $skill_id);
+			redirect(base_url('test'));
+		}else{
+			$this->logout();
+		}
+	}
+
+	public function getSkip($skill_id){
+		if($_SESSION['userData'][$skill_id]['totalScore'] <= 30 && ($_SESSION['userData'][$skill_id]['totalScore'] + $score) <= 30 && $_SESSION['userData'][$skill_id]['skipStatus'] == 0){
+			$_SESSION['userData'][$skill_id]['skipStatus'] = 1;
+			$_SESSION['userData'][$skill_id]['skips'] +=1;
+		}else{
+			if($_SESSION['userData'][$skill_id]['totalScore'] <= 60 && ($_SESSION['userData'][$skill_id]['totalScore'] + $score) <= 60 && $_SESSION['userData'][$skill_id]['skipStatus'] == 1){
+				$_SESSION['userData'][$skill_id]['skipStatus'] = 2;
+				$_SESSION['userData'][$skill_id]['skips'] +=1;
+			}
+		}	
+	}
+
+	public function getLevel($totalScore){
+		if($totalScore >=-10 || $totalScore <= 10){
+			$level = 1;
+		}elseif($totalScore >= 11 || $totalScore <= 20){
+			$level = 2;
+		}elseif($totalScore >= 21 || $totalScore <= 35){
+			$level = 3;
+		}elseif($totalScore >= 36 || $totalScore <= 45){
+			$level = 4;
+		}elseif($totalScore >= 46 || $totalScore <= 55){
+			$level = 5;
+		}elseif($totalScore >= 56 || $totalScore <= 75){
+			$level = 6;
+		}elseif($totalScore >= 76 || $totalScore <= 85){
+			$level = 7;
+		}else{
+			$level = 8;
+		}
+		return $level;
+	}
+
+	public function endTest($skill_id){
+		$_SESSION['questionData'] = NULL; 
+		$_SESSION['userData']['currentSkill'] = NULL;
+		$_SESSION['userData'][$skill_id]['totalScore'] = NULL;
+		$_SESSION['userData'][$skill_id]['skips'] = NULL;
+		$_SESSION['userData'][$skill_id]['skipStatus'] = NULL;
+	}
+
 	public function test(){
 		 var_dump($this->getQuestionDetails('1'));
 	}
 
 	
-	private function getQuestionDetails($questionID){
-		$questionDetails = $this->home_lib->getQuestionDetails($questionID);
+	private function getQuestionDetails($level, $skillID){
+		$questionDetails = $this->home_lib->getQuestionDetails($level, $skillID);
 		return $questionDetails;
 	}
 

@@ -60,36 +60,27 @@
     					<div class="col-sm-12">
                 <p class="mcq" style="float: right;"><a>Skip Question</a></p>
     						<p class="mcq"><strong>Question</strong></p>
-    						<p class="mcq"><p>#include &lt;iostream&gt;<br />
-using namespace std;<br />
-int main() {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; int a = 5, b = 6, c, d;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; c = a, b;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; d = (a, b);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; c &lt;&lt; &#39; &#39; &lt;&lt; d;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; return 0;<br />
-&nbsp;&nbsp;}</p>
-</p>
+    						<p class="mcq"><?=$questionData[0]['question']?></p>
                 <div class="options">
     							<div>
     								<span class="opt">A</span>
-    								<input type="radio" name="answer" id="optionA" value="A" />
-    								<label for="optionA">5 6</label>
+    								<input type="radio" name="answer" id="optionA" value="1" />
+    								<label for="optionA"><?=$questionData[0]['option1']?></label>
     							</div>
     							<div>
     								<span class="opt">B</span>
-    								<input type="radio" name="answer" id="optionB" value="B" />
-    								<label for="optionB">6 5</label>
+    								<input type="radio" name="answer" id="optionB" value="2" />
+    								<label for="optionB"><?=$questionData[0]['option2']?></label>
     							</div>
     							<div>
     								<span class="opt">C</span>
-    								<input type="radio" name="answer" id="optionC" value="C" />
-    								<label for="optionC">6 7</label>
+    								<input type="radio" name="answer" id="optionC" value="3" />
+    								<label for="optionC"><?=$questionData[0]['option3']?></label>
     							</div>
     							<div>
     								<span class="opt">D</span>
-    								<input type="radio" name="answer" id="optionD" value="D" />
-    								<label for="optionD">None of the above </label>
+    								<input type="radio" name="answer" id="optionD" value="4" />
+    								<label for="optionD"><?=$questionData[0]['option4']?></label>
     							</div>
     						</div>
     					</div>
@@ -111,7 +102,7 @@ int main() {<br />
             <div class="col-sm-12 well" style="margin-top: 25px;">
               <center><b>My Skill Strength: 15%</b></center>
               <div class="progress" style="margin-top: 10px;">
-                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:0%"></div>
+                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:10%"></div>
                 <div class="progress-bar progress-bar-success" role="progressbar" style="width:15%"></div>
               </div>
               <a style="float:right;" data-toggle="modal" data-target="#knowMore">Know More</a>

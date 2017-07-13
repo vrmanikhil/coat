@@ -66,6 +66,7 @@ class Home extends CI_Controller {
 	}
 
 	public function test(){
+		$this->data['questionData'] = $_SESSION['userData']['questionData'];
 		$this->load->view('test', $this->data);
 	}
 

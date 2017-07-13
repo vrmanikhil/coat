@@ -132,10 +132,10 @@ class Home_lib {
 		return $CI->homeModel->changeSkillStatusToResume($skillID, $userID);
 	}
 
-	public function getQuestionDetails($questionID){
+	public function getQuestionDetails($level, $skillID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getQuestionDetails($questionID);
+		return $CI->homeModel->getQuestionDetails($level, $skillID);
 	}
 
 }
