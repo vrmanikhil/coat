@@ -138,4 +138,9 @@ class Home_lib {
 		return $CI->homeModel->getQuestionDetails($level, $skillID);
 	}
 
+	public function getSkillData($skill_id){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getSkillData($skill_id);
+	}
 }

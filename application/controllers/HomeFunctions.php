@@ -225,6 +225,7 @@ class HomeFunctions extends CI_Controller {
 		$skillStatus = $this->home_lib->getSkillStatus($skill_id, $_SESSION['userData']['userID']);
 		if($skillStatus[0]['status']=='1'){
 			$_SESSION['userData']['currentSkill'] = $skill_id;
+			$_SESSION['userData']['currentSkillName'] = $this->getSkillData($skill_id)[0]['skill'];
 			$_SESSION['userData'][$skill_id]['totalScore'] = 0;
 			$_SESSION['userData'][$skill_id]['skips'] = 3;
 			$_SESSION['userData'][$skill_id]['skipStatus'] = 0;
@@ -268,6 +269,20 @@ class HomeFunctions extends CI_Controller {
 		}else{
 			$this->logout();
 		}
+	}	
+
+	public function resumeTest(){
+		echo "Resume The Test";
+	}
+
+	public function skipQuestion(){
+		$skill_id = $_SESSION['userData'][$skill_id]['currentSkill'];
+		if($_SESSION['userData'][$skill_id]['skips'] > 0){
+			$_SESSION['userData'][$skill_id]['skips']--;
+			$_SESSION['questionData'] = $this->getQuestionDetails($level, $skill_id);
+		}else{
+			$this->endTest($skill_id);
+		}
 	}
 
 	public function getSkip($skill_id){
@@ -306,6 +321,7 @@ class HomeFunctions extends CI_Controller {
 	public function endTest($skill_id){
 		$_SESSION['questionData'] = NULL; 
 		$_SESSION['userData']['currentSkill'] = NULL;
+		$_SESSION['userData']['currentSkillName'] = NULL;
 		$_SESSION['userData'][$skill_id]['totalScore'] = NULL;
 		$_SESSION['userData'][$skill_id]['skips'] = NULL;
 		$_SESSION['userData'][$skill_id]['skipStatus'] = NULL;
@@ -319,6 +335,10 @@ class HomeFunctions extends CI_Controller {
 	private function getQuestionDetails($level, $skillID){
 		$questionDetails = $this->home_lib->getQuestionDetails($level, $skillID);
 		return $questionDetails;
+	}
+
+	public function getSkillData($skill_id){
+		return $this->home_lib->getSkillData($skill_id);
 	}
 
 	private function calculateScore($difficulty_level, $expert_time, $timeConsumed, $correct){

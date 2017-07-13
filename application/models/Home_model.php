@@ -143,4 +143,11 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function getSkillData($skill_id){
+		$this->db->select('skill');
+		$this->db->where("(skill_id = $skill_id AND availableForUserDriven = 1)");
+		$this->db->or_where("(skill_id = $skill_id AND compulsorySkill = 1)");
+		$result = $this->db->get('skills');
+		return $result->result_array();
+	}
 }

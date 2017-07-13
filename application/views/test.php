@@ -54,7 +54,7 @@
 
 
     					<div style="text-align: center; margin-top: 25px;">
-    						<p class="mcq-title">SKILL: C++</p>
+    						<p class="mcq-title">SKILL: <?= $skillData['skillName']?></p>
     					</div>
 
     					<div class="col-sm-12">
