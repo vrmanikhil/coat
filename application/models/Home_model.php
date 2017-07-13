@@ -150,4 +150,33 @@ class Home_model extends CI_Model {
 		$result = $this->db->get('skills');
 		return $result->result_array();
 	}
+
+	public function getInTestSkill($userID){
+		$this->db->select('skillID');
+		$this->db->where('userID', $userID);
+		$this->db->where('status', 2);
+		$result = $this->db->get('userSkills');
+		return $result->result_array();
+	}
+
+	public function getSkips($userID, $skillID){
+		$this->db->select('SUM(correct) as skips');
+		$this->db->join('questions', 'questions.question_id = responses.questionID');
+		$result = $this->db->get_where('responses',array('responses.userID'=> $userID, 'questions.skill_id'=> $skillID, 'responses.correct' => -1));
+		return $result->result_array();
+	}
+
+	public function getTotalScore($userID, $skillID){
+		$this->db->select('SUM(score) as total');
+		$this->db->join('questions', 'questions.question_id = responses.questionID');
+		$result = $this->db->get_where('responses',array('responses.userID'=> $userID, 'questions.skill_id'=> $skillID));
+		return $result->result_array();
+	}
+
+	public function getTimeConsumed($userID, $skillID){
+		$this->db->select('SUM(timeConsumed) as time');
+		$this->db->join('questions', 'questions.question_id = responses.questionID');
+		$result = $this->db->get_where('responses',array('responses.userID'=> $userID, 'questions.skill_id'=> $skillID));
+		return $result->result_array();
+	}
 }

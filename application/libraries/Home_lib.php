@@ -143,4 +143,26 @@ class Home_lib {
 		$CI->load->model('home_model', 'homeModel');
 		return $CI->homeModel->getSkillData($skill_id);
 	}
+	public function getInTestSkill($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getInTestSkill($userID);
+	}
+	public function getSkips($userID, $skill_id){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getSkips($userID, $skill_id);
+	}
+
+	public function getTotalScore($userID, $skill_id){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getTotalScore($userID, $skill_id);
+	}
+
+	public function getTimeConsumed($userID, $skill_id){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getTimeConsumed($userID, $skill_id);
+	}
 }
