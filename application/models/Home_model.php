@@ -134,8 +134,12 @@ class Home_model extends CI_Model {
 		return $this->db->update('userSkills', $data);
 	}
 
-	public function getQuestionDetails($questionID){
-		$result = $this->db->get_where('questions', array('question_id'=>$questionID, 'active'=>'1'));
+	public function getQuestionDetails($level, $skillID){
+		$this->db->select('question, option1, option2, option3, option4');
+		$this->db->where('difficulty_level', $level);
+		$this->db->where('skill_id', $skillID);
+		$this->db->order_by('RAND()');
+		$result = $this->db->get('questions',1);
 		return $result->result_array();
 	}
 
