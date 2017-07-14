@@ -226,6 +226,7 @@ var timePassed= 0;
 $(function () {
   $('.svg-test').svgTimer();
 });
+
 var time = 900,r=document.getElementById('timer'),tmp=time;
 setInterval(function () {
     var c = tmp--,h = (c/3600)>>0,m=((c-h*3600)/60)>>0,s=(c-m*60-h*3600)+'';
