@@ -323,6 +323,7 @@ class HomeFunctions extends CI_Controller {
 		if(!$timeConsumed = $this->input->post('timeConsumed')){
 			$timeConsumed = 0;
 		}
+		$answer = $this->input->post('answer');
 		$skill_id = $_SESSION['userData']['currentSkill'];
 		$_SESSION['userData'][$skill_id]['totalTime'] = $this->input->post('totalTime');
 		if($_SESSION['userData'][$skill_id]['skips'] > 0){
@@ -330,7 +331,7 @@ class HomeFunctions extends CI_Controller {
 			$data = array(
 				'userID' => $_SESSION['userData']['userID'],
 				'questionID' => $_SESSION['questionData'][0]['question_id'],
-				'answer' => '0',
+				'answer' => $answer,
 				'score' => 0,
 				'timeConsumed' => $timeConsumed,
 				'correct' => '-1'
