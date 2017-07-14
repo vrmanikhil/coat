@@ -143,8 +143,7 @@ class Home_lib {
 		$CI->load->model('home_model', 'homeModel');
 		return $CI->homeModel->getSkillData($skill_id);
 	}
-<<<<<<< HEAD
-=======
+
 	public function getInTestSkill($userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model', 'homeModel');
@@ -184,5 +183,4 @@ class Home_lib {
 			return 0;
 		}
 	}
->>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
 }
