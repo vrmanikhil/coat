@@ -8,23 +8,13 @@ class HomeFunctions extends CI_Controller {
 		parent::__construct();
 		$this->load->library(array('Home_lib','session'));
 		$this->load->helper(array('url'));
-		// $this->data = array();
-		// $this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','color'=>'');
-		// $this->data['top'] =  $this->load->view('admin/commonCode/top',$this->data,true);
-		// $this->data['left'] =  $this->load->view('admin/commonCode/left',$this->data,true);
-		// $this->data['bottom'] =  $this->load->view('admin/commonCode/bottom',$this->data,true);
-		// $this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
-		// $this->data['csrf_token'] = $this->security->get_csrf_hash();
 		$this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','class'=>'');
 	}
 
 	private function login($email, $password){
 		$result = $this->home_lib->login($email,$password);
 		if ($result){
-			if($_SESSION['registrationLevel']=='1'){
-				redirect(base_url('select-skills'));}
-			if($_SESSION['registrationLevel']=='2'){
-				redirect(base_url('skill-tests'));}
+			redirect(base_url('select-skills'));
 		}else{
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again12.','class'=>'error'));
 			redirect(base_url());
@@ -275,7 +265,7 @@ class HomeFunctions extends CI_Controller {
 			echo "string"; die;
 			$this->logout();
 		}
-	}	
+	}
 
 	public function resumeTest(){
 		$userID = $_SESSION['userData']['userID'];
@@ -290,7 +280,7 @@ class HomeFunctions extends CI_Controller {
 		$_SESSION['userData'][$currentSkill]['totalTime'] = $testTime*60 - $timeConsumed;
 		$level = $this->getLevel($_SESSION['userData'][$currentSkill]['totalScore']);
 		$_SESSION['userData'][$currentSkill]['level'] = $level;
-		$_SESSION['questionData'] = $this->getQuestionDetails($level, $currentSkill); 
+		$_SESSION['questionData'] = $this->getQuestionDetails($level, $currentSkill);
 		redirect(base_url('test'));
 	}
 
@@ -362,7 +352,7 @@ class HomeFunctions extends CI_Controller {
 				$_SESSION['userData'][$skill_id]['skipStatus'] = 2;
 				$_SESSION['userData'][$skill_id]['skips'] +=1;
 			}
-		}	
+		}
 	}
 
 	private function getLevel($totalScore){
@@ -387,7 +377,7 @@ class HomeFunctions extends CI_Controller {
 	}
 
 	public function endTest($skill_id){
-		$_SESSION['questionData'] = NULL; 
+		$_SESSION['questionData'] = NULL;
 		$_SESSION['userData']['currentSkill'] = NULL;
 		$_SESSION['userData']['currentSkillName'] = NULL;
 		$_SESSION['userData'][$skill_id]['totalScore'] = NULL;
@@ -419,5 +409,17 @@ class HomeFunctions extends CI_Controller {
 		$score = $score * $correct;
 		return $score;
 	}
+
+	public function hello(){
+		// $difficulty_level = '1';
+		// $expert_time = '10';
+		// $timeConsumed = '1';
+		// $correct = '1';
+		// $score =  $this->calculateScore($difficulty_level, $expert_time, $timeConsumed, $correct);
+		// echo $score;
+	}
+
+
+
 
 }
