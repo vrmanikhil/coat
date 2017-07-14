@@ -41,11 +41,7 @@ class Home extends CI_Controller {
 			redirect(base_url('skill-tests'));
 		}
 		if($_SESSION['registrationLevel']=='3'){
-<<<<<<< HEAD
 			redirect(base_url('submit-test'));
-=======
-			echo "last";die;
->>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
 		}
 	}
 
@@ -61,24 +57,17 @@ class Home extends CI_Controller {
 			redirect(base_url('skill-tests'));
 		}
 		if($_SESSION['registrationLevel']=='3'){
-<<<<<<< HEAD
 			redirect(base_url('submit-test'));
-=======
-			echo "last";die;
->>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
 		}
 	}
 
 	public function submitTest(){
-<<<<<<< HEAD
 		if($_SESSION['registrationLevel']=='1'){
 			redirect(base_url('skill-tests'));
 		}
 		if($_SESSION['registrationLevel']=='2'){
 			redirect(base_url('skill-tests'));
 		}
-=======
->>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
 		$this->load->view('submitTest', $this->data);
 	}
 
@@ -86,10 +75,7 @@ class Home extends CI_Controller {
 		$this->data['skillData']['skillID'] = $_SESSION['userData']['currentSkill'];
 		$this->data['skillData']['skillName'] = $_SESSION['userData']['currentSkillName'];
 		$this->data['questionData'] = $_SESSION['questionData'];
-<<<<<<< HEAD
-=======
 		$this->data['totalTime'] = $_SESSION['userData'][$_SESSION['userData']['currentSkill']]['totalTime'];
->>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
 		$this->load->view('test', $this->data);
 	}
 
