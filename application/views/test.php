@@ -58,7 +58,11 @@
     					</div>
 
     					<div class="col-sm-12">
+<<<<<<< HEAD
                 <p class="mcq" style="float: right;"><a>Skip Question</a></p>
+=======
+                <p class="mcq" style="float: right;"><a href = "<?= base_url('homeFunctions/skipQuestion')?>">Skip Question</a></p>
+>>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
     						<p class="mcq"><strong>Question</strong></p>
     						<p class="mcq"><?=$questionData[0]['question']?></p>
                 <div class="options">
@@ -100,12 +104,17 @@
           <div class="col-sm-3">
 
             <div class="col-sm-12 well" style="margin-top: 25px;">
+<<<<<<< HEAD
               <center><b>My Skill Strength: 15%</b></center>
               <div class="progress" style="margin-top: 10px;">
                 <div class="progress-bar progress-bar-danger" role="progressbar" style="width:10%"></div>
                 <div class="progress-bar progress-bar-success" role="progressbar" style="width:15%"></div>
               </div>
               <a style="float:right;" data-toggle="modal" data-target="#knowMore">Know More</a>
+=======
+              <center><b>Test Time Remaining:</b></center>
+              <div><center id = 'timer'></center></div>
+>>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
             </div>
 
             <div class="col-sm-12 well">
@@ -159,7 +168,11 @@
         var opts = $.extend({}, $.fn.svgTimer.defaults, options);
 
         var template = "<div class='svg-hexagonal-counter'>"
+<<<<<<< HEAD
             + "<h2>0</h2>"
+=======
+            + "<h2>30</h2>"
+>>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
             + "<svg class='counter' x='0px' y='0px' viewBox='0 0 776 628'>"
             + "<path class='track' d='M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z'></path>"
             + "<path class='fill' d='M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z'></path>"
@@ -190,17 +203,37 @@
             });
 
             //run timer
+<<<<<<< HEAD
+=======
+            var r = 5;
+            var g = 250;
+>>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
             var interval = setInterval(function() {
                 track.css('stroke', opts.track);
                 fill.css({
                     'stroke': opts.fill,
                     'stroke-dashoffset': initialOffset-(i*(initialOffset/time)) + 'px',
                     'transition': 'stroke-dashoffset 1s ' +  opts.transition
+<<<<<<< HEAD
                 });
                 if(opts.direction === 'forward'){
                     counterText.text(i);
                 } else if (opts.direction === 'backward') {
                     var count = opts.time - i + 1;
+=======
+                }); 
+                if(time/i > 3){
+                     opts.fill = "rgb(0,153,0)";
+                }else if(time/i <= 3 && time/i > 1.5){
+                     opts.fill = "rgb(225,225,0)";
+                }else if(time/i <= 1.5){
+                     opts.fill = "rgb(204,0,0)";
+                }
+                if(opts.direction === 'forward'){
+                    counterText.text(i);
+                } else if (opts.direction === 'backward') {
+                    var count = opts.time - i;
+>>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
                     counterText.text(count);
                 }
 
@@ -213,11 +246,19 @@
     };
 
     $.fn.svgTimer.defaults = {
+<<<<<<< HEAD
         time: 124,
         track: 'rgb(56, 71, 83)',
         fill: 'rgb(104, 214, 198)',
         transition: 'linear',
         direction: 'forward',
+=======
+        time: 30,
+        track: 'rgb(56, 71, 83)',
+        fill: 'rgb(0,153,0)',
+        transition: 'linear',
+        direction: 'backward',
+>>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
         interval: 1000
     }
 }( jQuery ));
@@ -226,6 +267,22 @@
 $(function () {
   $('.svg-test').svgTimer();
 });
+<<<<<<< HEAD
+=======
+        var time = 9000,r=document.getElementById('timer'),tmp=time;
+        setInterval(function () {
+            var c = tmp--,h = (c/3600)>>0,m=((c-h*3600)/60)>>0,s=(c-m*60-h*3600)+'';
+            if(h>0){
+                timer.textContent= h+' Hr : '+m+' Min : '+(s.length>1?'':'0')+s+ ' Sec'
+            }else{
+                timer.textContent= m+' Min : '+(s.length>1?'':'0')+s+ ' Sec'
+            }
+            if (c<1) {
+                submitAnswers(eventKey);
+            }
+
+        },1000);
+>>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
 </script>
 
 

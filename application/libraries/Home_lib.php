@@ -143,4 +143,46 @@ class Home_lib {
 		$CI->load->model('home_model', 'homeModel');
 		return $CI->homeModel->getSkillData($skill_id);
 	}
+<<<<<<< HEAD
+=======
+	public function getInTestSkill($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getInTestSkill($userID);
+	}
+	public function getSkips($userID, $skill_id){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getSkips($userID, $skill_id);
+	}
+
+	public function getTotalScore($userID, $skill_id){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getTotalScore($userID, $skill_id);
+	}
+
+	public function getTimeConsumed($userID, $skill_id){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getTimeConsumed($userID, $skill_id);
+	}
+
+	public function updateResponse($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->updateResponse($data);
+	}
+
+	public function checkAnswer($questionID, $answer){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		$correctAnswer = $CI->homeModel->getAnswer($questionID)[0]['answer'];
+		if($answer == $correctAnswer){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+>>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
 }
