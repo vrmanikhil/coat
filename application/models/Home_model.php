@@ -135,7 +135,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getQuestionDetails($level, $skillID){
-		$this->db->select('question, option1, option2, option3, option4');
+		$this->db->select('question_id, question, option1, option2, option3, option4, expert_time');
 		$this->db->where('difficulty_level', $level);
 		$this->db->where('skill_id', $skillID);
 		$this->db->order_by('RAND()');
@@ -152,7 +152,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getInTestSkill($userID){
-		$this->db->select('skillID');
+		$this->db->select('skillID');	
 		$this->db->where('userID', $userID);
 		$this->db->where('status', 2);
 		$result = $this->db->get('userSkills');
@@ -178,5 +178,15 @@ class Home_model extends CI_Model {
 		$this->db->join('questions', 'questions.question_id = responses.questionID');
 		$result = $this->db->get_where('responses',array('responses.userID'=> $userID, 'questions.skill_id'=> $skillID));
 		return $result->result_array();
+	}
+
+	public function updateResponse($data){
+		return $this->db->insert('responses', $data);
+	}
+
+	public function getAnswer($questionID){
+		$this->db->select('answer');
+		$this->db->where('question_id', $questionID);
+		return $this->db->get('questions')->result_array();
 	}
 }

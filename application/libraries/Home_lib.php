@@ -165,4 +165,21 @@ class Home_lib {
 		$CI->load->model('home_model', 'homeModel');
 		return $CI->homeModel->getTimeConsumed($userID, $skill_id);
 	}
+
+	public function updateResponse($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->updateResponse($data);
+	}
+
+	public function checkAnswer($questionID, $answer){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		$correctAnswer = $CI->homeModel->getAnswer($questionID)[0]['answer'];
+		if($answer == $correctAnswer){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
 }
