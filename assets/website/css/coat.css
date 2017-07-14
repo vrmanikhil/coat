@@ -1,0 +1,302 @@
+/* ==========================================================================
+  Index Page
+   ========================================================================== */
+
+@font-face {
+	font-family: 'quick';
+	src: url(../fonts/quick.otf);
+}
+
+@font-face {
+	font-family: 'quick-b';
+	src: url(../fonts/quick-b.otf);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+	font-family: 'quick';
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.header {
+	background-color: #3d464d;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 999999;
+}
+
+
+.main-header {
+	color: white;
+	font-family: 'quick-b';
+	margin-bottom: 0px;
+	font-size: 16px;
+}
+
+.link {
+	color: #d9d9d9;
+}
+
+.link:hover {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.link:visited {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.link:focus {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.link:active {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.sub-header {
+	font-size: 13px;
+	margin-top: 0px;
+	color: white;
+}
+
+#remove-padding {
+	padding: 0px;
+}
+
+.button {
+	color: white;
+	font-family: 'quick-b';
+	margin-top: 50px;
+	padding: 9px;
+	text-align: center;
+}
+
+
+#signup {
+	border: 1px solid white;
+}
+
+#signup:hover {
+	background-color: white;
+	color: #3d464d;
+	transition: 0.15s ease-in;
+	text-decoration: none;
+}
+
+#signup:visited {
+	text-decoration: none;
+}
+
+#signup:focus {
+	text-decoration: none;
+}
+
+
+body::-webkit-scrollbar {
+	width: 0.5em;
+}
+
+body::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: #555555;
+	outline: 1px solid #b8bdc1;
+}
+
+
+
+.button:visited {
+	color: white;
+	text-decoration: none;
+}
+
+.button:focus {
+	color: white;
+	text-decoration: none;
+}
+
+
+
+.forgot {
+	color: white;
+	font-family: 'quick';
+	float: right;
+	margin-top: 0px;
+	font-size: 12px;
+}
+
+.forgot:hover {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.forgot:focus {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.forgot:visited {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+.forgot:active {
+	text-decoration: none;
+	color: #c6c6c6;
+}
+
+
+
+/* ==========================================================================
+   User Dashboard
+   ========================================================================== */
+
+#welcome {
+	color: white;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+	text-transform: capitalize;
+}
+
+#name {
+	margin-top: 0px;
+	font-family: 'quick-b';
+	color: #3d464d;
+	background-color: #d9d9d9;
+	padding: 12px 9px 12px 9px;
+	text-align: center;
+	font-size: 1.4em;
+	text-transform: uppercase;
+}
+
+.image {
+	text-align: center;
+}
+
+#avatar {
+	margin-top: 18px;
+}
+
+#sidebar-wrapper {
+	position: fixed;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	background-color: #3d464d;
+}
+
+#main-wrapper {
+	position: relative;
+	left: 250px;
+	top: 0;
+	margin-right: 100px;
+}
+
+
+
+.change {
+	float: none;
+	text-align: center !important;
+	display: block;
+	margin-top: 10px;
+}
+
+
+
+p {
+	font-family: 'quick';
+}
+
+
+
+
+
+
+
+
+
+.mcq-title {
+	padding: 10px;
+	background-color: #3d464d;
+	color: #fff;
+	text-transform: uppercase;
+	transition: all .35s;
+	font-weight: bold;
+}
+
+.mcq {
+	text-align: left;
+}
+
+.options label {
+	transition: background-color .3s, ease-in;
+	font-size: 15px;
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	background-color: none;
+	color: #222;
+	border: 1px solid #3d464d;
+	padding: 2%;
+	width: 85%;
+	text-align: left;
+	margin: 8px;
+}
+
+.options input[type="radio"] {
+	display: none;
+}
+
+.options input[type="radio"]:checked+label {
+	background: #3d464d;
+	color: #fff;
+}
+
+.opt {
+	background-color: #3d464d;
+	padding: 2.2%;
+	border: 1px solid #3d464d;
+	color: white;
+}
+
+/*flash message */
+
+.message{
+ padding:5px 0;
+ text-align: center;
+ color:white;
+ background-color: white;
+}
+.message.success{
+ background-color: #27ae60;
+}
+.message.error{
+ background-color:#c0392b;
+}
+.message p{
+ margin-bottom: 0;
+ font-weight: 500;
+ font-size: 14px;
+ letter-spacing: .5px;
+}
