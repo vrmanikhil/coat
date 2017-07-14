@@ -232,7 +232,7 @@ class HomeFunctions extends CI_Controller {
 			$_SESSION['userData'][$skill_id]['skipStatus'] = 0;
 			$_SESSION['userData'][$skill_id]['level'] = 1;
 			$testTime = $this->home_lib->getTestSetup()[0]['timeAllowed'];
-			$_SESSION['userData'][$currentSkill]['totalTime'] = $testTime*60;
+			$_SESSION['userData'][$skill_id]['totalTime'] = $testTime*60;
 			$_SESSION['questionData'] = $this->getQuestionDetails(1, $skill_id);
 			redirect(base_url('test'));
 		}
@@ -245,19 +245,21 @@ class HomeFunctions extends CI_Controller {
 	public function nextQuestion(){
 		$answer = $this->input->post('answer');
 		$timeConsumed = $this->input->post('timeConsumed');
-		$correct = $this->home_lib->checkAnswer($_SESSION['questionData']['question_id'], $answer);
+
+		$correct = $this->home_lib->checkAnswer($_SESSION['questionData'][0]['question_id'], $answer);
 		$skill_id = $_SESSION['userData']['currentSkill'];
 		$_SESSION['userData'][$skill_id]['totalTime'] = $this->input->post('totalTime');
-		$score = $this->calculateScore($_SESSION['userData'][$skill_id]['level'], $_SESSION['questionData']['expert_time'], $timeConsumed, $correct);
+		$score = $this->calculateScore($_SESSION['userData'][$skill_id]['level'], $_SESSION['questionData'][0]['expert_time'], $timeConsumed, $correct);
 		$data = array(
 			'userID' => $_SESSION['userData']['userID'],
-			'question_id' => $_SESSION['questionData']['question_id'],
+			'questionID' => $_SESSION['questionData'][0]['question_id'],
 			'answer' => $answer,
 			'score' => $score,
 			'timeConsumed' => $timeConsumed,
-			'$correct' => $correct
+			'correct' => $correct
 			);
-		if($this->home_lib->updateResponse($data)){
+		var_dump($data);
+		if($this->home_lib->updateResponse($data, $score)){
 			$this->updateSkip($skill_id);
 			$_SESSION['userData'][$skill_id]['totalScore'] += $score;
 			$totalScore = $_SESSION['userData'][$skill_id]['totalScore'];
@@ -268,8 +270,9 @@ class HomeFunctions extends CI_Controller {
 				$this->endTest($skill_id);
 			}
 			$_SESSION['questionData'] = $this->getQuestionDetails($level, $skill_id);
-			redirect(base_url('test'));
+			echo json_encode($_SESSION['questionData']);
 		}else{
+			echo "string"; die;
 			$this->logout();
 		}
 	}	
@@ -336,7 +339,7 @@ class HomeFunctions extends CI_Controller {
 				'timeConsumed' => $timeConsumed,
 				'correct' => '-1'
 				);
-			if($this->home_lib->updateResponse($data)){
+			if($this->home_lib->updateResponse($data)){	
 				$totalScore = $_SESSION['userData'][$skill_id]['totalScore'];
 				$level = $this->getLevel($totalScore);
 				$_SESSION['questionData'] = $this->getQuestionDetails($level, $skill_id);

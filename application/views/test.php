@@ -142,14 +142,18 @@
 </body>
 <?php echo $foot; ?>
 
-<script src="http://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<script src="<?php echo base_url('/assets/website/js/jquery-min.js'); ?>"></script>
 <script>
 var timePassed= 0;
+var totalTime = <?= $totalTime?>;
+console.log(totalTime);
+var questionTime = <?= 2*$questionData[0]['expert_time']?>;
+console.log(questionTime);
 (function ( $ ) {
     $.fn.svgTimer = function(options) {
         var opts = $.extend({}, $.fn.svgTimer.defaults, options);
         var template = "<div class='svg-hexagonal-counter'>"
-            + "<h2>10</h2>"
+            + "<h2>"+questionTime+"</h2>"
             + "<svg class='counter' x='0px' y='0px' viewBox='0 0 776 628'>"
             + "<path class='track' d='M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z'></path>"
             + "<path class='fill' d='M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z'></path>"
@@ -214,7 +218,7 @@ var timePassed= 0;
     };
 
     $.fn.svgTimer.defaults = {
-        time: 800,
+        time: questionTime,
         track: 'rgb(56, 71, 83)',
         fill: 'rgb(39,174,96)',
         transition: 'linear',
@@ -227,7 +231,7 @@ $(function () {
   $('.svg-test').svgTimer();
 });
 
-var time = 900,r=document.getElementById('timer'),tmp=time;
+var time = totalTime,r=document.getElementById('timer'),tmp=time;
 setInterval(function () {
     var c = tmp--,h = (c/3600)>>0,m=((c-h*3600)/60)>>0,s=(c-m*60-h*3600)+'';
     if(h>0){
@@ -252,15 +256,17 @@ $('.skipQuestion').on('click', function(){
 });
 
 $('.submitAns').on('click', function(){
-    submitAnswers();
+    submitAnswers(ans, timePassed, tmp);
 });
 
 $('.finishTest').on('click', function(){
     finishTest();
 });
-
 function submitAnswers(ans, timePassed, tmp){
-   // data:{answer: ans, timeConsumed: timePassed, totalTime:tmp}
+   data = {answer: ans, timeConsumed: timePassed, totalTime:tmp};
+   $.post('<?= base_url('homeFunctions/nextQuestion')?>', data).done(function(res){
+        console.log(res);
+   })
 }
 
 function finishTest(){
