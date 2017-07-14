@@ -180,6 +180,7 @@ var timePassed= 0;
             });
 
             //run timer
+
             var r = 5;
             var g = 250;
             var interval = setInterval(function() {
@@ -225,7 +226,6 @@ var timePassed= 0;
 $(function () {
   $('.svg-test').svgTimer();
 });
-
 var time = 900,r=document.getElementById('timer'),tmp=time;
 setInterval(function () {
     var c = tmp--,h = (c/3600)>>0,m=((c-h*3600)/60)>>0,s=(c-m*60-h*3600)+'';
@@ -259,7 +259,7 @@ $('.finishTest').on('click', function(){
 });
 
 function submitAnswers(ans, timePassed, tmp){
-   data:{answer: ans, timeConsumed: timePassed, totalTime:tmp}
+   // data:{answer: ans, timeConsumed: timePassed, totalTime:tmp}
 }
 
 function finishTest(){

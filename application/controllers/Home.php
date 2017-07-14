@@ -41,7 +41,7 @@ class Home extends CI_Controller {
 			redirect(base_url('skill-tests'));
 		}
 		if($_SESSION['registrationLevel']=='3'){
-			echo "last";die;
+			redirect(base_url('submit-test'));
 		}
 	}
 
@@ -57,11 +57,17 @@ class Home extends CI_Controller {
 			redirect(base_url('skill-tests'));
 		}
 		if($_SESSION['registrationLevel']=='3'){
-			echo "last";die;
+			redirect(base_url('submit-test'));
 		}
 	}
 
 	public function submitTest(){
+		if($_SESSION['registrationLevel']=='1'){
+			redirect(base_url('skill-tests'));
+		}
+		if($_SESSION['registrationLevel']=='2'){
+			redirect(base_url('skill-tests'));
+		}
 		$this->load->view('submitTest', $this->data);
 	}
 

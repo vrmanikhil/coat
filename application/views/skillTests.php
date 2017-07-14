@@ -35,7 +35,11 @@
                       <?php } if($value['status']=='1'){ ?>
                       <a href="<?php echo base_url('homeFunctions/startTest?skillID=').$value['skill_id']; ?>" class="btn" style="background-color: #3d464d; color: #fff; width: 100%;">Start Test</a>
                       <?php } if($value['status']=='2'){ ?>
+<<<<<<< HEAD
+                      <a class="btn" style="background-color: #2980b9; color: #fff; width: 100%;">Resume Test</a>
+=======
                       <a href = "<?php echo base_url('homeFunctions/resumeTest')?>" class="btn" style="background-color: #2980b9; color: #fff; width: 100%;">Resume Test</a>
+>>>>>>> c5499360dd675632c85398b5d45c3a8ac5e7ee79
                       <?php } if($value['status']=='3'){ ?>
                       <a class="btn" style="background-color: #c0392b; color: #fff; width: 100%;">Locked</a>
                       <?php } ?>
