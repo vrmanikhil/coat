@@ -1,4 +1,4 @@
-2<?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class HomeFunctions extends CI_Controller {
@@ -235,7 +235,6 @@ class HomeFunctions extends CI_Controller {
 	public function nextQuestion(){
 		$answer = $this->input->post('answer');
 		$timeConsumed = $this->input->post('timeConsumed');
-
 		$correct = $this->home_lib->checkAnswer($_SESSION['questionData'][0]['question_id'], $answer);
 		$skill_id = $_SESSION['userData']['currentSkill'];
 		$_SESSION['userData'][$skill_id]['totalTime'] = $this->input->post('totalTime');
@@ -248,9 +247,8 @@ class HomeFunctions extends CI_Controller {
 			'timeConsumed' => $timeConsumed,
 			'correct' => $correct
 			);
-		var_dump($data);
 		if($this->home_lib->updateResponse($data, $score)){
-			$this->updateSkip($skill_id);
+			$this->updateSkip($skill_id, $score);
 			$_SESSION['userData'][$skill_id]['totalScore'] += $score;
 			$totalScore = $_SESSION['userData'][$skill_id]['totalScore'];
 			$level = $this->getLevel($totalScore);
@@ -260,7 +258,14 @@ class HomeFunctions extends CI_Controller {
 				$this->endTest($skill_id);
 			}
 			$_SESSION['questionData'] = $this->getQuestionDetails($level, $skill_id);
-			echo json_encode($_SESSION['questionData']);
+			$testData['questionData'] = $_SESSION['questionData'][0];
+				if($_SESSION['userData'][$skill_id]['skips'] > 0){
+					$testData['skips'] = true;
+				}
+				else{
+					$testData['skips'] = false;
+				}
+				echo json_encode($testData);
 		}else{
 			echo "string"; die;
 			$this->logout();
@@ -275,6 +280,7 @@ class HomeFunctions extends CI_Controller {
 		$_SESSION['userData'][$currentSkill]['totalScore'] = $this->home_lib->getTotalScore($userID, $currentSkill)[0]['total'];
 		$_SESSION['userData'][$currentSkill]['skipStatus'] = $this->getSkipStatus($_SESSION['userData'][$currentSkill]['totalScore']);
 		$_SESSION['userData'][$currentSkill]['skips'] = $this->getSkips($userID, $currentSkill);
+		// var_dump($_SESSION['userData'][$currentSkill]['skips']); die;
 		$timeConsumed = $this->home_lib->getTimeConsumed($userID, $currentSkill)[0]['time'];
 		$testTime = $this->home_lib->getTestSetup()[0]['timeAllowed'];
 		$_SESSION['userData'][$currentSkill]['totalTime'] = $testTime*60 - $timeConsumed;
@@ -288,11 +294,11 @@ class HomeFunctions extends CI_Controller {
 		$skips = $this->home_lib->getSkips($userID, $skillID)[0]['skips'];
 		$skipStatus = $_SESSION['userData'][$skillID]['skipStatus'];
 		if($skipStatus == 0){
-			$skips = 3 + $skips;
+			$skips = 3 - $skips;
 		}elseif($skipStatus == 1){
-			$skips = 4 + $skips;
+			$skips = 4 - $skips;
 		}elseif($skipStatus == 2){
-			$skips = 5 + $skips;
+			$skips = 5 - $skips;
 		}else{
 			return false;
 		}
@@ -333,22 +339,29 @@ class HomeFunctions extends CI_Controller {
 				$totalScore = $_SESSION['userData'][$skill_id]['totalScore'];
 				$level = $this->getLevel($totalScore);
 				$_SESSION['questionData'] = $this->getQuestionDetails($level, $skill_id);
-				redirect(base_url('test'));
+				$testData['questionData'] = $_SESSION['questionData'][0];
+				if($_SESSION['userData'][$skill_id]['skips'] > 0){
+					$testData['skips'] = true;
+				}
+				else{
+					$testData['skips'] = false;
+				}
+				echo json_encode($testData);
 			}else{
 				$this->logout();
 			}
 		}else{
-			echo "string";
+			echo 'false';
 			$this->endTest($skill_id);
 		}
 	}
 
-	private function updateSkip($skill_id){
-		if($_SESSION['userData'][$skill_id]['totalScore'] <= 30 && ($_SESSION['userData'][$skill_id]['totalScore'] + $score) <= 30 && $_SESSION['userData'][$skill_id]['skipStatus'] == 0){
+	private function updateSkip($skill_id, $score){
+		if($_SESSION['userData'][$skill_id]['totalScore'] <= 30 && ($_SESSION['userData'][$skill_id]['totalScore'] + $score) >= 30 && $_SESSION['userData'][$skill_id]['skipStatus'] == 0){
 			$_SESSION['userData'][$skill_id]['skipStatus'] = 1;
 			$_SESSION['userData'][$skill_id]['skips'] +=1;
 		}else{
-			if($_SESSION['userData'][$skill_id]['totalScore'] <= 60 && ($_SESSION['userData'][$skill_id]['totalScore'] + $score) <= 60 && $_SESSION['userData'][$skill_id]['skipStatus'] == 1){
+			if($_SESSION['userData'][$skill_id]['totalScore'] <= 60 && ($_SESSION['userData'][$skill_id]['totalScore'] + $score) >= 60 && $_SESSION['userData'][$skill_id]['skipStatus'] == 1){
 				$_SESSION['userData'][$skill_id]['skipStatus'] = 2;
 				$_SESSION['userData'][$skill_id]['skips'] +=1;
 			}

@@ -55,44 +55,40 @@
     						<p class="mcq-title">SKILL: <?= $skillData['skillName']?></p>
     					</div>
     					<div class="col-sm-12">
-                            <p class="mcq skipQuestion" style="float: right;"><a>Skip Question</a></p>
+                            <p class="mcq skipQuestion" style="float: right;"><?php if($skips > 0){?><a href = "javascript:">Skip Question</a><?php }else{}?></p>
+                            <div class ="container">
     						<p class="mcq"><strong>Question</strong></p>
-    						<p class="mcq"><?=$questionData[0]['question']?></p>
+    						<div class="mcq" id = "question"><?=$questionData[0]['question']?></div>
                             <div class="options">
     							<div class = 'option'>
     								<span class="opt">A</span>
     								<input type="radio" name="answer" id="optionA" value="1" />
-    								<label for="optionA"><?=$questionData[0]['option1']?></label>
+    								<label for="optionA" id = 'option1'><?=$questionData[0]['option1']?></label>
     							</div>
     							<div class = 'option'>
     								<span class="opt">B</span>
     								<input type="radio" name="answer" id="optionB" value="2" />
-    								<label for="optionB"><?=$questionData[0]['option2']?></label>
+    								<label for="optionB" id = 'option2'><?=$questionData[0]['option2']?></label>
     							</div>
     							<div class = 'option'>
     								<span class="opt">C</span>
     								<input type="radio" name="answer" id="optionC" value="3" />
-    								<label for="optionC"><?=$questionData[0]['option3']?></label>
+    								<label for="optionC" id = 'option3'><?=$questionData[0]['option3']?></label>
     							</div>
     							<div class = 'option'>
     								<span class="opt">D</span>
     								<input type="radio" name="answer" id="optionD" value="4" />
-    								<label for="optionD"><?=$questionData[0]['option4']?></label>
+    								<label for="optionD" id = 'option4'><?=$questionData[0]['option4']?></label>
     							</div>
     						</div>
     					</div>
+                        </div>
     					<center><button class="btn btn-default submitAns" style="background-color: #3d464d; color: #fff; margin-top: 10px;">SUBMIT</button>
               </center>
 
           </div>
 
-
-
-
-
-
           <div class="col-sm-3">
-
             <div class="col-sm-12 well" style="margin-top: 25px;">
               <center><b>Test Time</b></center>
               <div><b><center id = 'timer' style= "font-size: 2em"></center></b></div>
@@ -118,27 +114,6 @@
 
 		</div>
 	</div>
-
-
-  <div class="modal fade" id="knowMore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel"><b>Skill Strength<b></h4>
-      </div>
-      <div class="modal-body">
-        <p class="mcq"><b>Details will go here</b></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-  </div>
-
 </body>
 <?php echo $foot; ?>
 
@@ -146,9 +121,7 @@
 <script>
 var timePassed= 0;
 var totalTime = <?= $totalTime?>;
-console.log(totalTime);
 var questionTime = <?= 2*$questionData[0]['expert_time']?>;
-console.log(questionTime);
 (function ( $ ) {
     $.fn.svgTimer = function(options) {
         var opts = $.extend({}, $.fn.svgTimer.defaults, options);
@@ -171,7 +144,7 @@ console.log(questionTime);
             var counterText = parentEl.find('h2');
 
             //set time and offset
-            var time = opts.time; /* how long the timer runs for */
+            var time = questionTime; /* how long the timer runs for */
             var initialOffset = 2160;
             timePassed = 1;
 
@@ -184,10 +157,9 @@ console.log(questionTime);
             });
 
             //run timer
-
-            var r = 5;
-            var g = 250;
-            var interval = setInterval(function() {
+            interval(opts);
+            function interval(opts){
+            setInterval(function() {
                 track.css('stroke', opts.track);
                 fill.css({
                     'stroke': opts.fill,
@@ -204,26 +176,26 @@ console.log(questionTime);
                 if(opts.direction === 'forward'){
                     counterText.text(i);
                 } else if (opts.direction === 'backward') {
-                    var count = opts.time - timePassed;
+                    var count = questionTime - timePassed;
                     counterText.text(count);
                 }
 
                 if (timePassed == time) {
-                    submitAnswers();
+                    submitAnswers('0',timePassed,tmp);
                     clearInterval(interval);
                 }
                 timePassed++;
-            }, opts.interval);
+                console.log(timePassed);
+            }, 1000);
+        };
         });
     };
 
     $.fn.svgTimer.defaults = {
-        time: questionTime,
         track: 'rgb(56, 71, 83)',
         fill: 'rgb(39,174,96)',
         transition: 'linear',
         direction: 'backward',
-        interval: 1000
     }
 }( jQuery ));
 
@@ -251,8 +223,15 @@ $('.option').on('click', function(){
 });    
 
 $('.skipQuestion').on('click', function(){
-    submitAnswers(0, tmp, timePassed);
-
+    data = {answer: '0', timeConsumed: timePassed, totalTime:tmp};
+   $.post('<?= base_url('homeFunctions/skipQuestion')?>', data).done(function(res){
+        res = JSON.parse(res);
+        if(res.skips!=false)
+            populate(res);
+        else{
+            $('.skipQuestion').empty();
+        }
+   })
 });
 
 $('.submitAns').on('click', function(){
@@ -265,7 +244,13 @@ $('.finishTest').on('click', function(){
 function submitAnswers(ans, timePassed, tmp){
    data = {answer: ans, timeConsumed: timePassed, totalTime:tmp};
    $.post('<?= base_url('homeFunctions/nextQuestion')?>', data).done(function(res){
-        console.log(res);
+        res = JSON.parse(res);
+        if(res.skips!=false){
+            populate(res);
+        }
+        else{
+            $('.skipQuestion').empty();
+        }
    })
 }
 
@@ -273,9 +258,19 @@ function finishTest(){
     alert('finishTest');
 }
 
-function populate(){
-    alert('populate');
-}
+function populate(res){
+    $('#question').empty();
+    $('#question').html(res.questionData.question);
+    $('#option1').html(res.questionData.option1);
+    $('#option2').html(res.questionData.option2);
+    $('#option3').html(res.questionData.option3);
+    $('#option4').html(res.questionData.option4);
+    $('.skipQuestion').show();
+    questionTime = 2*res.questionData.expert_time;
+    $('.svg-test').empty();
+    $('.svg-test').svgTimer();
+} 
+
 </script>
 
 

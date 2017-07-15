@@ -160,9 +160,9 @@ class Home_model extends CI_Model {
 	}
 
 	public function getSkips($userID, $skillID){
-		$this->db->select('SUM(correct) as skips');
+		$this->db->select('count(correct) as skips');
 		$this->db->join('questions', 'questions.question_id = responses.questionID');
-		$result = $this->db->get_where('responses',array('responses.userID'=> $userID, 'questions.skill_id'=> $skillID, 'responses.correct' => -1));
+		$result = $this->db->get_where('responses',array('responses.userID'=> $userID, 'questions.skill_id'=> $skillID, 'responses.correct' => '-1'));
 		return $result->result_array();
 	}
 
