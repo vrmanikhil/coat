@@ -182,4 +182,22 @@ class Home_lib {
 			return 0;
 		}
 	}
+
+	public function unlockSkills($skillID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->unlockSkills($skillID, $userID);
+	}
+
+	public function changeSkillStatusToComplete($skillID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->changeSkillStatusToComplete($skillID, $userID);
+	}
+
+	public function getResponses($skillID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getResponses($skillID, $userID);
+	}
 }

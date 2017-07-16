@@ -137,9 +137,15 @@ class Home_model extends CI_Model {
 	public function getQuestionDetails($level, $skillID){
 		$this->db->select('question_id, question, option1, option2, option3, option4, expert_time');
 		$this->db->where('difficulty_level', $level);
+		if(!empty($_SESSION['userData'][$skillID]['responses']))
+		$this->db->where_not_in('question_id', $_SESSION['userData'][$skillID]['responses']);
 		$this->db->where('skill_id', $skillID);
 		$this->db->order_by('RAND()');
 		$result = $this->db->get('questions',1);
+		if(!$result){
+			$level++;
+			getQuestionDetails($level, $skillID);
+		}
 		return $result->result_array();
 	}
 
@@ -189,4 +195,36 @@ class Home_model extends CI_Model {
 		$this->db->where('question_id', $questionID);
 		return $this->db->get('questions')->result_array();
 	}
+
+	public function unlockSkills($skillID, $userID){
+		$data = array(
+			'status' => '1'
+		);
+		$this->db->where('userID', $userID);
+		$this->db->where('status', '3');
+		$this->db->where_not_in('skillID', $skillID);
+		return $this->db->update('userSkills', $data);
+	}
+
+	public function changeSkillStatusToComplete($skillID, $userID){
+		$data = array(
+			'status' => '4'
+		);
+		$this->db->where('userID', $userID);
+		$this->db->where('status', '2');
+		$this->db->where('skillID', $skillID);
+		return $this->db->update('userSkills', $data);
+	}
+
+	public function getResponses($skillID, $userID){
+		$array = array();
+		$this->db->select('responses.questionID');
+		$this->db->join('questions', 'questions.question_id = responses.questionID');
+		$result = $this->db->get_where('responses',array('responses.userID'=> $userID, 'questions.skill_id'=> $skillID));
+		foreach ($result->result_array() as $key){
+			array_push($array, $key['questionID']);
+		}
+		return $array;
+	}
+
 }
