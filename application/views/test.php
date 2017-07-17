@@ -231,6 +231,7 @@ $('.skipQuestion').on('click', function(){
         if(res.skips!=false)
             populate(res);
         else{
+            populate(res);
             $('.skipQuestion').hide();
         }
    })
@@ -253,6 +254,7 @@ function submitAnswers(ans, timePassed, tmp){
             $('.skipQuestion').show();
         }
         else{
+            populate(res);
             $('.skipQuestion').hide();
         }
    })

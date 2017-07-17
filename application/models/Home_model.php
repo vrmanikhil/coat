@@ -134,7 +134,7 @@ class Home_model extends CI_Model {
 		return $this->db->update('userSkills', $data);
 	}
 
-	public function getQuestionDetails($level, $skillID){
+	public function getQuestionDetails($level, $skillID, $max = 0){
 		$this->db->select('question_id, question, option1, option2, option3, option4, expert_time');
 		$this->db->where('difficulty_level', $level);
 		if(!empty($_SESSION['userData'][$skillID]['responses']))
@@ -143,8 +143,24 @@ class Home_model extends CI_Model {
 		$this->db->order_by('RAND()');
 		$result = $this->db->get('questions',1);
 		if(empty($result->result_array())){
-			$level++;
-			return $this->getQuestionDetails($level, $skillID);
+			if($level <= 0){
+				$CI = &get_instance();
+				$CI->load->library('session');
+				$CI->session->set_flashdata('message', array('content'=>'You have Successfully Completed the Test.','class'=>'success'));
+				redirect('skill-tests');
+			}
+			if($level<8){
+				if($max == 0){
+					$level++;
+					return $this->getQuestionDetails($level, $skillID, $max);
+				}else{
+					$level--;
+					return $this->getQuestionDetails($level, $skillID, 1);
+				}
+			}elseif($level == 8){
+				$level-- ;
+				return $this->getQuestionDetails($level, $skillID, 1);
+			}
 		}
 		return $result->result_array();
 	}
