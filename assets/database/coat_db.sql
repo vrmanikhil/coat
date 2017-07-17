@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 17, 2017 at 04:00 PM
+-- Generation Time: Jul 17, 2017 at 05:15 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -46,7 +46,7 @@ INSERT INTO `admin` (`adminID`, `username`, `password`) VALUES
 --
 
 CREATE TABLE `colleges` (
-  `id` int(5) NOT NULL,
+  `collegeID` int(5) NOT NULL,
   `collegeName` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -54,7 +54,7 @@ CREATE TABLE `colleges` (
 -- Dumping data for table `colleges`
 --
 
-INSERT INTO `colleges` (`id`, `collegeName`) VALUES
+INSERT INTO `colleges` (`collegeID`, `collegeName`) VALUES
 (1, 'JSS Academy of Technical Education, Noida');
 
 -- --------------------------------------------------------
@@ -75,7 +75,7 @@ CREATE TABLE `compulsorySkills` (
 --
 
 CREATE TABLE `courses` (
-  `id` int(5) NOT NULL,
+  `courseID` int(5) NOT NULL,
   `course` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -83,7 +83,7 @@ CREATE TABLE `courses` (
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `course`) VALUES
+INSERT INTO `courses` (`courseID`, `course`) VALUES
 (1, 'B.Tech-CSE'),
 (2, 'B.Tech-IT');
 
@@ -370,7 +370,7 @@ ALTER TABLE `admin`
 -- Indexes for table `colleges`
 --
 ALTER TABLE `colleges`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`collegeID`);
 
 --
 -- Indexes for table `compulsorySkills`
@@ -382,7 +382,7 @@ ALTER TABLE `compulsorySkills`
 -- Indexes for table `courses`
 --
 ALTER TABLE `courses`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`courseID`);
 
 --
 -- Indexes for table `questions`
@@ -427,7 +427,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `colleges`
 --
 ALTER TABLE `colleges`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `collegeID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `compulsorySkills`
 --
@@ -437,7 +437,7 @@ ALTER TABLE `compulsorySkills`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `courseID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `questions`
 --
