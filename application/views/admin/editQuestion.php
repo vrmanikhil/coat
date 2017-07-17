@@ -41,14 +41,14 @@
                             <div class="controls">
                                 <label>Difficulty Level</label>
                                 <select name="difficulty_level" class="form-control" required>
-                                  <option value="1.0" <?php if($questionData['difficulty_level']==='1.0') echo "selected"; ?>>1.0</option>
-                                  <option value="2.0" <?php if($questionData['difficulty_level']==='2.0') echo "selected"; ?>>2.0</option>
-                                  <option value="3.0" <?php if($questionData['difficulty_level']==='3.0') echo "selected"; ?>>3.0</option>
-                                  <option value="4.0" <?php if($questionData['difficulty_level']==='4.0') echo "selected"; ?>>4.0</option>
-                                  <option value="5.0" <?php if($questionData['difficulty_level']==='5.0') echo "selected"; ?>>5.0</option>
-                                  <option value="6.0" <?php if($questionData['difficulty_level']==='6.0') echo "selected"; ?>>6.0</option>
-                                  <option value="7.0" <?php if($questionData['difficulty_level']==='7.0') echo "selected"; ?>>7.0</option>
-                                  <option value="8.0" <?php if($questionData['difficulty_level']==='8.0') echo "selected"; ?>>8.0</option>
+                                  <option value="1" <?php if($questionData['difficulty_level']==='1') echo "selected"; ?>>1</option>
+                                  <option value="2" <?php if($questionData['difficulty_level']==='2') echo "selected"; ?>>2</option>
+                                  <option value="3" <?php if($questionData['difficulty_level']==='3') echo "selected"; ?>>3</option>
+                                  <option value="4" <?php if($questionData['difficulty_level']==='4') echo "selected"; ?>>4</option>
+                                  <option value="5" <?php if($questionData['difficulty_level']==='5') echo "selected"; ?>>5</option>
+                                  <option value="6" <?php if($questionData['difficulty_level']==='6') echo "selected"; ?>>6</option>
+                                  <option value="7" <?php if($questionData['difficulty_level']==='7') echo "selected"; ?>>7</option>
+                                  <option value="8" <?php if($questionData['difficulty_level']==='8') echo "selected"; ?>>8</option>
                                 </select>
                             </div>
                       </div>

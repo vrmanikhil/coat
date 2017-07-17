@@ -158,7 +158,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getInTestSkill($userID){
-		$this->db->select('skillID');	
+		$this->db->select('skillID');
 		$this->db->where('userID', $userID);
 		$this->db->where('status', 2);
 		$result = $this->db->get('userSkills');
@@ -225,6 +225,16 @@ class Home_model extends CI_Model {
 			array_push($array, $key['questionID']);
 		}
 		return $array;
+	}
+
+	public function getColleges(){
+		$result = $this->db->get('colleges');
+		return $result->result_array();
+	}
+
+	public function getCourses(){
+		$result = $this->db->get('courses');
+		return $result->result_array();
 	}
 
 }

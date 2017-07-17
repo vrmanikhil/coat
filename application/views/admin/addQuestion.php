@@ -44,14 +44,14 @@
                             <div class="controls">
                                 <label>Difficulty Level</label>
                                 <select name="difficulty_level" class="form-control" required>
-                                  <option value="1.0">1.0</option>
-                                  <option value="2.0">2.0</option>
-                                  <option value="3.0">3.0</option>
-                                  <option value="4.0">4.0</option>
-                                  <option value="5.0">5.0</option>
-                                  <option value="6.0">6.0</option>
-                                  <option value="7.0">7.0</option>
-                                  <option value="8.0">8.0</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                  <option value="6">6</option>
+                                  <option value="7">7</option>
+                                  <option value="8">8</option>
                                 </select>
                             </div>
                       </div>
