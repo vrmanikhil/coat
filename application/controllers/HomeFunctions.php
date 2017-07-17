@@ -215,6 +215,7 @@ class HomeFunctions extends CI_Controller {
 		if($skillStatus[0]['status']=='1'){
 			$this->home_lib->lockSkills($skill_id, $_SESSION['userData']['userID']);
 			$this->home_lib->changeSkillStatusToResume($skill_id, $_SESSION['userData']['userID']);
+			$_SESSION['userData']['intest'] = false;
 			$_SESSION['userData']['currentSkill'] = $skill_id;
 			$_SESSION['userData']['currentSkillName'] = $this->getSkillData($skill_id)[0]['skill'];
 			$_SESSION['userData'][$skill_id]['totalScore'] = 0;
@@ -234,6 +235,10 @@ class HomeFunctions extends CI_Controller {
 	}
 
 	public function nextQuestion(){
+		if(!$_SESSION['userData']['intest']){
+			$this->session->set_flashdata('message', array('content'=>'You Need to Start or Resume a test to Answer.','class'=>'error'));
+			redirect(base_url('skill-tests'));
+		}
 		$answer = $this->input->post('answer');
 		$timeConsumed = $this->input->post('timeConsumed');
 		$correct = $this->home_lib->checkAnswer($_SESSION['questionData'][0]['question_id'], $answer);
@@ -282,6 +287,7 @@ class HomeFunctions extends CI_Controller {
 
 	public function resumeTest(){
 		$userID = $_SESSION['userData']['userID'];
+		$_SESSION['userData']['intest'] = false;
 		$currentSkill = $this->home_lib->getInTestSkill($userID)[0]['skillID'];
 		$_SESSION['userData']['currentSkill'] = $currentSkill;
 		$_SESSION['userData']['currentSkillName'] = $this->home_lib->getSkillData($currentSkill)[0]['skill'];
@@ -327,6 +333,10 @@ class HomeFunctions extends CI_Controller {
 	}
 
 	public function skipQuestion(){
+		if(!$_SESSION['userData']['intest'] || !isset($_SESSION['userData']['intest'])){
+			$this->session->set_flashdata('message', array('content'=>'Sorry, Some Error Occured. You May resume the Test to Continue.','class'=>'error'));
+			redirect(base_url('skill-tests'));
+		}
 		if(!$timeConsumed = $this->input->post('timeConsumed')){
 			$timeConsumed = 0;
 		}
@@ -418,13 +428,15 @@ class HomeFunctions extends CI_Controller {
 		$_SESSION['userData'][$skill_id]['totalTime'] = NULL;
 		$_SESSION['userData'][$skill_id]['level'] = NULL;
 		$_SESSION['userData'][$skill_id]['responses'] = NULL;
+		$_SESSION['userData']['intest'] = false;
 		$this->home_lib->unlockSkills($skill_id, $_SESSION['userData']['userID']);
 		$this->home_lib->changeSkillStatusToComplete($skill_id, $_SESSION['userData']['userID']);
+		$this->session->set_flashdata('message', array('content'=>'You have Successfully Completed the Test.','class'=>'success'));
 		redirect('skill-tests');
 	}
 
 	public function test(){
-		 echo $this->getLevel(11);
+		 var_dump( $_SESSION['userData'][19]['responses']);
 	}
 
 	private function getQuestionDetails($level, $skillID){

@@ -182,7 +182,7 @@ var interval = null;
                 }
 
                 if (timePassed == time) {
-                    submitAnswers('0',timePassed,tmp);
+                    submitAnswers('0',timePassed-1,tmp);
                     clearInterval(interval);
                 }
                 timePassed++;
@@ -226,11 +226,12 @@ $('.option').on('click', function(){
 $('.skipQuestion').on('click', function(){
     data = {answer: '0', timeConsumed: timePassed, totalTime:tmp};
    $.post('<?= base_url('homeFunctions/skipQuestion')?>', data).done(function(res){
+    console.log(res)
         res = JSON.parse(res);
         if(res.skips!=false)
             populate(res);
         else{
-            $('.skipQuestion').empty();
+            $('.skipQuestion').hide();
         }
    })
 });
@@ -245,6 +246,7 @@ $('.finishTest').on('click', function(){
 function submitAnswers(ans, timePassed, tmp){
    data = {answer: ans, timeConsumed: timePassed, totalTime:tmp};
    $.post('<?= base_url('homeFunctions/nextQuestion')?>', data).done(function(res){
+    console.log(res)
         res = JSON.parse(res);
         if(res.skips!=false){
             populate(res);

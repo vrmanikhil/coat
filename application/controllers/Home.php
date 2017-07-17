@@ -74,6 +74,21 @@ class Home extends CI_Controller {
 	}
 
 	public function test(){
+		if($_SESSION['userData']['intest']){
+			$_SESSION['questionData'] = NULL;
+			$_SESSION['userData']['currentSkill'] = NULL;
+			$_SESSION['userData']['currentSkillName'] = NULL;
+			$_SESSION['userData'][$skill_id]['totalScore'] = NULL;
+			$_SESSION['userData'][$skill_id]['skips'] = NULL;
+			$_SESSION['userData'][$skill_id]['skipStatus'] = NULL;
+			$_SESSION['userData'][$skill_id]['totalTime'] = NULL;
+			$_SESSION['userData'][$skill_id]['level'] = NULL;
+			$_SESSION['userData'][$skill_id]['responses'] = NULL;
+			$_SESSION['userData']['intest'] = false;
+			$this->session->set_flashdata('message', array('content'=>'Page Reload Not allowed During test.','class'=>'error'));
+			redirect(base_url('skill-tests'));
+		}
+		$_SESSION['userData']['intest'] = true;
 		$this->data['skillData']['skillID'] = $_SESSION['userData']['currentSkill'];
 		$this->data['skillData']['skillName'] = $_SESSION['userData']['currentSkillName'];
 		$this->data['questionData'] = $_SESSION['questionData'];

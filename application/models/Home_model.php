@@ -142,9 +142,9 @@ class Home_model extends CI_Model {
 		$this->db->where('skill_id', $skillID);
 		$this->db->order_by('RAND()');
 		$result = $this->db->get('questions',1);
-		if(!$result){
+		if(empty($result->result_array())){
 			$level++;
-			getQuestionDetails($level, $skillID);
+			return $this->getQuestionDetails($level, $skillID);
 		}
 		return $result->result_array();
 	}
