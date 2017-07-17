@@ -271,9 +271,11 @@ class HomeFunctions extends CI_Controller {
 			$_SESSION['questionData'] = $this->getQuestionDetails($level, $skill_id);
 			$testData['questionData'] = $_SESSION['questionData'][0];
 				if($_SESSION['userData'][$skill_id]['skips'] > 0){
+					$testData['skipsLeft'] = $_SESSION['userData'][$skill_id]['skips'];
 					$testData['skips'] = true;
 				}
 				else{
+					$testData['skipsLeft'] = 0;
 					$testData['skips'] = false;
 				}
 				$testData['level'] = $level;
@@ -359,11 +361,14 @@ class HomeFunctions extends CI_Controller {
 				$_SESSION['questionData'] = $this->getQuestionDetails($level, $skill_id);
 				$testData['questionData'] = $_SESSION['questionData'][0];
 				if($_SESSION['userData'][$skill_id]['skips'] > 0){
+					$testData['skipsLeft'] = $_SESSION['userData'][$skill_id]['skips'];
 					$testData['skips'] = true;
 				}
 				else{
+					$testData['skipsLeft'] = 0;
 					$testData['skips'] = false;
 				}
+
 				echo json_encode($testData);
 			}else{
 				$this->logout();

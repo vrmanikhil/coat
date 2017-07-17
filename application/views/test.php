@@ -93,7 +93,10 @@
               <center><b>Test Time</b></center>
               <div><b><center id = 'timer' style= "font-size: 2em"></center></b></div>
             </div>
-
+            <div class="col-sm-12 well" style="margin-top: 0px;">
+              <center><b>Skips Left:</b></center>
+              <div><b><center id = 'skipsLeft' style= "font-size: 2em"><?= $skips?></center></b></div>
+            </div>
             <div class="col-sm-12 well">
               <center><b>Question Time </b>
                 <div class="svg-test">
@@ -226,7 +229,6 @@ $('.option').on('click', function(){
 $('.skipQuestion').on('click', function(){
     data = {answer: '0', timeConsumed: timePassed, totalTime:tmp};
    $.post('<?= base_url('homeFunctions/skipQuestion')?>', data).done(function(res){
-    console.log(res)
         res = JSON.parse(res);
         if(res.skips!=false)
             populate(res);
@@ -247,7 +249,6 @@ $('.finishTest').on('click', function(){
 function submitAnswers(ans, timePassed, tmp){
    data = {answer: ans, timeConsumed: timePassed, totalTime:tmp};
    $.post('<?= base_url('homeFunctions/nextQuestion')?>', data).done(function(res){
-    console.log(res)
         res = JSON.parse(res);
         if(res.skips!=false){
             populate(res);
@@ -272,6 +273,7 @@ function populate(res){
     $('#option2').html(res.questionData.option2);
     $('#option3').html(res.questionData.option3);
     $('#option4').html(res.questionData.option4);
+    $(document).find('#skipsLeft').html(res.skipsLeft);
     $('.skipQuestion').show();
     questionTime = 2*res.questionData.expert_time;
     clearInterval(interval);
