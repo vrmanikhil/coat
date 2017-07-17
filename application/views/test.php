@@ -50,49 +50,46 @@
 
 			<div class="col-md-9" id="main-wrapper">
 
-          <div class="col-sm-9">
+          <div class="col-sm-9 questionContainer">
     					<div style="text-align: center; margin-top: 25px;">
     						<p class="mcq-title">SKILL: <?= $skillData['skillName']?></p>
     					</div>
+                        <div class = 'questionContent'>
     					<div class="col-sm-12">
-                            <p class="mcq skipQuestion" style="float: right;"><a>Skip Question</a></p>
+                            <p class="mcq skipQuestion" style="float: right;"><?php if($skips > 0){?><a href = "javascript:">Skip Question</a><?php }else{}?></p>
+                            
     						<p class="mcq"><strong>Question</strong></p>
-    						<p class="mcq"><?=$questionData[0]['question']?></p>
+    						<div class="mcq" id = "question"><?=$questionData[0]['question']?></div>
                             <div class="options">
     							<div class = 'option'>
     								<span class="opt">A</span>
     								<input type="radio" name="answer" id="optionA" value="1" />
-    								<label for="optionA"><?=$questionData[0]['option1']?></label>
+    								<label for="optionA" id = 'option1'><?=$questionData[0]['option1']?></label>
     							</div>
     							<div class = 'option'>
     								<span class="opt">B</span>
     								<input type="radio" name="answer" id="optionB" value="2" />
-    								<label for="optionB"><?=$questionData[0]['option2']?></label>
+    								<label for="optionB" id = 'option2'><?=$questionData[0]['option2']?></label>
     							</div>
     							<div class = 'option'>
     								<span class="opt">C</span>
     								<input type="radio" name="answer" id="optionC" value="3" />
-    								<label for="optionC"><?=$questionData[0]['option3']?></label>
+    								<label for="optionC" id = 'option3'><?=$questionData[0]['option3']?></label>
     							</div>
     							<div class = 'option'>
     								<span class="opt">D</span>
     								<input type="radio" name="answer" id="optionD" value="4" />
-    								<label for="optionD"><?=$questionData[0]['option4']?></label>
+    								<label for="optionD" id = 'option4'><?=$questionData[0]['option4']?></label>
     							</div>
     						</div>
     					</div>
+                       </div>
     					<center><button class="btn btn-default submitAns" style="background-color: #3d464d; color: #fff; margin-top: 10px;">SUBMIT</button>
               </center>
 
           </div>
 
-
-
-
-
-
           <div class="col-sm-3">
-
             <div class="col-sm-12 well" style="margin-top: 25px;">
               <center><b>Test Time</b></center>
               <div><b><center id = 'timer' style= "font-size: 2em"></center></b></div>
@@ -118,38 +115,48 @@
 
 		</div>
 	</div>
-
-
-  <div class="modal fade" id="knowMore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel"><b>Skill Strength<b></h4>
-      </div>
-      <div class="modal-body">
-        <p class="mcq"><b>Details will go here</b></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-  </div>
-
+                        <div class="col-sm-12" class = 'wrap' style = "display: none">
+                            <p class="mcq skipQuestion" style="float: right;"><?php if($skips > 0){?><a href = "javascript:">Skip Question</a><?php }else{}?></p>
+                            <p class="mcq"><strong>Question</strong></p>
+                            <div class="mcq" id = "question"></div>
+                            <div class="options">
+                                <div class = 'option'>
+                                    <span class="opt">A</span>
+                                    <input type="radio" name="answer" id="optionA" value="1" />
+                                    <label for="optionA" id = 'option1'></label>
+                                </div>
+                                <div class = 'option'>
+                                    <span class="opt">B</span>
+                                    <input type="radio" name="answer" id="optionB" value="2" />
+                                    <label for="optionB" id = 'option2'></label>
+                                </div>
+                                <div class = 'option'>
+                                    <span class="opt">C</span>
+                                    <input type="radio" name="answer" id="optionC" value="3" />
+                                    <label for="optionC" id = 'option3'></label>
+                                </div>
+                                <div class = 'option'>
+                                    <span class="opt">D</span>
+                                    <input type="radio" name="answer" id="optionD" value="4" />
+                                    <label for="optionD" id = 'option4'></label>
+                                </div>
+                            </div>
+                        </div>
 </body>
 <?php echo $foot; ?>
 
-<script src="http://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<script src="<?php echo base_url('/assets/website/js/jquery-min.js'); ?>"></script>
 <script>
 var timePassed= 0;
+var totalTime = <?= $totalTime?>;
+// var totalTime = 90;
+var questionTime = <?= 2*$questionData[0]['expert_time']?>;
+var interval = null;
 (function ( $ ) {
     $.fn.svgTimer = function(options) {
         var opts = $.extend({}, $.fn.svgTimer.defaults, options);
         var template = "<div class='svg-hexagonal-counter'>"
-            + "<h2>10</h2>"
+            + "<h2>"+questionTime+"</h2>"
             + "<svg class='counter' x='0px' y='0px' viewBox='0 0 776 628'>"
             + "<path class='track' d='M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z'></path>"
             + "<path class='fill' d='M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z'></path>"
@@ -167,7 +174,7 @@ var timePassed= 0;
             var counterText = parentEl.find('h2');
 
             //set time and offset
-            var time = opts.time; /* how long the timer runs for */
+            var time = questionTime; /* how long the timer runs for */
             var initialOffset = 2160;
             timePassed = 1;
 
@@ -180,10 +187,8 @@ var timePassed= 0;
             });
 
             //run timer
-
-            var r = 5;
-            var g = 250;
-            var interval = setInterval(function() {
+           
+            interval = setInterval(function() {
                 track.css('stroke', opts.track);
                 fill.css({
                     'stroke': opts.fill,
@@ -200,26 +205,25 @@ var timePassed= 0;
                 if(opts.direction === 'forward'){
                     counterText.text(i);
                 } else if (opts.direction === 'backward') {
-                    var count = opts.time - timePassed;
+                    var count = questionTime - timePassed;
                     counterText.text(count);
                 }
 
                 if (timePassed == time) {
-                    submitAnswers();
+                    submitAnswers('0',timePassed-1,tmp);
                     clearInterval(interval);
                 }
                 timePassed++;
-            }, opts.interval);
+            }, 1000);
+    
         });
     };
 
     $.fn.svgTimer.defaults = {
-        time: 800,
         track: 'rgb(56, 71, 83)',
         fill: 'rgb(39,174,96)',
         transition: 'linear',
         direction: 'backward',
-        interval: 1000
     }
 }( jQuery ));
 
@@ -227,7 +231,7 @@ $(function () {
   $('.svg-test').svgTimer();
 });
 
-var time = 900,r=document.getElementById('timer'),tmp=time;
+var time = totalTime,r=document.getElementById('timer'),tmp=time;
 setInterval(function () {
     var c = tmp--,h = (c/3600)>>0,m=((c-h*3600)/60)>>0,s=(c-m*60-h*3600)+'';
     if(h>0){
@@ -247,29 +251,61 @@ $('.option').on('click', function(){
 });    
 
 $('.skipQuestion').on('click', function(){
-    submitAnswers(0, tmp, timePassed);
-
+    data = {answer: '0', timeConsumed: timePassed, totalTime:tmp};
+   $.post('<?= base_url('homeFunctions/skipQuestion')?>', data).done(function(res){
+        res = JSON.parse(res);
+        if(res.skips!=false)
+            populate(res);
+        else{
+            $('.skipQuestion').empty();
+        }
+   })
 });
 
 $('.submitAns').on('click', function(){
-    submitAnswers();
+    submitAnswers(ans, timePassed, tmp);
 });
 
 $('.finishTest').on('click', function(){
     finishTest();
 });
-
 function submitAnswers(ans, timePassed, tmp){
-   // data:{answer: ans, timeConsumed: timePassed, totalTime:tmp}
+   data = {answer: ans, timeConsumed: timePassed, totalTime:tmp};
+   $.post('<?= base_url('homeFunctions/nextQuestion')?>', data).done(function(res){
+    console.log(res);
+        res = JSON.parse(res);
+        if(res.skips!=false){
+            populate(res);
+            $('.skipQuestion').show();
+        }
+        else{
+            $('.skipQuestion').hide();
+        }
+   })
 }
 
 function finishTest(){
-    alert('finishTest');
+   window.location = "<?= base_url('homeFunctions/endTest')?>";
 }
 
-function populate(){
-    alert('populate');
-}
+function populate(res){
+    $('#questionContent').empty();
+    var container = $('.wrap').clone();
+    console.log(container);
+    container.removeClass('wrap');
+    container.find('#question').html(res.questionData.question);
+    container.find('#option1').html(res.questionData.option1);
+    container.find('#option2').html(res.questionData.option2);
+    container.find('#option3').html(res.questionData.option3);
+    container.find('#option4').html(res.questionData.option4);
+    $(".questionContainer").append(container[0]);
+    container.show();
+    questionTime = 2*res.questionData.expert_time;
+    clearInterval(interval);
+    $('.svg-test').empty();
+    $('.svg-test').svgTimer();
+} 
+
 </script>
 
 

@@ -76,6 +76,7 @@ class Home extends CI_Controller {
 		$this->data['skillData']['skillName'] = $_SESSION['userData']['currentSkillName'];
 		$this->data['questionData'] = $_SESSION['questionData'];
 		$this->data['totalTime'] = $_SESSION['userData'][$_SESSION['userData']['currentSkill']]['totalTime'];
+		$this->data['skips'] = $_SESSION['userData'][$_SESSION['userData']['currentSkill']]['skips'];
 		$this->load->view('test', $this->data);
 	}
 
