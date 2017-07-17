@@ -104,7 +104,7 @@
               <div class="col-xs-9">
                 <div class="form-group">
                   <label>Mobile</label>
-                  <input type="text" class="form-control" name="mobile" placeholder="Mobile Number" required>
+                  <input type="text" class="form-control" name="mobile" placeholder="Mobile Number" maxlength="10" required>
                 </div>
               </div>
               <div class="col-xs-7">
