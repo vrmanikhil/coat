@@ -126,7 +126,9 @@
                 <div class="form-group">
                   <label>College</label>
                   <select class="form-control" name="collegeID" required>
-                    <option value="1">JSS Academy of Technical Education, Noida</option>
+                    <?php foreach ($colleges as $key => $value) { ?>
+                      <option value="<?php echo $value['collegeID'] ?>"><?php echo $value['collegeName']; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
               </div>
@@ -134,8 +136,9 @@
                 <div class="form-group">
                   <label>Course</label>
                   <select class="form-control" name="courseID" required>
-                    <option value="1">B.Tech-CSE</option>
-                    <option value="2">B.Tech-IT</option>
+                    <?php foreach ($courses as $key => $value) { ?>
+                      <option value="<?php echo $value['courseID'] ?>"><?php echo $value['course']; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
               </div>

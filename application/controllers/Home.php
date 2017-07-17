@@ -18,6 +18,8 @@ class Home extends CI_Controller {
 	}
 
 	public function index(){
+		$this->data['colleges'] = $this->home_lib->getColleges();
+		$this->data['courses'] = $this->home_lib->getCourses();
 		$this->load->view('home', $this->data);
 	}
 
