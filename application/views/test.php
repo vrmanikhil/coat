@@ -262,7 +262,7 @@ function finishTest(){
 
 function populate(res){
     $('#question').empty();
-    $("#"+selected).prop(checked, false);
+    $("#"+selected).prop("checked", false);
     $('#question').html(res.questionData.question);
     $('#option1').html(res.questionData.option1);
     $('#option2').html(res.questionData.option2);
