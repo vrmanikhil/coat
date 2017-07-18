@@ -189,10 +189,10 @@ class Home_lib {
 		return $CI->homeModel->unlockSkills($skillID, $userID);
 	}
 
-	public function changeSkillStatusToComplete($skillID, $userID){
+	public function changeSkillStatusToComplete($skillID, $userID, $totalScore){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->changeSkillStatusToComplete($skillID, $userID);
+		return $CI->homeModel->changeSkillStatusToComplete($skillID, $userID, $totalScore);
 	}
 
 	public function getResponses($skillID, $userID){

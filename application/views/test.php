@@ -185,7 +185,7 @@ var interval = null;
                 }
 
                 if (timePassed == time) {
-                    submitAnswers('0',timePassed-1,tmp);
+                    submitAnswers('0',--questionTime,tmp);
                     clearInterval(interval);
                 }
                 timePassed++;
@@ -227,7 +227,7 @@ $('.option').on('click', function(){
 });    
 
 $('.skipQuestion').on('click', function(){
-    data = {answer: '0', timeConsumed: timePassed, totalTime:tmp};
+    data = {answer: '0', timeConsumed: totalTime-tmp, totalTime:tmp};
    $.post('<?= base_url('homeFunctions/skipQuestion')?>', data).done(function(res){
         res = JSON.parse(res);
         if(res.skips!=false)
@@ -240,15 +240,20 @@ $('.skipQuestion').on('click', function(){
 });
 
 $('.submitAns').on('click', function(){
-    submitAnswers(ans, timePassed, tmp);
+    submitAnswers(ans, totalTime-tmp, tmp);
 });
 
 $('.finishTest').on('click', function(){
     finishTest();
 });
 function submitAnswers(ans, timePassed, tmp){
+    console.log(timePassed);
    data = {answer: ans, timeConsumed: timePassed, totalTime:tmp};
    $.post('<?= base_url('homeFunctions/nextQuestion')?>', data).done(function(res){
+        console.log(res);
+        if(res == 'false'){
+            window.location = "<?= base_url('skill-tests')?>";
+        }
         res = JSON.parse(res);
         if(res.skips!=false){
             populate(res);
@@ -276,6 +281,7 @@ function populate(res){
     $(document).find('#skipsLeft').html(res.skipsLeft);
     $('.skipQuestion').show();
     questionTime = 2*res.questionData.expert_time;
+    totalTime = res.totalTime;
     clearInterval(interval);
     $('.svg-test').empty();
     $('.svg-test').svgTimer();

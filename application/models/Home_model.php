@@ -222,9 +222,10 @@ class Home_model extends CI_Model {
 		return $this->db->update('userSkills', $data);
 	}
 
-	public function changeSkillStatusToComplete($skillID, $userID){
+	public function changeSkillStatusToComplete($skillID, $userID, $totalScore){
 		$data = array(
-			'status' => '4'
+			'status' => '4',
+			'score' => $totalScore
 		);
 		$this->db->where('userID', $userID);
 		$this->db->where('status', '2');
