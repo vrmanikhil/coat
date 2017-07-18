@@ -1,5 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once BASEPATH.'../assets/dompdf/autoload.inc.php';
+use Dompdf\Adapter\CPDF;
+use Dompdf\Dompdf;
+use Dompdf\Exception;
+use Dompdf\Option;
 
 class Admin extends CI_Controller {
 
@@ -96,6 +101,27 @@ class Admin extends CI_Controller {
 
 	public function seed(){
 		$this->admin_library->seed();
+	}
+
+	public function downloadReport(){
+		$data = array();
+		$data['logo'] =file_get_contents("http://www.campuspuppy.com/assets/img/logo-white.png");
+		$base64 = base64_encode($data['logo']);
+		$data['logo'] = 'data:image/jpeg;base64,' . $base64;
+		$html = $this->load->view('report/report', $data, true);
+		// var_dump($html);die;
+		$dompdf = new Dompdf();
+		$dompdf->loadHtml($html);
+		$dompdf->setPaper('A3', 'landscape');
+		$dompdf->render();
+		$dompdf->stream('abc.pdf');
+	}
+
+	public function report(){
+		$this->data['logo'] =file_get_contents("http://www.campuspuppy.com/assets/img/logo-white.png");
+		$base64 = base64_encode($this->data['logo']);
+		$this->data['logo'] = 'data:image/jpeg;base64,' . $base64;
+		$this->load->view('report/report', $this->data);
 	}
 
 

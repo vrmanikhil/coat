@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu1
--- http://www.phpmyadmin.net
+-- version 4.0.10.18
+-- https://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jul 17, 2017 at 05:15 PM
--- Server version: 5.7.18-0ubuntu0.16.04.1
--- PHP Version: 7.0.15-0ubuntu0.16.04.4
+-- Host: localhost:3306
+-- Generation Time: Jul 18, 2017 at 01:41 AM
+-- Server version: 5.6.35-cll-lve
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `coat_db`
@@ -26,11 +26,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE `admin` (
-  `adminID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `admin` (
+  `adminID` int(5) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`adminID`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `admin`
@@ -45,10 +47,11 @@ INSERT INTO `admin` (`adminID`, `username`, `password`) VALUES
 -- Table structure for table `colleges`
 --
 
-CREATE TABLE `colleges` (
-  `collegeID` int(5) NOT NULL,
-  `collegeName` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `colleges` (
+  `collegeID` int(5) NOT NULL AUTO_INCREMENT,
+  `collegeName` varchar(255) NOT NULL,
+  PRIMARY KEY (`collegeID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `colleges`
@@ -63,10 +66,11 @@ INSERT INTO `colleges` (`collegeID`, `collegeName`) VALUES
 -- Table structure for table `compulsorySkills`
 --
 
-CREATE TABLE `compulsorySkills` (
-  `id` int(5) NOT NULL,
-  `skill_id` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `compulsorySkills` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `skill_id` int(5) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -74,10 +78,11 @@ CREATE TABLE `compulsorySkills` (
 -- Table structure for table `courses`
 --
 
-CREATE TABLE `courses` (
-  `courseID` int(5) NOT NULL,
-  `course` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `courses` (
+  `courseID` int(5) NOT NULL AUTO_INCREMENT,
+  `course` varchar(255) NOT NULL,
+  PRIMARY KEY (`courseID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `courses`
@@ -93,8 +98,8 @@ INSERT INTO `courses` (`courseID`, `course`) VALUES
 -- Table structure for table `questions`
 --
 
-CREATE TABLE `questions` (
-  `question_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `questions` (
+  `question_id` int(5) NOT NULL AUTO_INCREMENT,
   `question` longtext NOT NULL,
   `option1` longtext NOT NULL,
   `option2` longtext NOT NULL,
@@ -103,8 +108,9 @@ CREATE TABLE `questions` (
   `difficulty_level` enum('1','2','3','4','5','6','7','8') NOT NULL,
   `expert_time` int(5) NOT NULL,
   `skill_id` int(5) NOT NULL,
-  `answer` enum('1','2','3','4') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `answer` enum('1','2','3','4') NOT NULL,
+  PRIMARY KEY (`question_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=132 ;
 
 --
 -- Dumping data for table `questions`
@@ -123,10 +129,9 @@ INSERT INTO `questions` (`question_id`, `question`, `option1`, `option2`, `optio
 (10, '<p>FIFO scheduling is ________.<br />\r\n&nbsp;</p>\r\n', '<p>Non Preemptive Scheduling</p>\r\n', '<p>Deadline Scheduling</p>\r\n', '<p>Preemptive Scheduling</p>\r\n', '<p>Fair share scheduling</p>\r\n', '1', 10, 19, '1'),
 (11, '<p>The Banker&#39;s algorithm is used<br />\r\n&nbsp;</p>\r\n', '<p>to prevent deadlock in operating systems</p>\r\n', '<p>to detect deadlock in operating systems</p>\r\n', '<p>to rectify a deadlocked state</p>\r\n', '<p>none of the above</p>\r\n', '1', 10, 19, '1'),
 (12, '<p>An assembler is used to translate a program written in<br />\r\n&nbsp;</p>\r\n', '<p>A Low Language</p>\r\n', '<p>A high Language</p>\r\n', '<p>Middle Language</p>\r\n', '<p>Assembly Language</p>\r\n', '1', 10, 19, '4'),
-(13, '<p>Memory management is:<br />\r\n&nbsp;</p>\r\n', '<p>replaced with virtual memory on current systems</p>\r\n', '<p>not used in modern operating system</p>\r\n', '<p>not used on multiprogramming systems</p>\r\n', '<p>critical for even the simplest operating systems</p>\r\n', '1', 10, 1, '1'),
+(13, '<p>Memory management is:<br />\r\n&nbsp;</p>\r\n', '<p>replaced with virtual memory on current systems</p>\r\n', '<p>not used in modern operating system</p>\r\n', '<p>not used on multiprogramming systems</p>\r\n', '<p>critical for even the simplest operating systems</p>\r\n', '1', 10, 19, '1'),
 (14, '<p>Dead-lock in an Operating System is<br />\r\n&nbsp;</p>\r\n', '<p>Definite waiting process</p>\r\n', '<p>Desirable process</p>\r\n', '<p>Undesirable process</p>\r\n', '<p>All the above</p>\r\n', '1', 10, 19, '1'),
-(15, '<p>Which of the following approaches do not require knowledge of the system state?<br />\r\n&nbsp;</p>\r\n', '<p>Deadlock detection</p>\r\n', '<p>Deadlock dAvoidence</p>\r\n', '<p>Deadlock Prevention</p>\r\n', '<p>None of the above</p>\r\n', '1', 10, 19, '4'),
-(16, '<p>Round robin scheduling is essentially the preemptive version of ________ ?<br />\r\n&nbsp;</p>\r\n', '<p>FIFO</p>\r\n', '<p>Shortest job first</p>\r\n', '<p>Shortest remaining</p>\r\n', '<p>Longest time first</p>\r\n', '1', 10, 19, '1'),
+(16, '<p>Round robin scheduling is essentially the preemptive version of ________ ?<br />\n&nbsp;</p>\n', '<p>FIFO</p>\r\n', '<p>Shortest job first</p>\r\n', '<p>Shortest remaining</p>\r\n', '<p>Longest time first</p>\r\n', '1', 10, 19, '1'),
 (17, '<p>&nbsp;A page fault occurs ?<br />\r\n&nbsp;</p>\r\n', '<p>when the page is not in the memory</p>\r\n', '<p>when the page is in the memory</p>\r\n', '<p>when the process enters the blocked state</p>\r\n', '<p>when the process is in the ready state</p>\r\n', '1', 10, 19, '1'),
 (18, '<p>Which of the following will determine your choice of systems software for your computer?&nbsp;<br />\r\n&nbsp;</p>\r\n', '<p>Is the applications software you want to use compatible with it ?</p>\r\n', '<p>Is it expensive ?</p>\r\n', '<p>Is it compatible with your hardware ?</p>\r\n', '<p>Both 1 and 3</p>\r\n', '1', 10, 19, '4'),
 (19, '<p>What is a shell ?&nbsp;<br />\r\n&nbsp;</p>\r\n', '<p>is a hardware component</p>\r\n', '<p>It is a command interpreter</p>\r\n', '<p>It is a part in compiler</p>\r\n', '<p>It is a tool in CPU scheduling</p>\r\n', '1', 10, 19, '2'),
@@ -137,7 +142,6 @@ INSERT INTO `questions` (`question_id`, `question`, `option1`, `option2`, `optio
 (24, '<p>Virtual memory is ..... ?<br />\r\n&nbsp;</p>\r\n', '<p>An extremely large main memory</p>\r\n', '<p>An extremely large secondary memory</p>\r\n', '<p>An illusion of extremely large main memory</p>\r\n', '<p>A type of memory used in super computers</p>\r\n', '2', 10, 19, '3'),
 (25, '<p>Concurrent process are ?<br />\r\n&nbsp;</p>\r\n', '<p>Processes that do not overlap in time</p>\r\n', '<p>Process that overlap in time</p>\r\n', '<p>Processes that are executed by the processor at the same time</p>\r\n', '<p>None of the above</p>\r\n', '2', 10, 19, '2'),
 (26, '<p>Which is not the state of the process ?<br />\r\n&nbsp;</p>\r\n', '<p>Blocked</p>\r\n', '<p>Running</p>\r\n', '<p>Ready&nbsp;</p>\r\n', '<p>Privileged</p>\r\n', '2', 10, 19, '4'),
-(27, '<p>Which is not the state of the process ?<br />\r\n&nbsp;</p>\r\n', '<p>Blocked</p>\r\n', '<p>Running</p>\r\n', '<p>Ready&nbsp;</p>\r\n', '<p>Privileged</p>\r\n', '2', 10, 19, '4'),
 (28, '<p>Size of the virtual memory depends upon ?<br />\r\n&nbsp;</p>\r\n', '<p>Data Bus</p>\r\n', '<p>Address Bus</p>\r\n', '<p>Size of main memory</p>\r\n', '<p>Memory buffer register</p>\r\n', '2', 10, 19, '2'),
 (29, '<p>Which of the following approaches do not require knowledge of the system state?<br />\r\n&nbsp;</p>\r\n', '<p>Deadlock detection</p>\r\n', '<p>Deadlock Avoidence</p>\r\n', '<p>Deadlock Prevention</p>\r\n', '<p>None of the above</p>\r\n', '2', 10, 19, '4'),
 (30, '<p>Which of the following scheduling policy is well suited for time shared operating system?<br />\r\n&nbsp;</p>\r\n', '<p>Shortest job first</p>\r\n', '<p>Round robin</p>\r\n', '<p>First com first serve</p>\r\n', '<p>Elevator</p>\r\n', '2', 10, 19, '2'),
@@ -176,7 +180,6 @@ INSERT INTO `questions` (`question_id`, `question`, `option1`, `option2`, `optio
 (63, '<p>Which of following is/are the advantage(s) of modular programming?<br />\r\n&nbsp;</p>\r\n', '<p>The program is much easier to change</p>\r\n', '<p>Modules can be reused in other programs</p>\r\n', '<p>Easy debugging</p>\r\n', '<p>Easy to compile</p>\r\n', '4', 10, 19, '1'),
 (64, '<p>The function(s) performed by the paging software is (are)<br />\r\n&nbsp;</p>\r\n', '<p>&nbsp;Implementation of the access environment for all programs in the system</p>\r\n', '<p>Management of the physical address space</p>\r\n', '<p>Sharing and protection</p>\r\n', '<p>All the above</p>\r\n', '4', 10, 19, '4'),
 (65, '<p>A compiler for a high-level language that runs on one machine and produces code for a different machine is called is<br />\r\n&nbsp;</p>\r\n', '<p>optimizing compiler</p>\r\n', '<p>one pass compiler</p>\r\n', '<p>cross compiler</p>\r\n', '<p>multipass compiler</p>\r\n', '4', 10, 19, '3'),
-(66, '<p>Round robin scheduling is essentially the preemptive version of ________.<br />\r\n&nbsp;</p>\r\n', '<p>FIFO</p>\r\n', '<p>Shortest job first</p>\r\n', '<p>Shortest remaining</p>\r\n', '<p>Longest time first</p>\r\n', '4', 10, 19, '1'),
 (67, '<p>Which directory implementation is used in most Operating System?<br />\r\n&nbsp;</p>\r\n', '<p>Single level directory structure</p>\r\n', '<p>Two level directory structure</p>\r\n', '<p>Tree directory structure</p>\r\n', '<p>Acyclic directory structure</p>\r\n', '4', 10, 19, '3'),
 (68, '<p>The mechanism that bring a page into memory only when it is needed is called _____________<br />\r\n&nbsp;</p>\r\n', '<p>Sagmentation</p>\r\n', '<p>Fragmentation</p>\r\n', '<p>Demand Paging</p>\r\n', '<p>Page and Replacement</p>\r\n', '4', 10, 19, '3'),
 (69, '<p>The part of machine level instruction, which tells the central processor what has to be done, is<br />\r\n&nbsp;</p>\r\n', '<p>Operation code</p>\r\n', '<p>address</p>\r\n', '<p>Locator</p>\r\n', '<p>Flip flop</p>\r\n', '4', 10, 19, '1'),
@@ -249,15 +252,241 @@ INSERT INTO `questions` (`question_id`, `question`, `option1`, `option2`, `optio
 -- Table structure for table `responses`
 --
 
-CREATE TABLE `responses` (
+CREATE TABLE IF NOT EXISTS `responses` (
   `userID` int(5) NOT NULL,
   `questionID` int(5) NOT NULL,
-  `answer` enum('1','2','3','4') NOT NULL,
+  `answer` enum('0','1','2','3','4') NOT NULL,
   `score` float NOT NULL,
   `timeConsumed` int(3) NOT NULL,
   `correct` tinyint(1) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `responses`
+--
+
+INSERT INTO `responses` (`userID`, `questionID`, `answer`, `score`, `timeConsumed`, `correct`, `timestamp`) VALUES
+(1, 4, '3', -1.47, 6, 0, '2017-07-17 12:58:52'),
+(1, 10, '3', -0.6075, 11, 0, '2017-07-17 12:59:03'),
+(1, 15, '3', -2.43, 2, 0, '2017-07-17 12:59:05'),
+(1, 1, '3', -1.92, 4, 0, '2017-07-17 12:59:08'),
+(1, 5, '3', 1.6875, 5, 1, '2017-07-17 12:59:13'),
+(1, 8, '', -0.0075, 19, 0, '2017-07-17 12:59:33'),
+(2, 6, '2', 0.03, 18, 1, '2017-07-18 06:17:33'),
+(2, 5, '2', -2.7075, 1, 0, '2017-07-18 06:17:34'),
+(2, 12, '4', 0.75, 10, 1, '2017-07-18 06:17:43'),
+(2, 88, '1', 1.2675, 7, 1, '2017-07-18 06:17:50'),
+(2, 3, '3', 0.3675, 13, 1, '2017-07-18 06:18:03'),
+(2, 9, '2', 0.48, 12, 1, '2017-07-18 06:18:15'),
+(2, 8, '1', 0, 20, 0, '2017-07-18 06:18:35'),
+(2, 11, '1', 0.6075, 11, 1, '2017-07-18 06:18:46'),
+(2, 19, '2', 0.1875, 15, 1, '2017-07-18 06:19:01'),
+(2, 13, '4', -0.3675, 13, 0, '2017-07-18 06:19:14'),
+(2, 4, '', -0.0075, 19, 0, '2017-07-18 06:19:34'),
+(2, 18, '3', -0.0075, 21, 0, '2017-07-18 06:19:34'),
+(2, 14, '', -0.0075, 19, 0, '2017-07-18 06:19:54'),
+(2, 10, '4', -2.7075, 1, 0, '2017-07-18 06:19:55'),
+(2, 15, '', -0.0075, 19, 0, '2017-07-18 06:20:15'),
+(2, 16, '4', -2.7075, 1, 0, '2017-07-18 06:20:16'),
+(2, 7, '', -0.0075, 19, 0, '2017-07-18 06:20:37'),
+(2, 17, '1', 0.0075, 21, 1, '2017-07-18 06:20:37'),
+(2, 2, '1', -0.0075, 19, 0, '2017-07-18 06:20:39'),
+(2, 1, '4', 0.75, 10, 1, '2017-07-18 06:20:48'),
+(2, 39, '3', -0.03, 18, 0, '2017-07-18 06:21:06'),
+(2, 40, '4', 0, 20, 1, '2017-07-18 06:21:26'),
+(2, 31, '2', -1.2675, 7, 0, '2017-07-18 06:21:33'),
+(2, 38, '3', -0.1875, 15, 0, '2017-07-18 06:21:47'),
+(2, 30, '3', 0, 20, 0, '2017-07-18 06:22:07'),
+(2, 25, '3', 0, 20, 0, '2017-07-18 06:22:07'),
+(2, 33, '3', 0, 20, 1, '2017-07-18 06:22:27'),
+(2, 28, '', -0.0075, 19, 0, '2017-07-18 06:22:27'),
+(2, 36, '3', -0.03, 18, 0, '2017-07-18 06:22:44'),
+(2, 21, '2', 0, 20, 1, '2017-07-18 06:23:04'),
+(2, 27, '4', 0.75, 10, 1, '2017-07-18 06:23:14'),
+(2, 32, '3', 0.1875, 15, 1, '2017-07-18 06:23:29'),
+(2, 37, '', -0.0075, 19, 0, '2017-07-18 06:23:49'),
+(3, 8, '', -0.0075, 19, 0, '2017-07-18 06:23:59'),
+(3, 9, '2', 1.08, 8, 1, '2017-07-18 06:24:08'),
+(2, 24, '3', 0.0075, 19, 1, '2017-07-18 06:24:09'),
+(2, 20, '2', 1.2675, 7, 1, '2017-07-18 06:24:16'),
+(3, 2, '3', 0.27, 14, 1, '2017-07-18 06:24:21'),
+(3, 3, '3', 1.2675, 7, 1, '2017-07-18 06:24:28'),
+(2, 34, '1', -0.12, 16, 0, '2017-07-18 06:24:31'),
+(3, 12, '2', -0.6075, 11, 0, '2017-07-18 06:24:39'),
+(2, 29, '4', 0.12, 16, 1, '2017-07-18 06:24:47'),
+(3, 15, '', -0.0075, 19, 0, '2017-07-18 06:24:59'),
+(3, 19, '4', -2.7075, 1, 0, '2017-07-18 06:24:59'),
+(2, 22, '', -0.0075, 19, 0, '2017-07-18 06:25:10'),
+(3, 7, '', -0.0075, 19, 0, '2017-07-18 06:25:20'),
+(2, 23, '1', 0.12, 16, 1, '2017-07-18 06:25:26'),
+(3, 10, '1', 0.6075, 11, 1, '2017-07-18 06:25:30'),
+(2, 35, '2', 1.2675, 7, 1, '2017-07-18 06:25:33'),
+(2, 26, '4', 1.2675, 7, 1, '2017-07-18 06:25:40'),
+(3, 17, '3', -0.1875, 15, 0, '2017-07-18 06:25:45'),
+(3, 16, '2', -0.9075, 9, 0, '2017-07-18 06:25:53'),
+(2, 49, '2', 0, 20, 1, '2017-07-18 06:26:00'),
+(2, 55, '2', -1.47, 6, 0, '2017-07-18 06:26:05'),
+(3, 18, '', -0.0075, 19, 0, '2017-07-18 06:26:16'),
+(3, 6, '3', -0.0075, 21, 0, '2017-07-18 06:26:16'),
+(3, 11, '3', -0.0075, 21, 0, '2017-07-18 06:26:19'),
+(2, 54, '2', 0.48, 12, 1, '2017-07-18 06:26:20'),
+(2, 48, '2', 0.12, 16, 1, '2017-07-18 06:26:21'),
+(2, 53, '2', 0.1875, 15, 1, '2017-07-18 06:26:35'),
+(3, 4, '4', 0.0675, 17, 1, '2017-07-18 06:26:36'),
+(2, 56, '2', -1.92, 4, 0, '2017-07-18 06:26:39'),
+(3, 1, '4', 1.08, 8, 1, '2017-07-18 06:26:44'),
+(3, 5, '3', 0.75, 10, 1, '2017-07-18 06:26:54'),
+(3, 14, '3', -0.6075, 11, 0, '2017-07-18 06:27:05'),
+(3, 88, '4', -0.9075, 9, 0, '2017-07-18 06:27:14'),
+(2, 44, '', -0.0075, 19, 0, '2017-07-18 06:27:15'),
+(3, 13, '1', 0.0075, 19, 1, '2017-07-18 06:27:33'),
+(2, 47, '', -0.0075, 19, 0, '2017-07-18 06:27:35'),
+(3, 30, '2', 0.3675, 13, 1, '2017-07-18 06:27:45'),
+(2, 41, '', -0.0075, 19, 0, '2017-07-18 06:27:55'),
+(3, 24, '2', -0.6075, 11, 0, '2017-07-18 06:27:56'),
+(2, 58, '2', -0.12, 16, 0, '2017-07-18 06:28:11'),
+(3, 29, '4', 0, 20, 1, '2017-07-18 06:28:16'),
+(2, 51, '', -0.0075, 19, 0, '2017-07-18 06:28:31'),
+(3, 22, '', -0.0075, 19, 0, '2017-07-18 06:28:36'),
+(2, 43, '3', -0.0075, 19, 0, '2017-07-18 06:28:49'),
+(3, 20, '', -0.0075, 19, 0, '2017-07-18 06:28:57'),
+(2, 59, '3', -0.12, 16, 0, '2017-07-18 06:29:07'),
+(2, 45, '3', -0.03, 18, 0, '2017-07-18 06:29:09'),
+(2, 52, '3', -0.0075, 19, 0, '2017-07-18 06:29:09'),
+(2, 50, '3', 0, 20, 0, '2017-07-18 06:29:10'),
+(3, 33, '', -0.0075, 19, 0, '2017-07-18 06:29:17'),
+(2, 60, '', -0.0075, 19, 0, '2017-07-18 06:29:30'),
+(3, 36, '3', 0, 20, 0, '2017-07-18 06:29:37'),
+(2, 57, '3', -0.75, 10, 0, '2017-07-18 06:29:40'),
+(3, 32, '3', 0.12, 16, 1, '2017-07-18 06:29:53'),
+(2, 42, '2', 0.27, 14, 1, '2017-07-18 06:29:54'),
+(3, 28, '4', -1.47, 6, 0, '2017-07-18 06:29:59'),
+(3, 35, '2', 1.2675, 7, 1, '2017-07-18 06:30:06'),
+(3, 21, '2', 0.6075, 11, 1, '2017-07-18 06:30:17'),
+(2, 46, '1', 0.12, 16, 1, '2017-07-18 06:30:21'),
+(3, 25, '3', -1.2675, 7, 0, '2017-07-18 06:30:23'),
+(3, 23, '1', 1.2675, 7, 1, '2017-07-18 06:30:30'),
+(2, 62, '4', 0.6075, 11, 1, '2017-07-18 06:30:31'),
+(3, 26, '4', 1.47, 6, 1, '2017-07-18 06:30:36'),
+(2, 78, '1', 1.08, 8, 1, '2017-07-18 06:30:39'),
+(2, 64, '1', -0.27, 14, 0, '2017-07-18 06:30:53'),
+(3, 40, '', -0.0075, 19, 0, '2017-07-18 06:30:56'),
+(2, 70, '2', -0.03, 18, 0, '2017-07-18 06:31:11'),
+(3, 39, '3', 0, 20, 0, '2017-07-18 06:31:16'),
+(3, 31, '1', 0.1875, 15, 1, '2017-07-18 06:31:30'),
+(2, 71, '', -0.0075, 19, 0, '2017-07-18 06:31:31'),
+(3, 27, '4', 0.75, 10, 1, '2017-07-18 06:31:41'),
+(2, 74, '3', -0.27, 14, 0, '2017-07-18 06:31:45'),
+(3, 38, '', -0.0075, 19, 0, '2017-07-18 06:32:01'),
+(2, 69, '4', -0.0675, 17, 0, '2017-07-18 06:32:02'),
+(2, 68, '3', 1.2675, 7, 1, '2017-07-18 06:32:09'),
+(2, 73, '1', 0.6075, 11, 1, '2017-07-18 06:32:20'),
+(3, 34, '', -0.0075, 19, 0, '2017-07-18 06:32:21'),
+(2, 66, '2', -0.48, 12, 0, '2017-07-18 06:32:31'),
+(3, 37, '1', 0.3675, 13, 1, '2017-07-18 06:32:34'),
+(3, 43, '2', -0.0675, 17, 0, '2017-07-18 06:32:54'),
+(3, 57, '2', -2.7075, 1, 0, '2017-07-18 06:32:54'),
+(2, 79, '', -0.0075, 19, 0, '2017-07-18 06:32:54'),
+(2, 65, '2', -0.75, 10, 0, '2017-07-18 06:33:05'),
+(3, 42, '2', 0.0075, 19, 1, '2017-07-18 06:33:13'),
+(2, 76, '1', 0.27, 14, 1, '2017-07-18 06:33:18'),
+(3, 59, '3', -0.75, 10, 0, '2017-07-18 06:33:22'),
+(2, 75, '', 0, 9, -1, '2017-07-18 06:33:27'),
+(3, 49, '2', 0.6075, 11, 1, '2017-07-18 06:33:33'),
+(2, 63, '', -0.0075, 19, 0, '2017-07-18 06:33:47'),
+(3, 48, '', -0.0075, 19, 0, '2017-07-18 06:33:53'),
+(3, 52, '4', -0.75, 10, 0, '2017-07-18 06:34:02'),
+(2, 72, '1', 0.0675, 17, 1, '2017-07-18 06:34:03'),
+(3, 54, '2', 0.9075, 9, 1, '2017-07-18 06:34:12'),
+(2, 80, '4', 0.75, 10, 1, '2017-07-18 06:34:13'),
+(3, 55, '1', 0.9075, 9, 1, '2017-07-18 06:34:21'),
+(2, 75, '2', -0.6075, 11, 0, '2017-07-18 06:34:24'),
+(3, 41, '4', -0.3675, 13, 0, '2017-07-18 06:34:34'),
+(2, 67, '3', 0.1875, 15, 1, '2017-07-18 06:34:39'),
+(2, 77, '3', -0.1875, 15, 0, '2017-07-18 06:34:39'),
+(3, 60, '1', 0.1875, 15, 1, '2017-07-18 06:34:49'),
+(2, 61, '', 0, 20, -1, '2017-07-18 06:34:58'),
+(2, 61, '', 0, 20, -1, '2017-07-18 06:34:58'),
+(3, 47, '4', -0.27, 14, 0, '2017-07-18 06:35:03'),
+(2, 61, '2', -1.08, 8, 0, '2017-07-18 06:35:07'),
+(3, 56, '4', -0.6075, 11, 0, '2017-07-18 06:35:17'),
+(2, 87, '1', 0.27, 14, 1, '2017-07-18 06:35:20'),
+(2, 91, '2', 1.6875, 5, 1, '2017-07-18 06:35:25'),
+(3, 44, '', 0, 9, -1, '2017-07-18 06:35:26'),
+(2, 86, '3', -1.08, 8, 0, '2017-07-18 06:35:32'),
+(3, 53, '3', -0.27, 14, 0, '2017-07-18 06:35:40'),
+(2, 81, '3', -0.48, 12, 0, '2017-07-18 06:35:44'),
+(3, 45, '', 0, 5, -1, '2017-07-18 06:35:45'),
+(3, 58, '3', -1.2675, 7, 0, '2017-07-18 06:35:52'),
+(2, 93, '1', -0.244898, 10, 0, '2017-07-18 06:35:54'),
+(3, 44, '', 0, 18, -1, '2017-07-18 06:36:10'),
+(2, 89, '3', -0.0675, 17, 0, '2017-07-18 06:36:11'),
+(3, 45, '1', 0.9075, 9, 1, '2017-07-18 06:36:19'),
+(3, 44, '2', -1.08, 8, 0, '2017-07-18 06:36:27'),
+(2, 95, '3', 0.03, 18, 1, '2017-07-18 06:36:28'),
+(3, 46, '1', 0.3675, 13, 1, '2017-07-18 06:36:40'),
+(2, 90, '2', 0.0675, 17, 1, '2017-07-18 06:36:45'),
+(3, 51, '', -0.0075, 19, 0, '2017-07-18 06:37:02'),
+(3, 50, '4', -0.0075, 21, 0, '2017-07-18 06:37:02'),
+(2, 94, '', -0.0075, 19, 0, '2017-07-18 06:37:05'),
+(3, 75, '1', -0.27, 14, 0, '2017-07-18 06:37:16'),
+(2, 85, '2', 0.0675, 17, 1, '2017-07-18 06:37:23'),
+(3, 79, '2', -0.1875, 15, 0, '2017-07-18 06:37:32'),
+(2, 82, '2', -0.27, 14, 0, '2017-07-18 06:37:36'),
+(3, 76, '3', -0.75, 10, 0, '2017-07-18 06:37:41'),
+(3, 78, '1', 0.9075, 9, 1, '2017-07-18 06:37:50'),
+(2, 84, '3', 0.12, 16, 1, '2017-07-18 06:37:52'),
+(2, 83, '1', 1.2675, 7, 1, '2017-07-18 06:37:58'),
+(2, 92, '2', -1.17188, 6, 0, '2017-07-18 06:38:05'),
+(3, 63, '', -0.0075, 19, 0, '2017-07-18 06:38:10'),
+(3, 73, '1', 0.12, 16, 1, '2017-07-18 06:38:27'),
+(2, 107, '', -0.001875, 39, 0, '2017-07-18 06:38:45'),
+(3, 77, '3', -0.03, 18, 0, '2017-07-18 06:38:46'),
+(3, 61, '3', -0.75, 10, 0, '2017-07-18 06:38:55'),
+(2, 108, '2', 0.0675, 17, 1, '2017-07-18 06:39:04'),
+(2, 99, '2', 0.0075, 19, 1, '2017-07-18 06:39:04'),
+(3, 67, '', -0.0075, 19, 0, '2017-07-18 06:39:16'),
+(3, 80, '3', 0, 20, 0, '2017-07-18 06:39:17'),
+(2, 98, '1', 0, 20, 0, '2017-07-18 06:39:24'),
+(2, 102, '', -0.0075, 19, 0, '2017-07-18 06:39:25'),
+(3, 70, '3', -0.48, 12, 0, '2017-07-18 06:39:33'),
+(2, 100, '', -0.03, 9, 0, '2017-07-18 06:39:36'),
+(3, 62, '4', 1.2675, 7, 1, '2017-07-18 06:39:41'),
+(3, 69, '', -0.0075, 19, 0, '2017-07-18 06:40:02'),
+(2, 106, '2', -0.653333, 32, 0, '2017-07-18 06:40:08'),
+(2, 103, '3', 1.36688, 13, 1, '2017-07-18 06:40:21'),
+(3, 66, '', -0.0075, 19, 0, '2017-07-18 06:40:22'),
+(3, 74, '2', -2.7075, 1, 0, '2017-07-18 06:40:23'),
+(2, 96, '1', -0.03, 18, 0, '2017-07-18 06:40:38'),
+(2, 109, '1', -0.403333, 19, 0, '2017-07-18 06:40:40'),
+(3, 71, '3', -0.0675, 17, 0, '2017-07-18 06:40:41'),
+(2, 110, '3', 2.85188, 10, 1, '2017-07-18 06:40:50'),
+(3, 68, '3', 0.6075, 11, 1, '2017-07-18 06:40:53'),
+(2, 104, '1', 2.91068, 6, 1, '2017-07-18 06:40:57'),
+(3, 65, '3', 0.75, 10, 1, '2017-07-18 06:41:03'),
+(2, 97, '4', 0.75, 10, 1, '2017-07-18 06:41:08'),
+(3, 72, '1', 0.1875, 15, 1, '2017-07-18 06:41:19'),
+(2, 105, '3', -0.421875, 10, 0, '2017-07-18 06:41:21'),
+(2, 101, '3', -2.63672, 1, 0, '2017-07-18 06:41:21'),
+(3, 64, '4', 0.75, 10, 1, '2017-07-18 06:41:28'),
+(3, 81, '4', 0, 20, 1, '2017-07-18 06:41:48'),
+(3, 91, '4', -1.92, 4, 0, '2017-07-18 06:41:52'),
+(3, 94, '4', -0.1875, 15, 0, '2017-07-18 06:42:06'),
+(3, 93, '2', 0.244898, 10, 1, '2017-07-18 06:42:16'),
+(3, 90, '3', -1.08, 8, 0, '2017-07-18 06:42:24'),
+(3, 82, '3', -1.92, 4, 0, '2017-07-18 06:42:28'),
+(3, 95, '', -0.0075, 19, 0, '2017-07-18 06:42:48'),
+(3, 89, '', -0.0075, 19, 0, '2017-07-18 06:43:08'),
+(3, 85, '2', 0.1875, 15, 1, '2017-07-18 06:43:23'),
+(3, 87, '2', -0.03, 18, 0, '2017-07-18 06:43:41'),
+(3, 86, '3', -0.48, 12, 0, '2017-07-18 06:43:52'),
+(3, 84, '3', 0.27, 14, 1, '2017-07-18 06:44:06'),
+(3, 83, '4', -0.1875, 15, 0, '2017-07-18 06:44:21'),
+(3, 92, '4', 1.17188, 6, 1, '2017-07-18 06:44:27'),
+(3, 97, '1', -0.1875, 15, 0, '2017-07-18 06:44:41'),
+(3, 106, '1', -2.7075, 3, 0, '2017-07-18 06:44:44'),
+(3, 98, '1', -1.08, 8, 0, '2017-07-18 06:44:52');
 
 -- --------------------------------------------------------
 
@@ -265,12 +494,13 @@ CREATE TABLE `responses` (
 -- Table structure for table `skills`
 --
 
-CREATE TABLE `skills` (
-  `skill_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `skills` (
+  `skill_id` int(5) NOT NULL AUTO_INCREMENT,
   `skill` varchar(255) NOT NULL,
   `availableForUserDriven` tinyint(1) NOT NULL,
-  `compulsorySkill` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `compulsorySkill` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`skill_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `skills`
@@ -307,10 +537,11 @@ INSERT INTO `skills` (`skill_id`, `skill`, `availableForUserDriven`, `compulsory
 -- Table structure for table `testSetup`
 --
 
-CREATE TABLE `testSetup` (
+CREATE TABLE IF NOT EXISTS `testSetup` (
   `testID` int(2) NOT NULL,
   `skillsAllowed` int(5) NOT NULL,
-  `timeAllowed` int(5) NOT NULL
+  `timeAllowed` int(5) NOT NULL,
+  PRIMARY KEY (`testID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -318,7 +549,7 @@ CREATE TABLE `testSetup` (
 --
 
 INSERT INTO `testSetup` (`testID`, `skillsAllowed`, `timeAllowed`) VALUES
-(1, 5, 15);
+(1, 5, 25);
 
 -- --------------------------------------------------------
 
@@ -326,8 +557,8 @@ INSERT INTO `testSetup` (`testID`, `skillsAllowed`, `timeAllowed`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `userID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `userID` int(5) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -338,8 +569,18 @@ CREATE TABLE `users` (
   `batch` int(5) NOT NULL,
   `courseID` int(5) NOT NULL,
   `registrationLevel` enum('1','2','3') NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`userID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`userID`, `firstName`, `lastName`, `email`, `mobile`, `gender`, `password`, `collegeID`, `batch`, `courseID`, `registrationLevel`, `created_at`) VALUES
+(1, 'Nikhil', 'Verma', 'vrmanikhil@gmail.com', 7503705892, '1', '0cc175b9c0f1b6a831c399e269772661', 1, 2016, 1, '2', '2017-07-17 12:58:27'),
+(2, 'itishri', 'singh', 'itishri.singh12@gmail.com', 9999511987, '2', '51a9be9ad4ab40432ac537a892cb633e', 1, 2018, 2, '2', '2017-07-18 06:17:11'),
+(3, 'Deepti', 'Jain', 'deeptijain9676@gmail.com', 9718669382, '2', '3036514cbad26225659717408c8d2c67', 1, 2018, 2, '2', '2017-07-18 06:23:26');
 
 -- --------------------------------------------------------
 
@@ -347,117 +588,28 @@ CREATE TABLE `users` (
 -- Table structure for table `userSkills`
 --
 
-CREATE TABLE `userSkills` (
-  `id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `userSkills` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `userID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL,
   `score` float NOT NULL DEFAULT '0',
-  `status` enum('1','2','3','4') NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `status` enum('1','2','3','4') NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
--- Indexes for dumped tables
+-- Dumping data for table `userSkills`
 --
 
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`adminID`),
-  ADD UNIQUE KEY `username` (`username`);
+INSERT INTO `userSkills` (`id`, `userID`, `skillID`, `score`, `status`) VALUES
+(1, 1, 19, 0, '2'),
+(2, 1, 25, 0, '3'),
+(3, 2, 19, 0, '4'),
+(4, 2, 25, 0, '1'),
+(5, 3, 25, 0, '1'),
+(6, 3, 19, 0, '4'),
+(7, 3, 25, 0, '1');
 
---
--- Indexes for table `colleges`
---
-ALTER TABLE `colleges`
-  ADD PRIMARY KEY (`collegeID`);
-
---
--- Indexes for table `compulsorySkills`
---
-ALTER TABLE `compulsorySkills`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `courses`
---
-ALTER TABLE `courses`
-  ADD PRIMARY KEY (`courseID`);
-
---
--- Indexes for table `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`question_id`);
-
---
--- Indexes for table `skills`
---
-ALTER TABLE `skills`
-  ADD PRIMARY KEY (`skill_id`);
-
---
--- Indexes for table `testSetup`
---
-ALTER TABLE `testSetup`
-  ADD PRIMARY KEY (`testID`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`userID`);
-
---
--- Indexes for table `userSkills`
---
-ALTER TABLE `userSkills`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `adminID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `colleges`
---
-ALTER TABLE `colleges`
-  MODIFY `collegeID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `compulsorySkills`
---
-ALTER TABLE `compulsorySkills`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `courses`
---
-ALTER TABLE `courses`
-  MODIFY `courseID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `question_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
---
--- AUTO_INCREMENT for table `skills`
---
-ALTER TABLE `skills`
-  MODIFY `skill_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `userSkills`
---
-ALTER TABLE `userSkills`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
