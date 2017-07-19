@@ -147,7 +147,7 @@ class Home_model extends CI_Model {
 				$CI = &get_instance();
 				$CI->load->library('session');
 				$CI->session->set_flashdata('message', array('content'=>'You have Successfully Completed the Test.','class'=>'success'));
-				redirect('skill-tests');
+				echo 'false'; die;
 			}
 			if($level<8){
 				if($max == 0){
