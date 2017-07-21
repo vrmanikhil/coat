@@ -240,6 +240,7 @@ $('.skipQuestion').on('click', function(){
 });
 
 $('.submitAns').on('click', function(){
+    $(this).hide();
     submitAnswers(ans, totalTime-tmp, tmp);
 });
 
@@ -247,10 +248,8 @@ $('.finishTest').on('click', function(){
     finishTest();
 });
 function submitAnswers(ans, timePassed, tmp){
-    console.log(timePassed);
    data = {answer: ans, timeConsumed: timePassed, totalTime:tmp};
    $.post('<?= base_url('homeFunctions/nextQuestion')?>', data).done(function(res){
-        console.log(res);
         if(res == 'false'){
             window.location = "<?= base_url('skill-tests')?>";
         }
@@ -267,6 +266,7 @@ function submitAnswers(ans, timePassed, tmp){
 }
 
 function finishTest(){
+    clearInterval(interval);
    window.location = "<?= base_url('homeFunctions/endTest')?>";
 }
 
@@ -285,6 +285,13 @@ function populate(res){
     clearInterval(interval);
     $('.svg-test').empty();
     $('.svg-test').svgTimer();
+        var hey = setInterval(function () {
+            var nc = 0;
+            if (nc<=0) {
+                clearInterval(hey);
+                $('.submitAns').show();
+            }
+        },1000);
 } 
 
 </script>
