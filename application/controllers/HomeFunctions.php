@@ -191,6 +191,7 @@ class HomeFunctions extends CI_Controller {
 
 	public function submitTest(){
 		$userID = $_SESSION['userData']['userID'];
+		$_SESSION['registrationLevel'] = 3;
 		$result = $this->home_lib->updateRegistrationLevel($userID, '3');
 		if($result){
 			redirect(base_url('submit-test'));

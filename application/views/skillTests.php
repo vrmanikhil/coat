@@ -44,7 +44,7 @@
                   <?php } ?>
                 </tbody>
               </table>
-              <center><a href="<?php echo base_url('submit-test'); ?>" class="btn btn-lg" style="background-color: #3d464d; color: #fff;">SUBMIT TEST</a></center>
+              <center><a href="<?php echo base_url('homeFunctions/submitTest'); ?>" class="btn btn-lg" style="background-color: #3d464d; color: #fff;">SUBMIT TEST</a></center>
           </div>
 			</div>
 		</div>
