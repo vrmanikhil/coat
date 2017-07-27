@@ -83,8 +83,10 @@
     						</div>
     					</div>
                        
-    					<center><button class="btn btn-default submitAns" style="background-color: #3d464d; color: #fff; margin-top: 10px;">SUBMIT</button>
-              </center>
+    					<center>
+                            <button id="reset" class="btn btn-default" style="background-color: #3d464d; color: #fff; margin-top: 10px;">RESET</button>
+                            <button class="btn btn-default submitAns" style="background-color: #3d464d; color: #fff; margin-top: 10px;">SUBMIT</button>
+                        </center>
 
           </div>
 
@@ -239,15 +241,22 @@ $('.skipQuestion').on('click', function(){
    })
 });
 
+$('#reset').on('click', function() {
+   $('input[type=radio]').prop('checked', function () {
+       return this.getAttribute('checked') == 'checked';
+   });
+})
+
 $('.submitAns').on('click', function(){
     $(this).hide();
+    $('#reset').hide();
     submitAnswers(ans, totalTime-tmp, tmp);
 });
 
 $('.finishTest').on('click', function(){
     finishTest();
 });
-function submitAnswers(ans, timePassed, tmp){
+function submitAnswers(ans, timePassed, tmp){   
    data = {answer: ans, timeConsumed: timePassed, totalTime:tmp};
    $.post('<?= base_url('homeFunctions/nextQuestion')?>', data).done(function(res){
         if(res == 'false'){
@@ -289,8 +298,9 @@ function populate(res){
             var nc = 0;
             if (nc<=0) {
                 clearInterval(hey);
-                $('.submitAns').show();
-            }
+                $('.submitAns').show()
+                $('#reset').show()   
+                }
         },1000);
 } 
 
