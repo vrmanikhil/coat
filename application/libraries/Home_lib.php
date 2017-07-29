@@ -213,4 +213,36 @@ class Home_lib {
 		return $CI->homeModel->getCourses();
 	}
 
+	public function insertSessionData($timestamp){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->insertSessionData($timestamp);
+	}
+
+	public function updateSessionData($timestamp){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->updateSessionData($timestamp);
+	}
+
+	public function checkSessionData($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		$sessionData = $CI->homeModel->getSessionData($userID);
+		if(empty($sessionData)){
+			return false;
+		}
+		if((time()-$sessionData[0]['currentTimestamp']) > 10){
+			$this->deleteSessionData($userID);
+			return false;
+		}else{
+			return true;
+		} 
+	}
+
+	public function deleteSessionData($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		$CI->homeModel->deleteSessionData($userID);
+	} 
 }

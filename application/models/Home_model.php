@@ -254,4 +254,23 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function updateSessionData($timestamp){
+		$data['currentTimestamp'] = $timestamp;
+		$this->db->where('userID', $_SESSION['userData']['userID']);
+		return $this->db->update('session', $data);
+	}
+	public function insertSessionData($timestamp){
+		$data['userID'] = $_SESSION['userData']['userID'];
+		$data['createdAt'] = $timestamp;
+		$data['currentTimestamp'] = $timestamp;
+		return $this->db->insert('session', $data);
+	}
+
+	public function getSessionData($userID){
+		return $this->db->get_where('session', array('userID'=>$userID))->result_array();
+	}
+
+	public function deleteSessionData($userID){
+		return $this->db->query("DELETE FROM session Where userID = $userID");	
+	}
 }

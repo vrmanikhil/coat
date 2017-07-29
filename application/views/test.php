@@ -123,6 +123,7 @@
 <?php echo $foot; ?>
 
 <script src="<?php echo base_url('/assets/website/js/jquery-min.js'); ?>"></script>
+<script type="text/javascript" src = "<?php echo base_url('/assets/website/js/updateSession.js'); ?>"></script>
 <script>
 var timePassed= 0;
 var totalTime = <?= $totalTime?>;

@@ -14,9 +14,15 @@ class HomeFunctions extends CI_Controller {
 	private function login($email, $password){
 		$result = $this->home_lib->login($email,$password);
 		if ($result){
+			if($this->home_lib->checkSessionData($_SESSION['userData']['userID'])){
+				$this->session->set_flashdata('message', array('content'=>'Someone is Already Logged in With This Account. Please Contact Your Test Administrator for Further Assistance.','class'=>'error'));
+				redirect(base_url());
+			}else{
+				$this->home_lib->insertSessionData(time());
+			}
 			redirect(base_url('select-skills'));
 		}else{
-			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again12.','class'=>'error'));
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
 			redirect(base_url());
 		}
 	}
@@ -126,6 +132,7 @@ class HomeFunctions extends CI_Controller {
 	}
 
 	public function logout(){
+		$this->home_lib->deleteSessionData($_SESSION['userData']['userID']);
 		$this->session->set_userdata('userData', false);
 		$this->session->set_userdata('userData', []);
 		$this->session->sess_destroy();
@@ -484,7 +491,15 @@ class HomeFunctions extends CI_Controller {
 		// echo $score;
 	}
 
+	public function updateCurrentTimestamp(){
+		if($this->home_lib->updateSessionData(time())){
+			echo 'true';
+			die;
+		}else{
+			echo 'false';
+			die;
+		}
 
-
+	}
 
 }
