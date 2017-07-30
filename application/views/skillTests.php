@@ -51,5 +51,7 @@
 	</div>
 </body>
 <?php echo $foot; ?>
+<?php if($singleLogin == 1){ ?>
 <script type="text/javascript" src = "<?php echo base_url('/assets/website/js/updateSession.js'); ?>"></script>
+<?php }  ?>
 </html>

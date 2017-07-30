@@ -123,7 +123,9 @@
 <?php echo $foot; ?>
 
 <script src="<?php echo base_url('/assets/website/js/jquery-min.js'); ?>"></script>
+<?php if($singleLogin == 1){ ?>
 <script type="text/javascript" src = "<?php echo base_url('/assets/website/js/updateSession.js'); ?>"></script>
+<?php } ?>
 <script>
 var timePassed= 0;
 var totalTime = <?= $totalTime?>;
@@ -281,6 +283,8 @@ function finishTest(){
 }
 
 function populate(res){
+    $('.submitAns').hide()
+    $('#reset').hide();
     $('#question').empty();
     $("#"+selected).prop("checked", false);
     $('#question').html(res.questionData.question);

@@ -15,6 +15,7 @@ class Home extends CI_Controller {
 		// $this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
 		$this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','class'=>'');
 		$this->data['csrf_token'] = $this->security->get_csrf_hash();
+		$this->data['singleLogin'] = $this->home_lib->getTestSetup()[0]['singleLogin'];
 	}
 
 	public function index(){
