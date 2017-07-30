@@ -343,6 +343,14 @@ class Admin_functions extends CI_Controller {
 			}
 	}
 
+	public function changeLoginType(){
+		$singleLogin = $this->input->get('singleLogin');
+		if($this->session->userdata('user_data')['username'] == 'admin'){
+			$data['singleLogin'] = $singleLogin;
+			if($this->admin_library->changeLoginType($data))
+				echo json_encode($data);
+		}
+	}
 	
 
 }

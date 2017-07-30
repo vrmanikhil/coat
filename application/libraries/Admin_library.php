@@ -171,5 +171,9 @@ class Admin_library {
 		$CI->load->model('admin_model','adminModel');
 		return $CI->adminModel->getUsers();
 	}
-
+	public function changeLoginType($data){
+		$CI = &get_instance();
+		$CI->load->model('admin_model', 'adminModel');
+		return $CI->adminModel->changeLoginType($data);
+	}
 }

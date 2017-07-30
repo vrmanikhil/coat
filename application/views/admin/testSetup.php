@@ -47,6 +47,7 @@
                                               <th>S.No</th>
                                               <th>Skill</th>
                                               <th>Delete</th>
+                                              <th>Login</th>
                                           </tr>
                                       </thead>
                                       <tbody>
@@ -55,6 +56,7 @@
                                               <td><?php echo $i; $i++; ?></td>
                                               <td><?php echo $value['skill'] ?></td>
                                               <td class="center"><a data-toggle="modal" data-id="<?php echo $value['skill_id']; ?>" data-target="#myModal1" class="open-AddBookDialog btn btn-danger">Delete</a></td>
+                                              <td class  = "center singleLogin" ><button class = '<?php if($testSetup["singleLogin"] == 1){ echo "btn btn-danger"; }else{ echo "btn btn-success"; }?> loginType' value = "<?= $testSetup['singleLogin']?>"><?php if($testSetup['singleLogin'] == 1){ echo "Single"; }else{ echo "Multiple"; }?></Button></td>
                                           </tr>
                                           <?php } ?>
                                       </tbody>
@@ -151,6 +153,29 @@
     var myBookId = $(this).data('id');
     $(".modal-footer #bookId").val( myBookId );
 });
+
+ $(document).on("click", ".loginType", function(){
+  data = $(this).val();
+  if(data == 0){
+     data = 1;
+  }else{
+    data = 0;
+  }
+    $.get('<?= base_url('admin_functions/changeLoginType')?>', {singleLogin:data}).done(function(res){
+      res = JSON.parse(res);
+      if(res.singleLogin == 1){
+        $(".loginType").removeClass('btn btn-success');
+        $(".loginType").addClass('btn btn-danger');
+        $(".loginType").html('Single');
+        $(".loginType").val('1');
+      }else{
+        $(".loginType").removeClass('btn btn-danger');
+        $(".loginType").addClass('btn btn-success');
+        $(".loginType").html('Multiple');
+        $(".loginType").val('0');
+      }
+    });
+ });
  </script>
 
 </body>

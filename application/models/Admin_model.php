@@ -166,5 +166,8 @@ class Admin_model extends CI_Model {
 		}
 	}
 
+	public function changeLoginType($data){
+		return $this->db->update('testSetup', $data);
+	}
 
 }
