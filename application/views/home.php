@@ -186,4 +186,5 @@
 
 </body>
 <?php echo $foot; ?>
+<script type="text/javascript" src = "<?php echo base_url('/assets/website/js/disable.js'); ?>"></script>
 </html>

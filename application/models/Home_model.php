@@ -144,10 +144,7 @@ class Home_model extends CI_Model {
 		$result = $this->db->get('questions',1);
 		if(empty($result->result_array())){
 			if($level <= 0){
-				$CI = &get_instance();
-				$CI->load->library('session');
-				$CI->session->set_flashdata('message', array('content'=>'You have Successfully Completed the Test.','class'=>'success'));
-				echo 'false'; die;
+				return false;
 			}
 			if($level<8){
 				if($max == 0){
@@ -273,4 +270,137 @@ class Home_model extends CI_Model {
 	public function deleteSessionData($userID){
 		return $this->db->query("DELETE FROM session Where userID = $userID");	
 	}
+
+	public function getSponsoredTestSetup(){
+		$result = $this->db->get('sponseredTestSettings');
+		return $result->result_array();
+	}
+
+	public function getSponsoredTestSettings($testID){
+		$result = $this->db->get_where('sponseredTest', array('testID'=>$testID));
+		return $result->result_array();
+	}
+
+	public function getSponsoredTest(){
+		$result = $this->db->get_where('sponseredTest', array('active' => '1'));
+		return $result->result_array();
+	}
+
+	public function getUserSponsoredTest($userID){
+		$this->db->join('sponseredTest', 'userSponseredTest.testID = sponseredTest.testID');
+		$result = $this->db->get_where('userSponseredTest', array('userID'=>$userID));
+		return $result->result_array();
+	}
+
+	public function addUserSponsoredTest($data){
+		return $this->db->insert('userSponseredTest', $data);
+	}
+
+	public function lockTests($testID, $userID){
+		$data = array(
+			'status' => '3'
+		);
+		$this->db->where('userID', $userID);
+		$this->db->where('status', '1');
+		$this->db->where_not_in('testID', $testID);
+		$this->db->update('userSponseredTest', $data);
+		return $this->db->last_query();
+	}
+
+	public function changeTestStatusToResume($testID, $userID){
+		$data = array(
+			'status' => '2'
+		);
+		$this->db->where('userID', $userID);
+		$this->db->where('status', '1');
+		$this->db->where('testID', $testID);
+		return $this->db->update('userSponseredTest', $data);
+	}
+
+	public function unlockTests($testID, $userID){
+		$data = array(
+			'status' => '1'
+		);
+		$this->db->where('userID', $userID);
+		$this->db->where('status', '3');
+		$this->db->where_not_in('testID', $testID);
+		return $this->db->update('userSponseredTest', $data);
+	}
+
+	public function changeTestStatusToComplete($testID, $userID){
+		$data = array(
+			'status' => '4'
+		);
+		$this->db->where('userID', $userID);
+		$this->db->where('status', '2');
+		$this->db->where('testID', $testID);
+		return $this->db->update('userSponseredTest', $data);
+	}
+
+	public function getTestStatus($testID, $userID){
+		$result = $this->db->get_where('userSponseredTest', array('userID'=>$userID, 'testID'=>$testID));
+		return $result->result_array();
+	}
+
+	public function getInTest($userID){
+		$this->db->select('testID');
+		$this->db->where('userID', $userID);
+		$this->db->where('status', 2);
+		$result = $this->db->get('userSponseredTest');
+		return $result->result_array();
+	}
+
+	public function getTestData($testID){
+		$this->db->select('*');
+		$this->db->where("(testID = $testID AND active = 1)");
+		$result = $this->db->get('sponseredTest');
+		return $result->result_array();
+	}
+
+	public function getSponsoredQuestionDetails($testID){
+		$this->db->select('*');
+		if(!empty($_SESSION['userData'][$testID]['responses']))
+			$this->db->where_not_in('questionID', $_SESSION['userData'][$testID]['responses']);
+		$this->db->where('testID', $testID);
+		$this->db->order_by('RAND()');
+		$result = $this->db->get('SponseredTestQuestions',1);
+		if(empty($result->result_array())){
+			return false;
+		}
+		return $result->result_array();
+	}
+
+	public function updateTime($userID, $testID, $time){
+		$data = array('timetaken'=>$time);
+		$this->db->where('userID', $userID);
+		$this->db->where('testID', $testID);
+		$this->db->update('userSponseredTest', $data);
+	}
+
+	public function getSponsoredTestTimeConsumed($userID, $testID){
+		$result = $this->db->get_where('userSponseredTest',array('userID'=> $userID, 'testID'=> $testID));
+		return $result->result_array();
+	}
+
+	public function updateSponsoredTestResponse($data){
+		return $this->db->insert('sponseredTestResponses', $data);
+	}
+
+	public function getSponsoredTestResponses($testID, $userID){
+		$array = array();
+		$this->db->select('sponseredTestResponses.questionID');
+		$this->db->join('sponseredTestQuestions', 'sponseredTestQuestions.questionID = sponseredTestResponses.questionID');
+		$result = $this->db->get_where('sponseredTestResponses',array('sponseredTestResponses.userID'=> $userID, 'sponseredTestQuestions.testID'=> $testID));
+		foreach ($result->result_array() as $key){
+			array_push($array, $key['questionID']);
+		}
+		return $array;
+	}
+
+	public function getTestAnswer($questionID){
+		$this->db->select('answer');
+		$this->db->where('questionID', $questionID);
+		return $this->db->get('sponseredTestQuestions')->result_array();
+	}
 }
+

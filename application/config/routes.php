@@ -54,7 +54,9 @@ $route['select-skills'] = 'home/selectSkills';
 $route['skill-tests'] = 'home/skillTests';
 $route['submit-test'] = 'home/submitTest';
 $route['test'] = 'home/test';
+$route['sponsored-test'] = 'home/sponsoredTest';
 $route['test-guidelines/(:num)'] = 'home/guidelines/$1';
+$route['sponsored-test-guidelines/(:num)'] = 'home/SponsoredTestGuidelines/$1';
 
 // $route['startTest/(:num)'] = 'homeFunctions/startTest/$1';
 

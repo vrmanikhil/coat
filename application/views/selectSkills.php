@@ -11,6 +11,32 @@
 			<?php echo $left; ?>
 			<div class="col-md-9" id="main-wrapper">
           <div class="col-sm-12">
+            <?php 
+              if($sponsoredTestSetup['testOn'] == 1){
+            ?>
+              <div style="text-align: center; margin-top: 25px;">
+                <p class="mcq-title">Sponsored Test</p>
+              </div>
+              <table class="table">
+                <thead class="thead-inverse">
+                  <tr>
+                    <th>#</th>
+                    <th>Test Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php $i=1; foreach ($sponsoredTest as $key => $value) { ?>
+                  <tr>
+                    <th scope="row"><?php echo $i++; ?></th>
+                    <td><?php echo $value['name']; ?></td>
+                  </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+              <?php } ?>
+                <?php 
+                 if($sponsoredTestSetup['type'] != 2 || $sponsoredTestSetup['testOn'] == 2){
+                ?>
     					<div style="text-align: center; margin-top: 25px;">
     						<p class="mcq-title">Compulsory Skill Tests</p>
     					</div>
@@ -69,6 +95,7 @@
                 <center><button type="submit" class="btn btn-primary" style="background-color: #3d464d; color: #fff; margin-top: 20px;">Add Skill</button></center>
               </form>
             </div>
+            <?php } ?>
           </div>
           <div class="col-sm-12">
             <center><a href="<?php echo base_url('homeFunctions/goAhead'); ?>" class="btn btn-primary btn-lg">Go Ahead</a></center>
@@ -81,4 +108,5 @@
 <?php if($singleLogin == 1){ ?>
 <script type="text/javascript" src = "<?php echo base_url('/assets/website/js/updateSession.js'); ?>"></script>
 <?php } ?>
+<script type="text/javascript" src = "<?php echo base_url('/assets/website/js/disable.js'); ?>"></script>
 </html>

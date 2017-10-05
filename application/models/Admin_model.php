@@ -170,4 +170,56 @@ class Admin_model extends CI_Model {
 		return $this->db->update('testSetup', $data);
 	}
 
+	public function getSponsoredTestSetupDetails(){
+		$query = $this->db->get('sponseredTestSettings');
+		return $query->result_array();
+	}
+
+	public function setupSponsoredTest($testData){
+		return $this->db->update('sponseredTestSettings', $testData);
+	}
+
+	public function addSponsoredQuestion($data){
+		return $this->db->insert('SponseredTestQuestions',$data);
+	}
+
+	public function getSponsoredTest(){
+		$result = $this->db->get('sponseredTest');
+		return $result->result_array();
+	}
+
+	public function addSponsoredTest($data){
+		return $this->db->insert('sponseredTest',$data);
+	}
+
+	public function deleteSponsoredTest($testID){
+		return $this->db->delete('sponseredTest', array('testID' => $testID));
+	}
+
+	public function updateSponsoredTest($data, $testID){
+		$this->db->where('testID', $testID);
+		return $this->db->update('sponseredTest', $data);
+	}
+
+	public function getSponsoredTestQuestions(){
+		$this->db->from('sponseredTestQuestions');
+		$this->db->join('sponseredTest', 'sponseredTest.testID = sponseredTestQuestions.testID');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function deleteSponsoredTestQuestion($questionID){
+		return $this->db->delete('sponseredTestQuestions', array('questionID' => $questionID));
+	}
+
+	public function getSponsoredTestQuestionData($questionID){
+		$this->db->where('questionID', $questionID);
+		$query = $this->db->get('sponseredTestQuestions');
+		return $query->result_array();
+	}
+
+	public function updateSponsoredTestQuestion($questionData, $questionID){
+		$this->db->where('questionID', $questionID);
+		return $this->db->update('sponseredTestQuestions', $questionData);
+	}
 }

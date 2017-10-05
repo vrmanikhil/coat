@@ -175,7 +175,7 @@ class Home_lib {
 	public function checkAnswer($questionID, $answer){
 		$CI = &get_instance();
 		$CI->load->model('home_model', 'homeModel');
-		$correctAnswer = $CI->homeModel->getAnswer($questionID)[0]['answer'];
+		$correctAnswer = $CI->homeModel->getTestAnswer($questionID)[0]['answer'];
 		if($answer == $correctAnswer){
 			return 1;
 		}else{
@@ -245,4 +245,107 @@ class Home_lib {
 		$CI->load->model('home_model', 'homeModel');
 		$CI->homeModel->deleteSessionData($userID);
 	} 
+
+	public function getSponsoredTestSetup(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getSponsoredTestSetup();
+	}
+
+	public function getSponsoredTestSettings($testID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getSponsoredTestSettings($testID);
+	}
+
+	public function getSponsoredTest(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getSponsoredTest();
+	}
+
+	public function addUserSponsoredTest($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->addUserSponsoredTest($data);
+	}
+
+	public function getUserSponsoredTest($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getUserSponsoredTest($userID);
+	}
+
+	public function getTestStatus($testID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getTestStatus($testID, $userID);
+	}
+
+	public function changeTestStatusToResume($testID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->changeTestStatusToResume($testID, $userID);
+	}
+
+	public function changeTestStatusToComplete($testID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->changeTestStatusToComplete($testID, $userID);
+	}
+
+	public function lockTests($testID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->lockTests($testID, $userID);
+	}
+
+	public function unlockTests($testID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->unlockTests($testID, $userID);
+	}
+
+	public function getTestData($testID){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getTestData($testID);
+	}
+
+	public function getSponsoredQuestionDetails($testID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getSponsoredQuestionDetails($testID);
+	}
+
+	public function getInTest($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getInTest($userID);
+	}
+
+	public function updateSponsoredTestResponse($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->updateSponsoredTestResponse($data);
+	}
+
+	public function updateTime($userID, $testID, $time){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->updateTime($userID, $testID, $time);
+	}
+
+	public function getSponsoredTestTimeConsumed($userID, $testID){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getSponsoredTestTimeConsumed($userID, $testID);
+	}
+
+	public function getSponsoredTestResponses($testID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getSponsoredTestResponses($testID, $userID);
+	}
+
 }

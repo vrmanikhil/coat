@@ -124,6 +124,51 @@ class Admin extends CI_Controller {
 		$this->load->view('report/report', $this->data);
 	}
 
+	public function sponsoredTestSettings(){
+		if (!$this->admin_library->auth()) {
+			redirect(base_url('/admin'));
+		}
+		$this->data['testSetup'] = $this->admin_library->getSponsoredTestSetupDetails();
+		$this->data['testSetup'] = $this->data['testSetup'][0];
+		$this->load->view('admin/sponsoredTestSettings', $this->data);
+	}
 
+	public function manageSponsoredTest(){
+		if (!$this->admin_library->auth()) {
+			redirect(base_url('/admin'));
+		}
+		$this->data['sponsoredTest'] = $this->admin_library->getSponsoredTest();
+		$this->load->view('admin/manageSponsoredTest', $this->data);
+	}
 
+	public function addSponsoredTestQuestion()
+	{
+		if (!$this->admin_library->auth()) {
+			redirect(base_url('/admin'));
+		}
+		$this->data['sponsoredTest'] = $this->admin_library->getSponsoredTest();
+		$this->load->view('admin/addSponsoredTestQuestions', $this->data);
+	}
+
+	public function manageSponsoredTestQuestions()
+	{
+		if (!$this->admin_library->auth()) {
+			redirect(base_url('/admin'));
+		}
+		$this->data['questions'] = $this->admin_library->getSponsoredTestQuestions();
+		$this->load->view('admin/manageSponsoredTestQuestions', $this->data);
+	}
+
+	public function editSponsoredTestQuestion($questionID = '')
+	{
+		if (!$this->admin_library->auth()) {
+			redirect(base_url('/admin'));
+		}
+		$this->data['test'] = $this->admin_library->getSponsoredTest();
+		$this->data['questionData'] = $this->admin_library->getSponsoredTestQuestionData($questionID);
+		$this->data['questionData'] = $this->data['questionData'][0];
+		$this->data['questionData']['options'] = json_decode($this->data['questionData']['options']);
+		$this->data['optionNumber'] = count($this->data['questionData']['options']);
+		$this->load->view('admin/editSponsoredTestQuestion', $this->data);
+	}
 }

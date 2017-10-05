@@ -13,6 +13,13 @@
         <a href="<?php echo base_url('/admin/manageQuestions') ?>" class="list-group-item">View Questions</a>
         <a href="<?php echo base_url('/admin/addQuestion') ?>" class="list-group-item">Add Question</a>
 
+        <center><label class="list-group-item">SPONSORED TEST</label></center>
+        <a href="<?php echo base_url('/admin/sponsoredTestSettings') ?>" class="list-group-item">Sponsored Test Settings</a>
+        <a href="<?php echo base_url('/admin/manageSponsoredTestQuestions') ?>" class="list-group-item">Manage Sponsored Test Questions</a>
+         <a href="<?php echo base_url('/admin/manageSponsoredTest') ?>" class="list-group-item">Manage Sponsored Test</a>
+        <a href="<?php echo base_url('/admin/addSponsoredTestQuestion') ?>" class="list-group-item">Add Sponsored Test Questions</a>
+
+
         <center><label class="list-group-item">USERS</label></center>
         <a href="<?php echo base_url('/admin/manageUsers') ?>" class="list-group-item">Manage Users</a>
 

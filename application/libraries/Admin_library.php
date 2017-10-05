@@ -176,4 +176,77 @@ class Admin_library {
 		$CI->load->model('admin_model', 'adminModel');
 		return $CI->adminModel->changeLoginType($data);
 	}
+
+	public function getSponsoredTestSetupDetails(){
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->getSponsoredTestSetupDetails();
+	}
+
+	public function setupSponsoredTest($testData){
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->setupSponsoredTest($testData);
+	}
+
+	public function addSponsoredQuestion($questionData)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->addSponsoredQuestion($questionData);
+	}
+
+	public function getSponsoredTest(){
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->getSponsoredTest();
+	}
+
+	public function addSponsoredTest($data)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->addSponsoredTest($data);
+	}
+
+	public function deleteSponsoredTest($testID)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->deleteSponsoredTest($testID);
+	}
+
+	public function updateSponsoredTest($data, $testID)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->updateSponsoredTest($data, $testID);
+	}
+
+	public function getSponsoredTestQuestions(){
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->getSponsoredTestQuestions();
+	}
+
+	public function deleteSponsoredTestQuestion($questionID)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->deleteSponsoredTestQuestion($questionID);
+	}
+
+	public function getSponsoredTestQuestionData($questionID)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->getSponsoredTestQuestionData($questionID);
+	}
+
+	public function updateSponsoredTestQuestion($questionData, $question_id)
+	{
+		$CI = &get_instance();
+		$CI->load->model('admin_model','adminModel');
+		return $CI->adminModel->updateSponsoredTestQuestion($questionData, $question_id);
+	}
 }

@@ -26,4 +26,5 @@
 <?php if($singleLogin == 1){ ?>
 <script type="text/javascript" src = "<?php echo base_url('/assets/website/js/updateSession.js'); ?>"></script>
 <?php } ?>
+<script type="text/javascript" src = "<?php echo base_url('/assets/website/js/disable.js'); ?>"></script>
 </html>

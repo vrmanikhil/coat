@@ -279,10 +279,13 @@ function submitAnswers(ans, timePassed, tmp){
 
 function finishTest(){
     clearInterval(interval);
-   window.location = "<?= base_url('homeFunctions/endTest')?>";
+    window.location = "<?= base_url('homeFunctions/endTest')?>";
 }
 
 function populate(res){
+    if(res.questionData == null){
+        finishTest();
+    }else{
     $('.submitAns').hide()
     $('#reset').hide();
     $('#question').empty();
@@ -308,11 +311,8 @@ function populate(res){
                 }
         },1000);
 } 
+}
 
 </script>
-
-
-
-
-
+<script type="text/javascript" src = "<?php echo base_url('/assets/website/js/disable.js'); ?>"></script>
 </html>

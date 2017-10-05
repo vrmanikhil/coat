@@ -189,11 +189,20 @@ class HomeFunctions extends CI_Controller {
 				'userID' => $userID,
 				'skillID' => $value['skill_id']
 			);
+			
 			$this->home_lib->addUserDrivenSkill($data);
-			$this->session->set_userdata('registrationLevel', '2');
-			$this->home_lib->updateRegistrationLevel($userID, '2');
 		}
-		redirect(base_url('skill-tests'));
+		$sponsoredTest = $this->home_lib->getSponsoredTest();
+		foreach ($sponsoredTest as $key => $value){
+			$testData = array(
+				'userID' => $userID,
+				'testID' => $value['testID']
+			);
+			$this->home_lib->addUserSponsoredTest($testData);
+		}
+			$this->session->set_userdata('registrationLevel', '2');
+			$this->home_lib->updateRegistrationLevel($userID, '2');	
+			redirect(base_url('skill-tests'));
 	}
 
 	public function submitTest(){
@@ -223,6 +232,7 @@ class HomeFunctions extends CI_Controller {
 		if($skillStatus[0]['status']=='1'){
 			$this->home_lib->lockSkills($skill_id, $_SESSION['userData']['userID']);
 			$this->home_lib->changeSkillStatusToResume($skill_id, $_SESSION['userData']['userID']);
+			$this->home_lib->lockTests($testID, $_SESSION['userData']['userID']);
 			$_SESSION['userData']['intest'] = false;
 			$_SESSION['userData']['currentSkill'] = $skill_id;
 			$_SESSION['userData']['currentSkillName'] = $this->getSkillData($skill_id)[0]['skill'];
@@ -275,9 +285,6 @@ class HomeFunctions extends CI_Controller {
 			$totalScore = $_SESSION['userData'][$skill_id]['totalScore'];
 			$level = $this->getLevel($totalScore);
 			$_SESSION['userData'][$skill_id]['level'] = $level;
-			if($totalScore > 100){
-				$this->endTest($skill_id);
-			}
 			array_push($_SESSION['userData'][$skill_id]['responses'], $_SESSION['questionData'][0]['question_id']);
 			$_SESSION['questionData'] = $this->getQuestionDetails($level, $skill_id);
 			$testData['questionData'] = $_SESSION['questionData'][0];
@@ -292,6 +299,9 @@ class HomeFunctions extends CI_Controller {
 				$testData['level'] = $level;
 				$testData['totalScore'] = $totalScore;
 				$testData['totalTime'] = $_SESSION['userData'][$skill_id]['totalTime'];
+				if($totalScore >= 100 || $totalScore < -10){
+					$testData['questionData'] = null;
+				}
 				echo json_encode($testData);
 		}else{
 			echo "string"; die;
@@ -404,11 +414,9 @@ class HomeFunctions extends CI_Controller {
 		}
 	}
 
-	private function getLevel($totalScore){
-		if($totalScore < -10){
-			$this->updateInfo();
-			$this->session->set_flashdata('message', array('content'=>'You have Completed the Test.','class'=>'success'));
-			echo 'false'; die;
+	private function getLevel($totalScore = 0){
+		if($totalScore < -10 && $totalScore != NULL){
+			$level = 0;
 		}
 		if(($totalScore >=-10 && $totalScore < 10) || $totalScore == NULL){
 			$level = 1;
@@ -458,6 +466,7 @@ class HomeFunctions extends CI_Controller {
 		$_SESSION['userData']['intest'] = false;
 		$this->home_lib->unlockSkills($skill_id, $_SESSION['userData']['userID']);
 		$this->home_lib->changeSkillStatusToComplete($skill_id, $_SESSION['userData']['userID'], $totalScore);
+		$this->home_lib->unlockTests($testID, $_SESSION['userData']['userID']);
 	}
 	public function test(){
 		 var_dump( $_SESSION['userData'][19]['responses']);
